@@ -35,7 +35,7 @@ public class ApplicationTest {
     @Test
     public void testUserController() throws Exception {
         RequestBuilder request = null;
-        request = get("/users");
+        request = get("/users/");
         mvc.perform(request)
             .andExpect(status().isOk())
             .andExpect(content().string(equalTo("[]")));
