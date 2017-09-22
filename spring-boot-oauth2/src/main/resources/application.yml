@@ -1,0 +1,8 @@
+server:
+  context-path: /spring-security-oauth-server
+  port: 8081
+spring:
+  redis:
+    host: 10.66.72.179
+    database: 1
+debug: true

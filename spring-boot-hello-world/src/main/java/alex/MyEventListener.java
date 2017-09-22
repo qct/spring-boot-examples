@@ -22,25 +22,21 @@ public class MyEventListener {
     @Async
     @EventListener(classes = EventA.class)
     public void handleEventA(EventA event) {
-        int i = 0;
-        if (event.getId() % 2 == 0) {
-            i = 10;
-        }
-        logger.info("received event A[{}], i={}", event.getId(), i);
+        logger.info("received event A, {}", event);
         try {
-            Thread.sleep(event.getId() * 1000);
+            logger.info("sleep {} seconds...", event.getId() % 3);
+            Thread.sleep(event.getId() % 3 * 1000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
 
-        logger.info("after sleep, event A[{}], i={}", event.getId(), i);
-        applicationEventPublisher.publishEvent(new EventB(999));
+        applicationEventPublisher.publishEvent(new EventB(event.getId()));
     }
 
     @EventListener(classes = EventB.class)
     @Async
     public void handleEventB(EventB event) {
-        logger.info("received event B... {}", event);
+        logger.info("received event B, {}", event);
     }
 }
 
@@ -48,12 +44,19 @@ class EventA {
 
     private int id;
 
-    public EventA(int id) {
+    EventA(int id) {
         this.id = id;
     }
 
-    public int getId() {
+    int getId() {
         return id;
+    }
+
+    @Override
+    public String toString() {
+        return "EventA{" +
+            "id=" + id +
+            '}';
     }
 }
 
@@ -61,11 +64,18 @@ class EventB {
 
     private int id;
 
-    public EventB(int id) {
+    EventB(int id) {
         this.id = id;
     }
 
     public int getId() {
         return id;
+    }
+
+    @Override
+    public String toString() {
+        return "EventB{" +
+            "id=" + id +
+            '}';
     }
 }
