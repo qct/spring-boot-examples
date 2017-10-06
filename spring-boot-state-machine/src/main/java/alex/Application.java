@@ -7,7 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.statemachine.StateMachine;
 
 /**
- * <p>Created by Damon.Q on 2017/2/14.
+ * <p>Created by qct on 2017/2/14.
  */
 @SpringBootApplication
 public class Application implements CommandLineRunner {

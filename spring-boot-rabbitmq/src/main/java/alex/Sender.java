@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /**
- * <p>Created by Damon.Q on 2017/2/16.
+ * <p>Created by qct on 2017/2/16.
  */
 @Component
 public class Sender {

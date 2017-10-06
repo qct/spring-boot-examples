@@ -1,7 +1,7 @@
 package alex;
 
 /**
- * <p>Created by Damon.Q on 2017/2/14.
+ * <p>Created by qct on 2017/2/14.
  */
 public enum States {
     UNPAID,                 //待支付

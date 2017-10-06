@@ -6,7 +6,7 @@ import org.springframework.statemachine.annotation.OnTransition;
 import org.springframework.statemachine.annotation.WithStateMachine;
 
 /**
- * <p>Created by Damon.Q on 2017/2/14.
+ * <p>Created by qct on 2017/2/14.
  */
 @WithStateMachine
 public class EventConfig {

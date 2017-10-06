@@ -11,7 +11,7 @@ import org.springframework.statemachine.config.builders.StateMachineStateConfigu
 import org.springframework.statemachine.config.builders.StateMachineTransitionConfigurer;
 
 /**
- * <p>Created by Damon.Q on 2017/2/14.
+ * <p>Created by qct on 2017/2/14.
  */
 @Configuration
 @EnableStateMachine

@@ -16,7 +16,7 @@ import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenCo
 import org.springframework.security.oauth2.provider.token.store.redis.RedisTokenStore;
 
 /**
- * <p>Created by damon.q on 2017/9/19.
+ * <p>Created by qct on 2017/9/19.
  */
 @Configuration
 @EnableAuthorizationServer

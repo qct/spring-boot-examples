@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
- * <p>Created by Damon.Q on 2017/2/13.
+ * <p>Created by qct on 2017/2/13.
  */
 @Controller
 @EnableAutoConfiguration
