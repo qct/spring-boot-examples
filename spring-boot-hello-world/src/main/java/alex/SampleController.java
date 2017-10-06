@@ -25,14 +25,14 @@ public class SampleController {
 
     private AtomicInteger count = new AtomicInteger(0);
 
+    public static void main(String[] args) {
+        SpringApplication.run(SampleController.class, args);
+    }
+
     @RequestMapping("/")
     @ResponseBody
     String home() {
         applicationEventPublisher.publishEvent(new EventA(count.incrementAndGet()));
         return "Hello, World!";
-    }
-
-    public static void main(String[] args) {
-        SpringApplication.run(SampleController.class, args);
     }
 }

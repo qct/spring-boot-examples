@@ -6,7 +6,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.statemachine.config.EnableStateMachine;
 import org.springframework.statemachine.config.EnumStateMachineConfigurerAdapter;
-import org.springframework.statemachine.config.builders.StateMachineConfigurationConfigurer;
 import org.springframework.statemachine.config.builders.StateMachineStateConfigurer;
 import org.springframework.statemachine.config.builders.StateMachineTransitionConfigurer;
 
@@ -29,10 +28,10 @@ public class StateMachineConfig extends EnumStateMachineConfigurerAdapter<States
         throws Exception {
         transitions
             .withExternal()
-                .source(States.UNPAID).target(States.WAITING_FOR_RECEIVE).event(Events.PAY)
-                .and()
+            .source(States.UNPAID).target(States.WAITING_FOR_RECEIVE).event(Events.PAY)
+            .and()
             .withExternal()
-                .source(States.WAITING_FOR_RECEIVE).target(States.DONE).event(Events.RECEIVE);
+            .source(States.WAITING_FOR_RECEIVE).target(States.DONE).event(Events.RECEIVE);
     }
 
     // substitute with EventConfig
