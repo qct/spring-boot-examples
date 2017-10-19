@@ -1,0 +1,8 @@
+kafka:
+  bootstrapAddress: 10.66.72.179:32808
+topic:
+  name:
+    message: myTopic
+    greeting: greeting
+    filtered: filtered
+    partitioned: partitioned
