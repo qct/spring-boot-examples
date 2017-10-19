@@ -1,0 +1,12 @@
+spring:
+  redis:
+    pool:
+      max-active: 8
+      max-idle: 8
+      min-idle: 0
+      max-wait: -1
+#    host: 10.66.72.179
+#    port: 6379
+    sentinel:
+      master: "mymaster"
+      nodes: "10.66.72.179:32798, 10.66.72.179:32799, 10.66.72.179:32800"
