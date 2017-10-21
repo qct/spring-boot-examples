@@ -30,6 +30,7 @@
         <module>spring-boot-RESTful</module>
         <module>spring-boot-security</module>
         <module>spring-boot-state-machine</module>
+        <module>spring-boot-retry</module>
     </modules>
 
     <properties>
