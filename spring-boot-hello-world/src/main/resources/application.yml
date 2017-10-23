@@ -1,0 +1,8 @@
+debug: false
+server:
+  port: 443
+  ssl:
+    key-store: classpath:.keystore
+    key-alias: tomcat
+    key-password: finance
+    key-store-type: JKS
