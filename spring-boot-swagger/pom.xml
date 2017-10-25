@@ -96,7 +96,7 @@
                 <artifactId>swagger2markup-maven-plugin</artifactId>
                 <version>1.3.3</version>
                 <configuration>
-                    <swaggerInput>src/main/resources/swagger.yml</swaggerInput>
+                    <swaggerInput>src/main/resources/my.yml</swaggerInput>
                     <outputDir>${project.build.directory}/generated-sources/asciidoc</outputDir>
                     <config>
                         <swagger2markup.markupLanguage>ASCIIDOC</swagger2markup.markupLanguage>
@@ -119,7 +119,7 @@
                     <outputDirectory>${project.build.directory}/generated-sources/generated-docs</outputDirectory>
                     <headerFooter>true</headerFooter>
                     <sourceHighlighter>coderay</sourceHighlighter>
-                    <!--<doctype>book</doctype>-->
+                    <doctype>book</doctype>
                     <backend>html5</backend>
                     <!--<backend>pdf</backend>-->
                     <attributes>
