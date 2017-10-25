@@ -11,7 +11,7 @@ import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.test.context.junit4.SpringRunner;
 
 /**
- * <p>Created by Damon.Q on 2017/10/20.
+ * <p>Created by qct on 2017/10/20.
  */
 //@RunWith(SpringRunner.class)
 //@SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)

@@ -5,7 +5,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 /**
- * <p>Created by Damon.Q on 2017/10/7.
+ * <p>Created by qct on 2017/10/7.
  */
 @Configuration
 public class MyConfig {

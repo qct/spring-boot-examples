@@ -11,7 +11,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 /**
- * <p>Created by Damon.Q on 2017/10/20.
+ * <p>Created by qct on 2017/10/20.
  */
 @Configuration
 public class TomcatConfig {

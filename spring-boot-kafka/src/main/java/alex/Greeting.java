@@ -1,7 +1,7 @@
 package alex;
 
 /**
- * <p>Created by Damon.Q on 2017/10/16.
+ * <p>Created by qct on 2017/10/16.
  */
 public class Greeting {
 

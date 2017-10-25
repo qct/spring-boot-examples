@@ -3,7 +3,7 @@ package alex;
 import org.springframework.stereotype.Service;
 
 /**
- * <p>Created by Damon.Q on 2017/10/20.
+ * <p>Created by qct on 2017/10/20.
  */
 @Service
 public class GreetingService {

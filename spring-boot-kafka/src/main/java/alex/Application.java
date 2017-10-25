@@ -22,7 +22,7 @@ import org.springframework.messaging.handler.annotation.Header;
 import org.springframework.messaging.handler.annotation.Payload;
 
 /**
- * <p>Created by Damon.Q on 2017/10/16.
+ * <p>Created by qct on 2017/10/16.
  */
 @SpringBootApplication
 public class Application {

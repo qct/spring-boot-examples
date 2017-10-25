@@ -17,7 +17,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 /**
- * <p>Created by Damon.Q on 2017/10/20.
+ * <p>Created by qct on 2017/10/20.
  */
 @RunWith(SpringRunner.class)
 @WebMvcTest(HomeController.class)

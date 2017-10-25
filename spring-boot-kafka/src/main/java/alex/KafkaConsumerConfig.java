@@ -14,7 +14,7 @@ import org.springframework.kafka.core.DefaultKafkaConsumerFactory;
 import org.springframework.kafka.support.serializer.JsonDeserializer;
 
 /**
- * <p>Created by Damon.Q on 2017/10/16.
+ * <p>Created by qct on 2017/10/16.
  */
 @Configuration
 @EnableKafka
