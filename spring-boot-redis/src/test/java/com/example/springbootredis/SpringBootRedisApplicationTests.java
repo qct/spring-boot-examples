@@ -1,23 +1,25 @@
 package com.example.springbootredis;
 
-import java.util.Collections;
+import java.time.LocalDateTime;
+import java.util.Collection;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
 import javax.annotation.Resource;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.redis.connection.RedisSentinelConnection;
+import org.springframework.data.redis.connection.RedisServer;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
+import org.springframework.data.redis.core.types.RedisClientInfo;
 import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class SpringBootRedisApplicationTests {
 
-    @Resource
+    @Autowired
     private StringRedisTemplate stringRedisTemplate;
 
     @Resource
@@ -34,12 +36,27 @@ public class SpringBootRedisApplicationTests {
 
     @Test
     public void testGet() throws Exception {
-        System.out.println(stringRedisTemplate.opsForValue().get("aa"));
+        List<RedisClientInfo> clientList = redisTemplate.getClientList();
+        while (true) {
+            System.out.println(LocalDateTime.now() + ": " + stringRedisTemplate.opsForValue().get("aa"));
+            Thread.sleep(1000L);
+        }
     }
 
     @Test
     public void testGetHash() throws Exception {
         SysDict ccb = redisTemplate.<String, SysDict>opsForHash().get("finance.dict.BANK", "CCB");
         System.out.println(ccb);
+    }
+
+    @Test
+    public void testSentinelInfo() throws Exception {
+        RedisSentinelConnection sentinelConnection = redisTemplate.getConnectionFactory().getSentinelConnection();
+        Collection<RedisServer> masters = sentinelConnection.masters();
+        System.out.println("master:");
+        masters.forEach(System.out::println);
+        Collection<RedisServer> slaves = sentinelConnection.slaves(masters.stream().findFirst().get());
+        System.out.println("slaves:");
+        slaves.forEach(System.out::println);
     }
 }
