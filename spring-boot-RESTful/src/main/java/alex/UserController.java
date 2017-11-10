@@ -19,6 +19,9 @@ import org.springframework.web.bind.annotation.RestController;
 public class UserController {
 
     static Map<Long, User> users = Collections.synchronizedMap(new HashMap<>());
+    static {
+        users.put(1L, new User(1L, "Poly", 24));
+    }
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public List<User> getUserList() {

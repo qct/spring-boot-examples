@@ -38,7 +38,7 @@ public class ApplicationTest {
         request = get("/users/");
         mvc.perform(request)
             .andExpect(status().isOk())
-            .andExpect(content().string(equalTo("[]")));
+            .andExpect(content().string(equalTo("[{\"id\":1,\"name\":\"Poly\",\"age\":24}]")));
 
         // 2、post提交一个user
         request = MockMvcRequestBuilders.post("/users/")
