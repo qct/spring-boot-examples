@@ -13,9 +13,13 @@ public class MyConfig {
     @Value("${user.dada}")
     private String name;
 
+    @Value("${user.address}")
+    private String address;
+
     @Bean
     public String test() {
         System.out.println("|||||||||||||||||||||||||||||||" + name);
+        System.out.println("|||||||||||||||||||||||||||||||" + address);
         return null;
     }
 }

@@ -1,0 +1,6 @@
+debug: false
+spring:
+  rocketmq:
+    name-server: 10.66.72.173:9876
+    producer:
+      group: damon-group
