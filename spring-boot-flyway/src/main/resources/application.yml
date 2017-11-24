@@ -1,2 +1,12 @@
 debug: true
-
+management:
+  security:
+    enabled: false
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    open-in-view: true
+  h2:
+    console:
+      enabled: true
