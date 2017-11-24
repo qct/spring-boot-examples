@@ -34,6 +34,8 @@
         <module>spring-boot-swagger</module>
         <module>spring-boot-jaxrs-client</module>
         <module>spring-boot-rocketmq</module>
+        <module>spring-boot-data-jpa</module>
+        <module>spring-boot-flyway</module>
     </modules>
 
     <properties>
