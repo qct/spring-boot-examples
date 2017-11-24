@@ -6,7 +6,7 @@ import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 
 /**
- * <p>Created by damon.q on 2017/11/24.
+ * <p>Created by qct on 2017/11/24.
  */
 @Entity
 public class Person {

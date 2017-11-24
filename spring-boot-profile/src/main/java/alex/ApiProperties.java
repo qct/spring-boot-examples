@@ -5,7 +5,7 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Component;
 
 /**
- * <p>Created by damon.q on 2017/11/18.
+ * <p>Created by qct on 2017/11/18.
  */
 @Component
 @PropertySource("classpath:config-${spring.profiles.active}.yml")
