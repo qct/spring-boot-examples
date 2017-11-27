@@ -112,7 +112,7 @@ public class Application {
         }
 
         public void sendMessageToPartition(String msg, int partition) {
-            kafkaTemplate.send(partitionedTopicName, partition, msg);
+            kafkaTemplate.send(partitionedTopicName, partition, msg, msg);
         }
 
         public void sendMessageToFiltered(String msg) {
@@ -134,13 +134,13 @@ public class Application {
 
         private CountDownLatch greetingLatch = new CountDownLatch(1);
 
-        @KafkaListener(topics = "${topic.name.message}", group = "foo", containerFactory = "fooKafkaListenerContainerFactory")
+        @KafkaListener(topics = "${topic.name.message}", groupId = "foo", containerFactory = "fooKafkaListenerContainerFactory")
         public void listenGroupFoo(String msg) {
             System.out.println("Received Message in group 'foo': " + msg);
             latch.countDown();
         }
 
-        @KafkaListener(topics = "${topic.name.message}", group = "bar", containerFactory = "barKafkaListenerContainerFactory")
+        @KafkaListener(topics = "${topic.name.message}", groupId = "bar", containerFactory = "barKafkaListenerContainerFactory")
         public void listenGroupBar(String msg) {
             System.out.println("Received Message in group 'bar': " + msg);
             latch.countDown();

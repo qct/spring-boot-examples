@@ -1,5 +1,7 @@
 package alex;
 
+import java.util.Optional;
+import java.util.function.Supplier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
@@ -36,10 +38,11 @@ public class DataJpaApplication {
             log.info("");
 
             // fetch an individual customer by ID
-            Customer customer = repository.findOne(1L);
+            Optional<Customer> customer = repository.findById(1L);
             log.info("Customer found with findOne(1L):");
             log.info("--------------------------------");
-            log.info(customer.toString());
+
+            log.info(customer.orElse(new Customer()).toString());
             log.info("");
 
             // fetch customers by last name

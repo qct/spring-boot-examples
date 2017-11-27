@@ -1,7 +1,4 @@
 debug: true
-management:
-  security:
-    enabled: false
 spring:
   jpa:
     hibernate:
@@ -9,4 +6,8 @@ spring:
     open-in-view: true
   h2:
     console:
+      enabled: true
+endpoints:
+  default:
+    web:
       enabled: true

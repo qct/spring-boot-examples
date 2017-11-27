@@ -1,5 +1,6 @@
- server:
-  context-path: /spring-security-oauth-server
+server:
+  servlet:
+    context-path: /spring-security-oauth-server
   port: 8081
 spring:
   redis:
