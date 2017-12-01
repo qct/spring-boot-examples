@@ -10,7 +10,7 @@ import org.springframework.core.Ordered;
 import org.springframework.stereotype.Component;
 
 /**
- * <p>Created by damon.q on 2017/11/29.
+ * <p>Created by qct.q on 2017/11/29.
  */
 @Component
 public class MyCustomBean implements InitializingBean, DisposableBean, BeanFactoryPostProcessor, BeanPostProcessor,

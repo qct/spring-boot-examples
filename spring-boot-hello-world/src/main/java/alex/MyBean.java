@@ -1,7 +1,7 @@
 package alex;
 
 /**
- * <p>Created by damon.q on 2017/11/29.
+ * <p>Created by qct.q on 2017/11/29.
  */
 public class MyBean {
 
