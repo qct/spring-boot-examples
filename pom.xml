@@ -4,11 +4,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>alex</groupId>
-    <artifactId>spring-boot-learn</artifactId>
+    <artifactId>spring-boot-examples</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>pom</packaging>
 
-    <name>spring-boot-learn</name>
+    <name>spring-boot-examples</name>
     <description>Demo project for Spring Boot</description>
 
     <parent>
