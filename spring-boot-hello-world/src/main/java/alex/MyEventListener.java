@@ -38,44 +38,44 @@ public class MyEventListener {
     public void handleEventB(EventB event) {
         logger.info("received event B, {}", event);
     }
-}
 
-class EventA {
+    private static class EventA {
 
-    private int id;
+        private int id;
 
-    EventA(int id) {
-        this.id = id;
+        EventA(int id) {
+            this.id = id;
+        }
+
+        int getId() {
+            return id;
+        }
+
+        @Override
+        public String toString() {
+            return "EventA{" +
+                "id=" + id +
+                '}';
+        }
     }
 
-    int getId() {
-        return id;
-    }
+    private static class EventB {
 
-    @Override
-    public String toString() {
-        return "EventA{" +
-            "id=" + id +
-            '}';
-    }
-}
+        private int id;
 
-class EventB {
+        EventB(int id) {
+            this.id = id;
+        }
 
-    private int id;
+        public int getId() {
+            return id;
+        }
 
-    EventB(int id) {
-        this.id = id;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    @Override
-    public String toString() {
-        return "EventB{" +
-            "id=" + id +
-            '}';
+        @Override
+        public String toString() {
+            return "EventB{" +
+                "id=" + id +
+                '}';
+        }
     }
 }

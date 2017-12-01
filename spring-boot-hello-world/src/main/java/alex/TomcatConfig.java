@@ -35,6 +35,16 @@ public class TomcatConfig {
         return tomcat;
     }
 
+    @Bean
+    public MyFactoryBean myFactoryBean() {
+        return new MyFactoryBean();
+    }
+    
+    @Bean
+    public MyBean myBean() throws Exception {
+        return myFactoryBean().getObject();
+    }
+
     private Connector initiateHttpConnector() {
         Connector connector = new Connector("org.apache.coyote.http11.Http11NioProtocol");
         connector.setScheme("http");
