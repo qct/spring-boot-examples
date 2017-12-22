@@ -3,6 +3,6 @@ server:
   port: 443
   ssl:
     key-store: classpath:.keystore
-    key-alias: tomcat
+    key-alias: localhost-root
     key-password: finance
     key-store-type: JKS

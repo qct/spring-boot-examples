@@ -5,38 +5,58 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Component;
 
 /**
+ * <code>@PropertySource</code> only works with *.properties, not *.yml.
+ *
  * <p>Created by qct on 2017/11/18.
  */
 @Component
-@PropertySource("classpath:config-${spring.profiles.active}.yml")
-@ConfigurationProperties(prefix = "finance.api")
+@PropertySource("classpath:config-${spring.profiles.active}.properties")
+@ConfigurationProperties(prefix = "finance")
 public class ApiProperties {
 
-    private int nodeThresholdDead;
-    private int nodeThresholdDelete;
-    private int port;
+    private String name;
 
-    public int getNodeThresholdDead() {
-        return nodeThresholdDead;
+    private final Node node = new Node();
+
+    public String getName() {
+        return name;
     }
 
-    public void setNodeThresholdDead(int nodeThresholdDead) {
-        this.nodeThresholdDead = nodeThresholdDead;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public int getNodeThresholdDelete() {
-        return nodeThresholdDelete;
+    public Node getNode() {
+        return node;
     }
 
-    public void setNodeThresholdDelete(int nodeThresholdDelete) {
-        this.nodeThresholdDelete = nodeThresholdDelete;
-    }
+    public static class Node {
+        private int deadThreshold;
+        private int deleteThreshold;
+        private int port;
 
-    public int getPort() {
-        return port;
-    }
+        public int getDeadThreshold() {
+            return deadThreshold;
+        }
 
-    public void setPort(int port) {
-        this.port = port;
+        public void setDeadThreshold(int deadThreshold) {
+            this.deadThreshold = deadThreshold;
+        }
+
+        public int getDeleteThreshold() {
+            return deleteThreshold;
+        }
+
+        public void setDeleteThreshold(int deleteThreshold) {
+            this.deleteThreshold = deleteThreshold;
+        }
+
+        public int getPort() {
+            return port;
+        }
+
+        public void setPort(int port) {
+            this.port = port;
+        }
     }
 }
