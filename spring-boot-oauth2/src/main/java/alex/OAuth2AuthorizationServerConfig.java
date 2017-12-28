@@ -3,14 +3,13 @@ package alex;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
-import org.springframework.security.oauth2.provider.token.store.redis.RedisTokenStore;
+import org.springframework.security.oauth2.provider.token.store.InMemoryTokenStore;
 
 /**
  * <p>Created by qct on 2017/9/19.
@@ -19,11 +18,17 @@ import org.springframework.security.oauth2.provider.token.store.redis.RedisToken
 @EnableAuthorizationServer
 public class OAuth2AuthorizationServerConfig extends AuthorizationServerConfigurerAdapter {
 
+    private final AuthenticationManager authenticationManager;
+
+//    private final RedisConnectionFactory redisConnectionFactory;
+
     @Autowired
-    @Qualifier("authenticationManagerBean")
-    AuthenticationManager authenticationManager;
-    @Autowired
-    private RedisConnectionFactory redisConnectionFactory;
+//    public OAuth2AuthorizationServerConfig(RedisConnectionFactory redisConnectionFactory,
+    public OAuth2AuthorizationServerConfig(
+        @Qualifier("authenticationManagerBean") AuthenticationManager authenticationManager) {
+//        this.redisConnectionFactory = redisConnectionFactory;
+        this.authenticationManager = authenticationManager;
+    }
 
     @Override
     public void configure(AuthorizationServerSecurityConfigurer oauthServer) throws Exception {
@@ -45,7 +50,8 @@ public class OAuth2AuthorizationServerConfig extends AuthorizationServerConfigur
 
     @Override
     public void configure(final AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
-        endpoints.tokenStore(new RedisTokenStore(redisConnectionFactory))
+//        endpoints.tokenStore(new RedisTokenStore(redisConnectionFactory))
+        endpoints.tokenStore(new InMemoryTokenStore())
             .authenticationManager(authenticationManager);
     }
 

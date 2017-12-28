@@ -6,4 +6,6 @@ spring:
   redis:
     host: 10.66.72.179
     database: 1
+logging:
+  level: debug
 debug: true

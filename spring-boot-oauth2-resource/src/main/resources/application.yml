@@ -1,8 +1,9 @@
 server:
-  context-path: /spring-security-resource-server
   port: 8082
+  servlet:
+    context-path: /spring-security-resource-server
 security:
-    oauth2:
-      resource:
-        filter-order: 3
+  oauth2:
+    resource:
+      filter-order: 3
 debug: true
