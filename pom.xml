@@ -45,5 +45,6 @@
         <module>spring-boot-data-jpa</module>
         <module>spring-boot-flyway</module>
         <module>spring-boot-webflux</module>
+        <module>spring-boot-mail</module>
     </modules>
 </project>

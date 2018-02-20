@@ -2,6 +2,7 @@ package alex;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
@@ -9,7 +10,9 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.A
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
+import org.springframework.security.oauth2.provider.token.AccessTokenConverter;
 import org.springframework.security.oauth2.provider.token.store.InMemoryTokenStore;
+import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
 
 /**
  * <p>Created by qct on 2017/9/19.
@@ -20,13 +23,13 @@ public class OAuth2AuthorizationServerConfig extends AuthorizationServerConfigur
 
     private final AuthenticationManager authenticationManager;
 
-//    private final RedisConnectionFactory redisConnectionFactory;
+    //    private final RedisConnectionFactory redisConnectionFactory;
 
     @Autowired
-//    public OAuth2AuthorizationServerConfig(RedisConnectionFactory redisConnectionFactory,
+    //    public OAuth2AuthorizationServerConfig(RedisConnectionFactory redisConnectionFactory,
     public OAuth2AuthorizationServerConfig(
         @Qualifier("authenticationManagerBean") AuthenticationManager authenticationManager) {
-//        this.redisConnectionFactory = redisConnectionFactory;
+        //        this.redisConnectionFactory = redisConnectionFactory;
         this.authenticationManager = authenticationManager;
     }
 
@@ -48,17 +51,18 @@ public class OAuth2AuthorizationServerConfig extends AuthorizationServerConfigur
             .autoApprove("read");
     }
 
-    @Override
+   /* @Override
     public void configure(final AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
 //        endpoints.tokenStore(new RedisTokenStore(redisConnectionFactory))
         endpoints.tokenStore(new InMemoryTokenStore())
             .authenticationManager(authenticationManager);
-    }
+    }*/
 
     // JWT token
-/*    @Override
+    @Override
     public void configure(final AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
-        endpoints.tokenStore(new RedisTokenStore(redisConnectionFactory))
+        //        endpoints.tokenStore(new RedisTokenStore(redisConnectionFactory))
+        endpoints.tokenStore(new InMemoryTokenStore())
             .accessTokenConverter(accessTokenConverter())
             .authenticationManager(authenticationManager);
     }
@@ -66,5 +70,5 @@ public class OAuth2AuthorizationServerConfig extends AuthorizationServerConfigur
     @Bean
     public AccessTokenConverter accessTokenConverter() {
         return new JwtAccessTokenConverter();
-    }*/
+    }
 }

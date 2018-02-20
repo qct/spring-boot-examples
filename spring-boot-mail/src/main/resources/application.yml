@@ -1,0 +1,5 @@
+debug: false
+spring:
+  mail:
+    host: smtp.xxx.net
+    port: 25

@@ -15,7 +15,7 @@ public class RetryService {
 
     private static final Logger logger = LoggerFactory.getLogger(RetryService.class);
 
-    @Retryable(maxAttempts = 5, backoff = @Backoff(delay = 2000l, multiplier = 1))
+    @Retryable(maxAttempts = 5, backoff = @Backoff(delay = 2000L, multiplier = 1))
     public String someService() throws Exception {
         int random = (int) (Math.random() * 10);
         if (random < 4) {

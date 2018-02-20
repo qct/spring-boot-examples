@@ -59,4 +59,16 @@ public class SpringBootRedisApplicationTests {
         System.out.println("slaves:");
         slaves.forEach(System.out::println);
     }
+
+    @Test
+    public void testHAdd() {
+        redisTemplate.opsForHash().put("test", "1", "11");
+        redisTemplate.opsForHash().put("test", "2", "22");
+    }
+
+    @Test
+    public void testHDel() {
+        Long a01_nt14410 = redisTemplate.opsForHash().delete("test", "1");
+        System.out.println(a01_nt14410);
+    }
 }

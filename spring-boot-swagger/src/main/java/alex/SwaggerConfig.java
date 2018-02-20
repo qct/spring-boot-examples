@@ -99,7 +99,7 @@ public class SwaggerConfig {
         return new ApiInfoBuilder()
             .title("Spring MVC Demo")
             .description("Spring MVC 简单示例")
-            .termsOfServiceUrl("开发者：Damon")
+            .termsOfServiceUrl("开发者：qct")
             .contact(new Contact("qct", "http://www.google.com", "xxx@yyy.com"))
             .license("Apache License")
             .licenseUrl("http://www.apache.org/licenses/LICENSE-2.0.html")
