@@ -46,5 +46,6 @@
         <module>spring-boot-flyway</module>
         <module>spring-boot-webflux</module>
         <module>spring-boot-mail</module>
+        <module>spring-boot-jooq</module>
     </modules>
 </project>
