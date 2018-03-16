@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <!--<include resource="org/springframework/boot/logging/logback/base.xml"/>-->
+
+    <substitutionProperty name="LOG_HOME" value="${log.home}"/>
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{"yyyy-MM-dd HH:mm:ss,SSS"}の[%-5level]の[%logger{48}]:[%thread]:[line:%L]:%msg-%ex{full}の%n</pattern>
+            <!--<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>-->
+            <!--<pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36}\(line: %L\) - %msg%n</pattern>-->
+        </encoder>
+    </appender>
+    <springProfile name="prod">
+        <appender name="writeRolling" class="ch.qos.logback.core.rolling.RollingFileAppender">
+            <file>./capital_cron_logger.log</file>
+            <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+                <fileNamePattern>./capital_cron_logger.%d{yyyy-MM-dd}.log</fileNamePattern>
+                <maxHistory>30</maxHistory>
+            </rollingPolicy>
+            <encoder>
+                <charset>UTF-8</charset>
+                <pattern>%d{"yyyy-MM-dd HH:mm:ss,SSS"}の[%-5level]の[%logger{48}]:[%thread]:[line:%L]:%msg-%ex{full}の%n</pattern>
+                <immediateFlush>true</immediateFlush>
+            </encoder>
+        </appender>
+    </springProfile>
+    <root level="debug">
+        <appender-ref ref="STDOUT"/>
+        <springProfile name="prod">
+            <appender-ref ref="writeRolling"/>
+        </springProfile>
+    </root>
+</configuration>

@@ -1,0 +1,17 @@
+debug: false
+
+spring:
+  quartz:
+    job-store-type: jdbc
+    jdbc:
+      initialize-schema: never
+    properties:
+      org.quartz.jobStore.isClustered: true
+      org.quartz.scheduler.instanceName: my-clustered-scheduler
+      org.quartz.scheduler.instanceId: AUTO
+      org.quartz.scheduler.interruptJobsOnShutdown: true
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/test?useUnicode=true&amp;characterEncoding=UTF8&amp;zeroDateTimeBehavior=convertToNull&amp;transformedBitIsBoolean=true&allowMultiQueries=true
+    username: root
+    password: root
