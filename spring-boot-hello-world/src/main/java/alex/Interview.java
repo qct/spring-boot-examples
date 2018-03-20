@@ -1,5 +1,6 @@
 package alex;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
@@ -61,8 +62,16 @@ public class Interview {
         }
     }
 
-    private Map<String, Long> calcStream(int[] input, int numOfThread) {
-        return Collections.emptyMap();
+    private static Map<String, Long> calcStream(int[] input) {
+        long start = System.currentTimeMillis();
+        AtomicLong result = new AtomicLong();
+        Arrays.stream(input).parallel().forEach(result::addAndGet);
+        long end = System.currentTimeMillis();
+
+        Map<String, Long> resultMap = new HashMap<>();
+        resultMap.put("result", result.longValue());
+        resultMap.put("time", end - start);
+        return resultMap;
     }
 
     private static int[] genericRandomArray(int size) {
@@ -74,8 +83,11 @@ public class Interview {
     }
 
     public static void main(String[] args) {
-        int[] randomArray = genericRandomArray(100);
+        int[] randomArray = genericRandomArray(10000);
         Map<String, Long> calc = calc(randomArray, 10);
         System.out.println(calc);
+
+        Map<String, Long> calcStream = calcStream(randomArray);
+        System.out.println(calcStream);
     }
 }
