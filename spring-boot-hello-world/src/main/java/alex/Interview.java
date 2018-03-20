@@ -1,13 +1,10 @@
 package alex;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.concurrent.ExecutionException;
+import java.util.Random;
 import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Future;
 import java.util.concurrent.SynchronousQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
@@ -18,44 +15,67 @@ import java.util.concurrent.atomic.AtomicLong;
  */
 public class Interview {
 
-    private Map<String, Long> calc(int[] input, int numOfThread) {
+    private static Map<String, Long> calc(int[] input, int numOfThread) {
         long start = System.currentTimeMillis();
         ExecutorService executorService = new ThreadPoolExecutor(numOfThread, numOfThread, 60L, TimeUnit.SECONDS,
             new SynchronousQueue<>());
         int unit = input.length / numOfThread;
-        List<Future<Long>> resultFutures = new ArrayList<>(numOfThread);
+        AtomicLong finalResult = new AtomicLong(0L);
         for (int i = 0; i < numOfThread; i++) {
             int finalI = i;
-            Future<Long> future = executorService.submit(() -> {
+            executorService.execute(() -> {
                 long result = 0L;
-                for (int j = finalI * unit + 1; j < finalI * (unit + 1); j++) {
+                for (int j = finalI * unit; j < (finalI + 1) * unit ; j++) {
                     result += input[j];
                 }
-                return result;
+                finalResult.addAndGet(result);
             });
-            resultFutures.add(future);
         }
-
-        AtomicLong result = new AtomicLong(0L);
-        resultFutures.forEach(f -> {
-            try {
-                result.addAndGet(f.get());
-            } catch (InterruptedException | ExecutionException e) {
-                //thorw logic exception.
-                e.printStackTrace();
-            }
-        });
 
         long end = System.currentTimeMillis();
         long elapse = end - start;
 
+        shutdownGracefully(executorService);
         Map<String, Long> resultMap = new HashMap<>();
-        resultMap.put("result", result.longValue());
+        resultMap.put("result", finalResult.longValue());
         resultMap.put("time", elapse);
         return resultMap;
     }
 
-    private Map<String, Long> calcStream(int[] input, int numOfThread) throws InterruptedException {
+    private static void shutdownGracefully(ExecutorService executorService) {
+        executorService.shutdown(); // Disable new tasks from being submitted
+        try {
+            // Wait a while for existing tasks to terminate
+            if (!executorService.awaitTermination(60, TimeUnit.SECONDS)) {
+                executorService.shutdownNow(); // Cancel currently executing tasks
+                // Wait a while for tasks to respond to being cancelled
+                if (!executorService.awaitTermination(60, TimeUnit.SECONDS)) {
+                    System.err.println("Pool did not terminate");
+                }
+            }
+        } catch (InterruptedException ie) {
+            // (Re-)Cancel if current thread also interrupted
+            executorService.shutdownNow();
+            // Preserve interrupt status
+            Thread.currentThread().interrupt();
+        }
+    }
+
+    private Map<String, Long> calcStream(int[] input, int numOfThread) {
         return Collections.emptyMap();
+    }
+
+    private static int[] genericRandomArray(int size) {
+        int[] result = new int[size];
+        for (int i = 0; i < size; i++) {
+            result[i] = new Random().nextInt(10000);
+        }
+        return result;
+    }
+
+    public static void main(String[] args) {
+        int[] randomArray = genericRandomArray(100);
+        Map<String, Long> calc = calc(randomArray, 10);
+        System.out.println(calc);
     }
 }
