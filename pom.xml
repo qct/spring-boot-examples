@@ -48,5 +48,6 @@
         <module>spring-boot-mail</module>
         <module>spring-boot-jooq</module>
         <module>spring-boot-quartz</module>
+        <module>spring-extension-example</module>
     </modules>
 </project>
