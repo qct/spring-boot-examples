@@ -49,5 +49,6 @@
         <module>spring-boot-jooq</module>
         <module>spring-boot-quartz</module>
         <module>spring-extension-example</module>
+        <module>spring-boot-integration</module>
     </modules>
 </project>
