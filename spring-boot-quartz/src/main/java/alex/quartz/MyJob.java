@@ -3,6 +3,7 @@ package alex.quartz;
 import org.quartz.DisallowConcurrentExecution;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
+import org.quartz.SchedulerException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.quartz.QuartzJobBean;
@@ -21,12 +22,17 @@ public class MyJob extends QuartzJobBean {
 
     @Override
     protected void executeInternal(JobExecutionContext jobExecutionContext) throws JobExecutionException {
-        logger.info("I'm running");
+        try {
+        logger.info("I'm running, {}, {}", jobExecutionContext.getJobDetail().getKey(),
+            jobExecutionContext.getScheduler().getSchedulerInstanceId());
+        } catch (SchedulerException e) {
+            e.printStackTrace();
+        }
         try {
             Thread.sleep(3000L);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        logger.info("I'm finished");
+//        logger.info("finished, {}, {}", jobExecutionContext.getJobDetail().getKey(), jobExecutionContext.getFireInstanceId());
     }
 }

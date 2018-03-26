@@ -24,7 +24,7 @@
             </encoder>
         </appender>
     </springProfile>
-    <root level="debug">
+    <root level="info">
         <appender-ref ref="STDOUT"/>
         <springProfile name="prod">
             <appender-ref ref="writeRolling"/>

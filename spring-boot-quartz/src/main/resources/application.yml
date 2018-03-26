@@ -7,6 +7,7 @@ spring:
       initialize-schema: never
     properties:
       org.quartz.jobStore.isClustered: true
+      org.quartz.jobStore.clusterCheckinInterval: 20000
       org.quartz.scheduler.instanceName: my-clustered-scheduler
       org.quartz.scheduler.instanceId: AUTO
       org.quartz.scheduler.interruptJobsOnShutdown: true

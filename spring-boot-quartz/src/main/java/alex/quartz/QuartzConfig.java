@@ -6,6 +6,8 @@ import org.quartz.DateBuilder;
 import org.quartz.DateBuilder.IntervalUnit;
 import org.quartz.JobBuilder;
 import org.quartz.JobDetail;
+import org.quartz.ObjectAlreadyExistsException;
+import org.quartz.Scheduler;
 import org.quartz.SchedulerException;
 import org.quartz.SchedulerListener;
 import org.quartz.Trigger;
@@ -48,36 +50,49 @@ public class QuartzConfig {
             @Override
             public void schedulerStarted() {
                 String jobGroup = "my-job-group";
-                String jobName = "my-job";
-                JobDetail detail = JobBuilder
-                    .newJob(MyJob.class)
-                    .storeDurably()
-                    .withIdentity(jobName, jobGroup)
-                    .build();
-
-                String triggerName = "my-trigger";
                 String triggerGroup = "my-trigger-group";
-                String cronEx = "*/6 * * * * ?";
-                CronTrigger trigger = TriggerBuilder
-                    .newTrigger()
-                    .withIdentity(triggerName, triggerGroup)
-                    .forJob(detail)
-                    .withSchedule(
-                        CronScheduleBuilder.cronSchedule(cronEx).withMisfireHandlingInstructionDoNothing())
-                    .startAt(DateBuilder.futureDate(3, IntervalUnit.SECOND))
-                    .build();
-                try {
-                    schedulerFactoryBean.getScheduler().getCurrentlyExecutingJobs().forEach(j -> {
+                for (int i = 0; i < 5; i++) {
+                    String jobName = "my-job-" + i;
+                    JobDetail detail = JobBuilder
+                        .newJob(MyJob.class)
+                        .storeDurably()
+                        .withIdentity(jobName, jobGroup)
+                        .build();
+
+                    String triggerName = "my-trigger-" + i;
+                    String cronEx = "*/5 * * * * ?";
+                    CronTrigger trigger = TriggerBuilder
+                        .newTrigger()
+                        .withIdentity(triggerName, triggerGroup)
+                        .forJob(detail)
+                        .withSchedule(
+                            CronScheduleBuilder.cronSchedule(cronEx).withMisfireHandlingInstructionDoNothing())
+                        .startAt(DateBuilder.futureDate(3, IntervalUnit.SECOND))
+                        .build();
+                    Scheduler scheduler = schedulerFactoryBean.getScheduler();
+                    try {
+                        scheduler.getCurrentlyExecutingJobs().forEach(j -> {
+                            try {
+                                logger.info(j.getScheduler().getSchedulerInstanceId());
+                            } catch (SchedulerException e) {
+                                e.printStackTrace();
+                            }
+                        });
+                        scheduler.scheduleJob(detail, trigger);
+                    }catch (ObjectAlreadyExistsException ex) {
+                        logger.warn(
+                            "Unexpectedly found existing job, due to cluster race condition: {} Will reschedule job, can safely be ignored",
+                            ex.getMessage());
                         try {
-                            logger.info(j.getScheduler().getSchedulerInstanceId());
+                            scheduler.rescheduleJob(trigger.getKey(), trigger);
                         } catch (SchedulerException e) {
-                            e.printStackTrace();
+                            logger.error("rescheduleJob job error, {}", detail);
+                            logger.error("", e);
                         }
-                    });
-                    schedulerFactoryBean.getScheduler().scheduleJob(detail, trigger);
-                } catch (SchedulerException e) {
-                    logger.error("Schedule job error, {}", detail);
-                    e.printStackTrace();
+                    } catch (SchedulerException e) {
+                        logger.error("Schedule job error, {}", detail);
+                        e.printStackTrace();
+                    }
                 }
             }
 
