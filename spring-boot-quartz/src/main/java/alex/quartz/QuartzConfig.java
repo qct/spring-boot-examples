@@ -1,5 +1,6 @@
 package alex.quartz;
 
+import java.util.Collections;
 import org.quartz.CronScheduleBuilder;
 import org.quartz.CronTrigger;
 import org.quartz.DateBuilder;
@@ -12,6 +13,7 @@ import org.quartz.SchedulerException;
 import org.quartz.SchedulerListener;
 import org.quartz.Trigger;
 import org.quartz.TriggerBuilder;
+import org.quartz.impl.matchers.GroupMatcher;
 import org.quartz.listeners.SchedulerListenerSupport;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -51,16 +53,29 @@ public class QuartzConfig {
             public void schedulerStarted() {
                 String jobGroup = "my-job-group";
                 String triggerGroup = "my-trigger-group";
+                Scheduler scheduler = schedulerFactoryBean.getScheduler();
+                try {
+                    scheduler.getJobKeys(GroupMatcher.anyJobGroup()).forEach(jobKey -> {
+                        try {
+                            scheduler.deleteJob(jobKey);
+                            logger.info("deleting job: {}", jobKey);
+                        } catch (SchedulerException e) {
+                            e.printStackTrace();
+                        }
+                    });
+                } catch (SchedulerException e) {
+                    e.printStackTrace();
+                }
+
                 for (int i = 0; i < 5; i++) {
                     String jobName = "my-job-" + i;
                     JobDetail detail = JobBuilder
                         .newJob(MyJob.class)
-                        .storeDurably()
                         .withIdentity(jobName, jobGroup)
                         .build();
 
                     String triggerName = "my-trigger-" + i;
-                    String cronEx = "*/5 * * * * ?";
+                    String cronEx = "*/20 * * * * ?";
                     CronTrigger trigger = TriggerBuilder
                         .newTrigger()
                         .withIdentity(triggerName, triggerGroup)
@@ -69,17 +84,10 @@ public class QuartzConfig {
                             CronScheduleBuilder.cronSchedule(cronEx).withMisfireHandlingInstructionDoNothing())
                         .startAt(DateBuilder.futureDate(3, IntervalUnit.SECOND))
                         .build();
-                    Scheduler scheduler = schedulerFactoryBean.getScheduler();
+
                     try {
-                        scheduler.getCurrentlyExecutingJobs().forEach(j -> {
-                            try {
-                                logger.info(j.getScheduler().getSchedulerInstanceId());
-                            } catch (SchedulerException e) {
-                                e.printStackTrace();
-                            }
-                        });
-                        scheduler.scheduleJob(detail, trigger);
-                    }catch (ObjectAlreadyExistsException ex) {
+                        scheduler.scheduleJob(detail, Collections.singleton(trigger), true);
+                    } catch (ObjectAlreadyExistsException ex) {
                         logger.warn(
                             "Unexpectedly found existing job, due to cluster race condition: {} Will reschedule job, can safely be ignored",
                             ex.getMessage());
