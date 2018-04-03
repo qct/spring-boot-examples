@@ -14,5 +14,11 @@ spring:
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
     url: jdbc:mysql://localhost:3306/test?useUnicode=true&amp;characterEncoding=UTF8&amp;zeroDateTimeBehavior=convertToNull&amp;transformedBitIsBoolean=true&allowMultiQueries=true
-    username: root
-    password: root
+    username: ENC(riUZAgnTJHneKLxEyEEVXA==)
+    password: ENC(Lhnswc4SYky2bn+joCPGxQ==)
+
+jasypt:
+  encryptor:
+    algorithm: PBEWithMD5AndDES
+    password: securityKey
+
