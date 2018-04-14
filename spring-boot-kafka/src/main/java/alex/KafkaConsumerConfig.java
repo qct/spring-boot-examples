@@ -1,10 +1,10 @@
 package alex;
 
-import java.util.HashMap;
 import java.util.Map;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.common.serialization.StringDeserializer;
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.kafka.KafkaProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.kafka.annotation.EnableKafka;
@@ -20,8 +20,12 @@ import org.springframework.kafka.support.serializer.JsonDeserializer;
 @EnableKafka
 public class KafkaConsumerConfig {
 
-    @Value("${kafka.bootstrapAddress}")
-    private String bootstrapAddress;
+    private final KafkaProperties kafkaProperties;
+
+    @Autowired
+    public KafkaConsumerConfig(KafkaProperties kafkaProperties) {
+        this.kafkaProperties = kafkaProperties;
+    }
 
     @Bean
     public ConcurrentKafkaListenerContainerFactory<String, String> fooKafkaListenerContainerFactory() {
@@ -67,8 +71,7 @@ public class KafkaConsumerConfig {
     }
 
     private ConsumerFactory<String, String> consumerFactory(String groupId) {
-        Map<String, Object> configProps = new HashMap<>();
-        configProps.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapAddress);
+        Map<String, Object> configProps = kafkaProperties.buildConsumerProperties();
         configProps.put(ConsumerConfig.GROUP_ID_CONFIG, groupId);
         configProps.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
         configProps.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
@@ -76,8 +79,7 @@ public class KafkaConsumerConfig {
     }
 
     private ConsumerFactory<String, Greeting> greetingConsumerFactory() {
-        Map<String, Object> props = new HashMap<>();
-        props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapAddress);
+        Map<String, Object> props = kafkaProperties.buildConsumerProperties();
         props.put(ConsumerConfig.GROUP_ID_CONFIG, "greeting");
         return new DefaultKafkaConsumerFactory<>(props, new StringDeserializer(),
             new JsonDeserializer<>(Greeting.class));

@@ -23,9 +23,9 @@ public class Application {
 
         @Override
         public void afterPropertiesSet() throws Exception {
-            System.out.println(apiProperties.getNodeThresholdDead());
-            System.out.println(apiProperties.getNodeThresholdDelete());
-            System.out.println(apiProperties.getPort());
+//            System.out.println(apiProperties.getNodeThresholdDead());
+//            System.out.println(apiProperties.getNodeThresholdDelete());
+//            System.out.println(apiProperties.getPort());
         }
     }
 }

@@ -1,8 +1,9 @@
-kafka:
-  bootstrapAddress: 10.66.72.179:32808
 topic:
   name:
     message: myTopic
     greeting: greeting
     filtered: filtered
     partitioned: partitioned
+spring:
+  kafka:
+    bootstrap-servers: 10.66.72.194:9092,10.66.72.195:9092,10.66.72.196:9092,10.66.72.197:9092
