@@ -2,7 +2,13 @@ debug: false
 server:
   port: 443
   ssl:
-    key-store: classpath:.keystore
+    key-store: classpath:keystore.jks
     key-alias: localhost-root
     key-password: finance
     key-store-type: JKS
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
