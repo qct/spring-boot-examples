@@ -2,6 +2,7 @@ package alex;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -14,10 +15,10 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 public class ApplicationTest {
 
     @Autowired
-    private Sender sender;
+    private AmqpTemplate sender;
 
     @Test
     public void hello() throws Exception {
-        sender.send();
+        sender.convertAndSend("123", "");
     }
 }
