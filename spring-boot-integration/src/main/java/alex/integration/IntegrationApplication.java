@@ -28,7 +28,7 @@ import org.springframework.integration.dsl.IntegrationFlowDefinition;
 import org.springframework.integration.dsl.Pollers;
 import org.springframework.integration.dsl.PublishSubscribeSpec;
 import org.springframework.integration.dsl.RouterSpec;
-import org.springframework.integration.dsl.channel.MessageChannelSpec;
+import org.springframework.integration.dsl.MessageChannelSpec;
 import org.springframework.integration.router.MethodInvokingRouter;
 import org.springframework.integration.scheduling.PollerMetadata;
 import org.springframework.integration.store.MessageGroup;
