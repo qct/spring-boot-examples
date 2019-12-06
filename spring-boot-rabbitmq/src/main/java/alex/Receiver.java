@@ -1,7 +1,6 @@
 package alex;
 
-import org.springframework.amqp.core.Queue;
-import org.springframework.amqp.rabbit.annotation.RabbitHandler;
+import java.util.List;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Component;
 
@@ -11,9 +10,21 @@ import org.springframework.stereotype.Component;
 @Component
 public class Receiver {
 
-    @RabbitHandler
-    @RabbitListener(queues = "hello")
-    public void process(String hello) {
-        System.out.println("Receiver: " + hello);
+    @RabbitListener(queues = "my.topic.queue.3", containerFactory = "myMessageListListenerContainerFactory")
+    public void processObj(List<MyMessage> myMessages) {
+        System.out.println("MyMessage List Receiver: " + myMessages.size());
+        for (MyMessage myMessage : myMessages) {
+            System.out.println("List Receiver: " + myMessage);
+        }
+    }
+
+    @RabbitListener(queues = "my.topic.queue.2", containerFactory = "myMessageListenerContainerFactory")
+    public void handleMyMessage(MyMessage myMessage) {
+        System.out.println("MyMessage Receiver: " + myMessage);
+    }
+
+    @RabbitListener(queues = "my.topic.queue.1")
+    public void handleString(String hello) {
+        System.out.println("String Receiver: " + hello);
     }
 }
