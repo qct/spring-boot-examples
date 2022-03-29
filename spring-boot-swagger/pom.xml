@@ -14,7 +14,7 @@
         <groupId>alex</groupId>
         <artifactId>spring-boot-examples</artifactId>
         <version>0.1.0-SNAPSHOT</version>
-        <relativePath>../</relativePath>
+        <relativePath>../pom.xml</relativePath>
     </parent>
 
     <properties>
@@ -74,7 +74,7 @@
                         </configuration>-->
                         <!-- client -->
                         <configuration>
-                            <inputSpec>src/main/resources/my.yml</inputSpec>
+                            <inputSpec>${project.basedir}/src/main/resources/my.yml</inputSpec>
                             <output>${project.build.directory}/generated-sources/client</output>
                             <language>java</language>
                             <library>okhttp-gson</library>

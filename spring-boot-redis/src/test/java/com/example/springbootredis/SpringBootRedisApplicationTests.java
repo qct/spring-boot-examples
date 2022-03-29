@@ -4,8 +4,7 @@ import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.List;
 import javax.annotation.Resource;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.redis.connection.RedisSentinelConnection;
@@ -13,9 +12,7 @@ import org.springframework.data.redis.connection.RedisServer;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.core.types.RedisClientInfo;
-import org.springframework.test.context.junit4.SpringRunner;
 
-@RunWith(SpringRunner.class)
 @SpringBootTest
 public class SpringBootRedisApplicationTests {
 

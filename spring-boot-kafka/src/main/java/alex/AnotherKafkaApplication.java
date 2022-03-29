@@ -22,7 +22,7 @@ import org.springframework.stereotype.Component;
  * @author qct
  * @since 1.0
  */
-@SpringBootApplication
+/*@SpringBootApplication
 public class AnotherKafkaApplication implements CommandLineRunner {
 
     private final Producer producer;
@@ -41,7 +41,7 @@ public class AnotherKafkaApplication implements CommandLineRunner {
         // producer.sendMessage();
         producer.sendMessageToPartition();
     }
-}
+}*/
 
 @Component
 class Receiver {

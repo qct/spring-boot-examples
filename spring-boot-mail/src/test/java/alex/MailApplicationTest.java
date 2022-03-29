@@ -9,15 +9,12 @@ import java.util.Map;
 import javax.mail.MessagingException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
-import org.springframework.mail.javamail.MimeMessagePreparator;
-import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.ui.freemarker.FreeMarkerTemplateUtils;
 
 /**
@@ -27,7 +24,6 @@ import org.springframework.ui.freemarker.FreeMarkerTemplateUtils;
  * @date 2018/2/20
  * @since 1.0
  */
-@RunWith(SpringRunner.class)
 @SpringBootTest
 public class MailApplicationTest {
 

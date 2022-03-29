@@ -14,19 +14,16 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDocs;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.http.MediaType;
-import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
 /**
  * <p>Created by qct on 2017/11/7.
  */
-@RunWith(SpringRunner.class)
 @WebMvcTest(UserController.class)
 @AutoConfigureRestDocs(outputDir = "target/generated-snippets")
 public class UserControllerTest {
@@ -37,9 +34,9 @@ public class UserControllerTest {
     @Test
     public void listUsers() throws Exception {
         mvc.perform(post("/users/")
-            .param("id", "1")
-            .param("name", "测试大师")
-            .param("age", "20"))
+                .param("id", "1")
+                .param("name", "测试大师")
+                .param("age", "20"))
             .andExpect(content().string(equalTo("success")));
 
         this.mvc.perform(get("/users/").accept(MediaType.ALL))
