@@ -4,11 +4,13 @@ server:
   ssl:
     key-store: classpath:keystore.jks
     key-alias: localhost-root
-    key-password: finance
     key-store-type: JKS
+    key-store-password: finance
 management:
   endpoints:
     web:
       exposure:
         include: "*"
-
+logging:
+  level:
+    root: info

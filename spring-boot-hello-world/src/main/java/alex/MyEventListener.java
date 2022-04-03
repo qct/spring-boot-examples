@@ -2,7 +2,10 @@ package alex;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.config.BeanPostProcessor;
+import org.springframework.context.ApplicationEvent;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.event.EventListener;
 import org.springframework.scheduling.annotation.Async;
@@ -19,7 +22,6 @@ public class MyEventListener {
     @Autowired
     private ApplicationEventPublisher applicationEventPublisher;
 
-    @Async
     @EventListener(classes = EventA.class)
     public void handleEventA(EventA event) {
         logger.info("received event A, {}", event);
@@ -32,6 +34,7 @@ public class MyEventListener {
 
         applicationEventPublisher.publishEvent(new EventB(event.getId()));
     }
+
 
     @EventListener(classes = EventB.class)
     @Async
