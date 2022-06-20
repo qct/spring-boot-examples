@@ -5,9 +5,6 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.CommandLineRunner;
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.kafka.annotation.TopicPartition;
 import org.springframework.kafka.core.KafkaTemplate;
@@ -46,48 +43,66 @@ public class AnotherKafkaApplication implements CommandLineRunner {
 @Component
 class Receiver {
 
-    @KafkaListener(topics = "${topic.name.message}", groupId = "foo", containerFactory = "fooKafkaListenerContainerFactory")
-    public void listenGroupFoo(String msg) {
-        System.out.println("Received Message in group 'foo': " + msg);
-    }
+  @KafkaListener(
+      topics = "${topic.name.message}",
+      groupId = "foo",
+      containerFactory = "fooKafkaListenerContainerFactory")
+  public void listenGroupFoo(String msg) {
+    System.out.println("Received Message in group 'foo': " + msg);
+  }
 
-    @KafkaListener(topicPartitions = @TopicPartition(topic = "${topic.name.partitioned}", partitions = {"2", "3"}))
-    public void listenToPartition(@Payload String msg, @Header(KafkaHeaders.RECEIVED_PARTITION_ID) int partition) {
-        System.out.println("Received Message: " + msg + " from partition: " + partition);
-    }
+  @KafkaListener(
+      topicPartitions =
+          @TopicPartition(
+              topic = "${topic.name.partitioned}",
+              partitions = {"2", "3"}))
+  public void listenToPartition(
+      @Payload String msg, @Header(KafkaHeaders.RECEIVED_PARTITION_ID) int partition) {
+    System.out.println("Received Message: " + msg + " from partition: " + partition);
+  }
 }
 
 @Component
 class Producer {
 
-    private final KafkaTemplate<String, String> kafkaTemplate;
+  private final KafkaTemplate<String, String> kafkaTemplate;
 
-    @Value("${topic.name.message}")
-    private String topicName;
+  @Value("${topic.name.message}")
+  private String topicName;
 
-    @Value("${topic.name.partitioned}")
-    private String partitionedTopicName;
+  @Value("${topic.name.partitioned}")
+  private String partitionedTopicName;
 
-    @Autowired
-    public Producer(KafkaTemplate<String, String> kafkaTemplate) {
-        this.kafkaTemplate = kafkaTemplate;
-    }
+  @Autowired
+  public Producer(KafkaTemplate<String, String> kafkaTemplate) {
+    this.kafkaTemplate = kafkaTemplate;
+  }
 
-    public void sendMessage() {
-        Executors.newSingleThreadScheduledExecutor().scheduleWithFixedDelay(() -> {
-            String msg = "test-message" + new Random().nextInt(10000);
-            System.out.println("sending msg: " + msg + ", to: " + topicName);
-            kafkaTemplate.send(topicName, msg);
-        }, 10L, 10L, TimeUnit.SECONDS);
-    }
+  public void sendMessage() {
+    Executors.newSingleThreadScheduledExecutor()
+        .scheduleWithFixedDelay(
+            () -> {
+              String msg = "test-message" + new Random().nextInt(10000);
+              System.out.println("sending msg: " + msg + ", to: " + topicName);
+              kafkaTemplate.send(topicName, msg);
+            },
+            10L,
+            10L,
+            TimeUnit.SECONDS);
+  }
 
-    public void sendMessageToPartition() {
-        Executors.newSingleThreadScheduledExecutor().scheduleWithFixedDelay(() -> {
-            String message = "Hello to Partitioned Topic!" + new Random().nextInt(10000);
-            for (int i = 0; i < 5; i++) {
+  public void sendMessageToPartition() {
+    Executors.newSingleThreadScheduledExecutor()
+        .scheduleWithFixedDelay(
+            () -> {
+              String message = "Hello to Partitioned Topic!" + new Random().nextInt(10000);
+              for (int i = 0; i < 5; i++) {
                 System.out.println("sending msg: " + message + ", to: " + partitionedTopicName);
                 kafkaTemplate.send(partitionedTopicName, i, message, message);
-            }
-        }, 10L, 10L, TimeUnit.SECONDS);
-    }
+              }
+            },
+            10L,
+            10L,
+            TimeUnit.SECONDS);
+  }
 }

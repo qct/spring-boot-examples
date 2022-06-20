@@ -27,11 +27,9 @@ import org.springframework.ui.freemarker.FreeMarkerTemplateUtils;
 @SpringBootTest
 public class MailApplicationTest {
 
-    @Autowired
-    private JavaMailSender mailSender;
+    @Autowired private JavaMailSender mailSender;
 
-    @Autowired
-    private Configuration configuration;
+    @Autowired private Configuration configuration;
 
     @Test
     public void testSendSimpleMessage() throws IOException, TemplateException, MessagingException {
@@ -40,7 +38,7 @@ public class MailApplicationTest {
         message.setTo("xxx@xxx.net");
         message.setText("test1");
         message.setSubject("主题");
-        //mailSender.send(message);
+        // mailSender.send(message);
 
         Template template = configuration.getTemplate("alert-email.ftl");
         Map<String, String> model = new HashMap<>();

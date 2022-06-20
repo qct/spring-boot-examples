@@ -17,33 +17,28 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
-/**
- * <p>Created by qct on 2017/2/16.
- */
+/** Created by qct on 2017/2/16. */
 @Component
 public class Sender implements CommandLineRunner {
 
-    @Autowired
-    private AmqpTemplate rabbitTemplate;
+    @Autowired private AmqpTemplate rabbitTemplate;
 
     @Override
     public void run(String... args) throws Exception {
         String context = "hello" + new Date();
-//        this.rabbitTemplate.convertAndSend(TOPIC_EXCHANGE_NAME, "topic-queue.login", context);
+        //        this.rabbitTemplate.convertAndSend(TOPIC_EXCHANGE_NAME, "topic-queue.login", context);
 
         this.rabbitTemplate.convertAndSend(FANOUT_EXCHANGE_NAME, "", context);
         this.rabbitTemplate.convertAndSend(DIRECT_EXCHANGE_NAME, DIRECT_ROUTING_KEY1, context);
         this.rabbitTemplate.convertAndSend(DIRECT_EXCHANGE_NAME, DIRECT_ROUTING_KEY2, context);
 
-
         Message headerMsg = MessageBuilder.withBody(context.getBytes()).setHeader("age", 21).build();
         this.rabbitTemplate.convertAndSend(HEADERS_EXCHANGE_NAME, "", headerMsg);
 
-
-        MyMessage myMessage  = new MyMessage();
+        MyMessage myMessage = new MyMessage();
         myMessage.setId("1");
         myMessage.setName("Lei");
-        MyMessage myMessage2  = new MyMessage();
+        MyMessage myMessage2 = new MyMessage();
         myMessage2.setId("2");
         myMessage2.setName("Jin");
 

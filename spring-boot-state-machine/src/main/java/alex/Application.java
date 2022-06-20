@@ -6,14 +6,11 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.statemachine.StateMachine;
 
-/**
- * <p>Created by qct on 2017/2/14.
- */
+/** Created by qct on 2017/2/14. */
 @SpringBootApplication
 public class Application implements CommandLineRunner {
 
-    @Autowired
-    private StateMachine<States, Events> stateMachine;
+    @Autowired private StateMachine<States, Events> stateMachine;
 
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);

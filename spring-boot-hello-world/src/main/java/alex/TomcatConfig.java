@@ -9,9 +9,7 @@ import org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactor
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-/**
- * <p>Created by qct on 2017/10/20.
- */
+/** Created by qct on 2017/10/20. */
 @Configuration
 public class TomcatConfig {
 
@@ -20,17 +18,18 @@ public class TomcatConfig {
 
     @Bean
     public TomcatServletWebServerFactory servletContainerFactory() {
-        TomcatServletWebServerFactory tomcat = new TomcatServletWebServerFactory() {
-            @Override
-            protected void postProcessContext(Context context) {
-                SecurityConstraint securityConstraint = new SecurityConstraint();
-                securityConstraint.setUserConstraint("CONFIDENTIAL");
-                SecurityCollection collection = new SecurityCollection();
-                collection.addPattern("/*");
-                securityConstraint.addCollection(collection);
-                context.addConstraint(securityConstraint);
-            }
-        };
+        TomcatServletWebServerFactory tomcat =
+                new TomcatServletWebServerFactory() {
+                    @Override
+                    protected void postProcessContext(Context context) {
+                        SecurityConstraint securityConstraint = new SecurityConstraint();
+                        securityConstraint.setUserConstraint("CONFIDENTIAL");
+                        SecurityCollection collection = new SecurityCollection();
+                        collection.addPattern("/*");
+                        securityConstraint.addCollection(collection);
+                        context.addConstraint(securityConstraint);
+                    }
+                };
         tomcat.addAdditionalTomcatConnectors(initiateHttpConnector());
         return tomcat;
     }
@@ -39,7 +38,7 @@ public class TomcatConfig {
     public MyFactoryBean myFactoryBean() {
         return new MyFactoryBean();
     }
-    
+
     @Bean
     public MyBean myBean() throws Exception {
         return myFactoryBean().getObject();

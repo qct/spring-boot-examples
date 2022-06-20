@@ -5,14 +5,11 @@ import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-/**
- * <p>Created by qct on 2017/2/16.
- */
+/** Created by qct on 2017/2/16. */
 @SpringBootTest(classes = RabbitMqApplication.class)
 public class RabbitMqApplicationTest {
 
-    @Autowired
-    private AmqpTemplate sender;
+    @Autowired private AmqpTemplate sender;
 
     @Test
     public void hello() throws Exception {

@@ -7,7 +7,6 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
-import org.springframework.ui.context.support.UiApplicationContextUtils;
 
 /**
  * default description.
@@ -17,7 +16,7 @@ import org.springframework.ui.context.support.UiApplicationContextUtils;
  * @since 1.0
  */
 @SpringBootApplication
-public class ExtensionExampleApplication implements CommandLineRunner{
+public class ExtensionExampleApplication implements CommandLineRunner {
 
     private static final Logger logger = LoggerFactory.getLogger(ExtensionExampleApplication.class);
 

@@ -20,9 +20,7 @@ public class RocketMqApplication implements CommandLineRunner {
 
     private static final Logger logger = LoggerFactory.getLogger(RocketMqApplication.class);
 
-    @Resource
-    private RocketMQTemplate rocketMQTemplate;
-
+    @Resource private RocketMQTemplate rocketMQTemplate;
 
     public static void main(String[] args) {
         SpringApplication.run(RocketMqApplication.class, args);
@@ -30,10 +28,12 @@ public class RocketMqApplication implements CommandLineRunner {
 
     @Override
     public void run(String... strings) throws Exception {
-//        rocketMQTemplate.convertAndSend("test-topic-1", "Hello, World!");
-//        rocketMQTemplate.send("test-topic-1", MessageBuilder.withPayload("Hello, World! I'm from spring").build());
+        //        rocketMQTemplate.convertAndSend("test-topic-1", "Hello, World!");
+        //        rocketMQTemplate.send("test-topic-1", MessageBuilder.withPayload("Hello, World! I'm
+        // from spring").build());
         while (true) {
-            rocketMQTemplate.convertAndSend("test-topic-2", new OrderPaidEvent("T_001", new BigDecimal("88.00")));
+            rocketMQTemplate.convertAndSend(
+                    "test-topic-2", new OrderPaidEvent("T_001", new BigDecimal("88.00")));
             int i = new Random().nextInt(60);
             System.out.println("sleep " + i);
             Thread.sleep(1000L * i);
@@ -46,8 +46,7 @@ public class RocketMqApplication implements CommandLineRunner {
 
         private BigDecimal paidMoney;
 
-        public OrderPaidEvent() {
-        }
+        public OrderPaidEvent() {}
 
         public OrderPaidEvent(String orderId, BigDecimal paidMoney) {
             this.orderId = orderId;
@@ -81,8 +80,10 @@ public class RocketMqApplication implements CommandLineRunner {
     }
 
     @Service
-    @RocketMQMessageListener(topic = "test-topic-2", consumerGroup = "my-consumer_test-topic-2", messageModel =
-        MessageModel.BROADCASTING)
+    @RocketMQMessageListener(
+            topic = "test-topic-2",
+            consumerGroup = "my-consumer_test-topic-2",
+            messageModel = MessageModel.BROADCASTING)
     public class MyConsumer2 implements RocketMQListener<OrderPaidEvent> {
 
         public void onMessage(OrderPaidEvent orderPaidEvent) {
@@ -91,8 +92,10 @@ public class RocketMqApplication implements CommandLineRunner {
     }
 
     @Service
-    @RocketMQMessageListener(topic = "test-topic-2", consumerGroup = "my-consumer_test-topic-3", messageModel =
-        MessageModel.BROADCASTING)
+    @RocketMQMessageListener(
+            topic = "test-topic-2",
+            consumerGroup = "my-consumer_test-topic-3",
+            messageModel = MessageModel.BROADCASTING)
     public class MyConsumer3 implements RocketMQListener<OrderPaidEvent> {
 
         public void onMessage(OrderPaidEvent orderPaidEvent) {

@@ -1,16 +1,16 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>alex</groupId>
+        <artifactId>spring-boot-examples</artifactId>
+        <version>0.1.0-SNAPSHOT</version>
+    </parent>
 
     <artifactId>spring-boot-jooq</artifactId>
     <version>0.1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
-
-    <parent>
-        <artifactId>spring-boot-examples</artifactId>
-        <groupId>alex</groupId>
-        <version>0.1.0-SNAPSHOT</version>
-    </parent>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -43,22 +43,6 @@
             <plugin>
                 <groupId>org.jooq</groupId>
                 <artifactId>jooq-codegen-maven</artifactId>
-                <!-- The jOOQ code generation plugin is also executed in the generate-sources phase, prior to compilation -->
-                <executions>
-                    <execution>
-                        <phase>generate-sources</phase>
-                        <goals>
-                            <goal>generate</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <dependencies>
-                    <dependency>
-                        <groupId>mysql</groupId>
-                        <artifactId>mysql-connector-java</artifactId>
-                        <version>${mysql.version}</version>
-                    </dependency>
-                </dependencies>
                 <!-- This is a minimal working configuration. See the manual's section about the code generator for more details -->
                 <configuration>
                     <jdbc>
@@ -77,6 +61,22 @@
                         </target>
                     </generator>
                 </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>mysql</groupId>
+                        <artifactId>mysql-connector-java</artifactId>
+                        <version>${mysql.version}</version>
+                    </dependency>
+                </dependencies>
+                <!-- The jOOQ code generation plugin is also executed in the generate-sources phase, prior to compilation -->
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                        <phase>generate-sources</phase>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>

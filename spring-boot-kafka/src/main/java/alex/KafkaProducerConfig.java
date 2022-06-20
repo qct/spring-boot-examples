@@ -12,9 +12,7 @@ import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.core.ProducerFactory;
 import org.springframework.kafka.support.serializer.JsonSerializer;
 
-/**
- * <p>Created by qct on 2017/10/16.
- */
+/** Created by qct on 2017/10/16. */
 @Configuration
 public class KafkaProducerConfig {
 

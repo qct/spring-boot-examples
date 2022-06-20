@@ -16,15 +16,12 @@ import org.springframework.data.redis.core.types.RedisClientInfo;
 @SpringBootTest
 public class SpringBootRedisApplicationTests {
 
-    @Autowired
-    private StringRedisTemplate stringRedisTemplate;
+    @Autowired private StringRedisTemplate stringRedisTemplate;
 
-    @Resource
-    private RedisTemplate<String, SysDict> redisTemplate;
+    @Resource private RedisTemplate<String, SysDict> redisTemplate;
 
     @Test
-    public void contextLoads() {
-    }
+    public void contextLoads() {}
 
     @Test
     public void testSet() throws Exception {
@@ -48,7 +45,8 @@ public class SpringBootRedisApplicationTests {
 
     @Test
     public void testSentinelInfo() throws Exception {
-        RedisSentinelConnection sentinelConnection = redisTemplate.getConnectionFactory().getSentinelConnection();
+        RedisSentinelConnection sentinelConnection =
+                redisTemplate.getConnectionFactory().getSentinelConnection();
         Collection<RedisServer> masters = sentinelConnection.masters();
         System.out.println("master:");
         masters.forEach(System.out::println);

@@ -5,16 +5,18 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 
-/**
- * <p>Created by qct on 2017/11/24.
- */
+/** Created by qct on 2017/11/24. */
 @Entity
 public class Person {
 
     @Id
-    @SequenceGenerator(name = "person_generator", sequenceName = "person_sequence", allocationSize = 1)
+    @SequenceGenerator(
+            name = "person_generator",
+            sequenceName = "person_sequence",
+            allocationSize = 1)
     @GeneratedValue(generator = "person_generator")
     private Long id;
+
     private String firstName;
     private String lastName;
 
@@ -36,7 +38,6 @@ public class Person {
 
     @Override
     public String toString() {
-        return "Person [firstName=" + this.firstName + ", lastName=" + this.lastName
-            + "]";
+        return "Person [firstName=" + this.firstName + ", lastName=" + this.lastName + "]";
     }
 }

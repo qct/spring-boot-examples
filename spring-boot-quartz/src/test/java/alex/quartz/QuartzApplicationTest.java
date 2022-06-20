@@ -14,7 +14,5 @@ import org.springframework.boot.test.context.SpringBootTest;
 public class QuartzApplicationTest {
 
     @Test
-    public void testContextLoads() {
-
-    }
+    public void testContextLoads() {}
 }

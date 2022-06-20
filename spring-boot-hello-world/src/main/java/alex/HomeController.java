@@ -1,14 +1,11 @@
 package alex;
 
 import java.util.concurrent.atomic.AtomicInteger;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-/**
- * <p>Created by qct on 2017/10/20.
- */
+/** Created by qct on 2017/10/20. */
 @Controller
 public class HomeController {
 
@@ -25,5 +22,4 @@ public class HomeController {
     public String home() {
         return greetingService.greeting() + count.incrementAndGet();
     }
-
 }

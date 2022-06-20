@@ -13,9 +13,7 @@ import org.springframework.retry.stats.DefaultStatisticsRepository;
 import org.springframework.retry.stats.StatisticsListener;
 import org.springframework.retry.support.RetryTemplate;
 
-/**
- * Created by quchentao on 2017/3/16.
- */
+/** Created by quchentao on 2017/3/16. */
 @Configuration
 @EnableRetry
 @EnableAspectJAutoProxy(proxyTargetClass = true)
@@ -26,7 +24,8 @@ public class RetryServiceMain {
     }
 
     public static void main(String[] args) throws Throwable {
-        final AnnotationConfigApplicationContext applicationContext = new AnnotationConfigApplicationContext(RetryServiceMain.class);
+        final AnnotationConfigApplicationContext applicationContext =
+                new AnnotationConfigApplicationContext(RetryServiceMain.class);
         final RetryService retryService = applicationContext.getBean(RetryService.class);
 
         RetryTemplate template = new RetryTemplate();
@@ -34,15 +33,18 @@ public class RetryServiceMain {
         template.setBackOffPolicy(new FixedBackOffPolicy());
         template.registerListener(new StatisticsListener(new DefaultStatisticsRepository()));
 
-        Object execute = template.execute(new RetryCallback<Integer, Exception>() {
-            int i = 5;
-            @Override
-            public Integer doWithRetry(RetryContext context) throws Exception {
-                throw new Exception();
-            }
-        });
+        Object execute =
+                template.execute(
+                        new RetryCallback<Integer, Exception>() {
+                            int i = 5;
 
-//        String result = retryService.someService();
-//        System.out.println(result);
+                            @Override
+                            public Integer doWithRetry(RetryContext context) throws Exception {
+                                throw new Exception();
+                            }
+                        });
+
+        //        String result = retryService.someService();
+        //        System.out.println(result);
     }
 }

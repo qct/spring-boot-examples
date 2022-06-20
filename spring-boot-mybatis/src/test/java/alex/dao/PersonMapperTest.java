@@ -7,14 +7,11 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-/**
- * <p>Created by qct on 2017/10/5.
- */
+/** Created by qct on 2017/10/5. */
 @SpringBootTest
 public class PersonMapperTest {
 
-    @Autowired
-    private PersonMapper mapper;
+    @Autowired private PersonMapper mapper;
 
     @Test
     public void selectByExample() throws Exception {

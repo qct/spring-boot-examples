@@ -9,9 +9,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 
-/**
- * <p>Created by qct on 2017/9/19.
- */
+/** Created by qct on 2017/9/19. */
 @Configuration
 @EnableWebSecurity
 public class ServerSecurityConfig extends WebSecurityConfigurerAdapter {
@@ -23,20 +21,20 @@ public class ServerSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.inMemoryAuthentication()
-            .withUser("john")
-            .password("123")
-            .roles("USER");
+        auth.inMemoryAuthentication().withUser("john").password("123").roles("USER");
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         // @formatter:off
         http.authorizeRequests()
-                .antMatchers("/public/**").permitAll()
-                .anyRequest().authenticated()
+                .antMatchers("/public/**")
+                .permitAll()
+                .anyRequest()
+                .authenticated()
                 .and()
-            .formLogin().permitAll();
+                .formLogin()
+                .permitAll();
         // @formatter:on
     }
 

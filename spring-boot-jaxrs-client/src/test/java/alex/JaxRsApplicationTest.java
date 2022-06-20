@@ -8,17 +8,13 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import si.mazi.rescu.RestProxyFactory;
 
-/**
- * <p>Created by qct on 2017/11/6.
- */
+/** Created by qct on 2017/11/6. */
 public class JaxRsApplicationTest {
 
     private static final String SERVICE_URI = "http://127.0.0.1:8080";
     public static final String EXPECTED = "world";
 
-    /**
-     * works unless remove dependency of cxf-rt-rs-client
-     */
+    /** works unless remove dependency of cxf-rt-rs-client */
     @Test
     public void testMessageWithJerseyProxyClient() throws Exception {
         ClientConfig c = new ClientConfig().register(Endpoint.class);

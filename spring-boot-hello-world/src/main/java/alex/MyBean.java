@@ -1,8 +1,6 @@
 package alex;
 
-/**
- * <p>Created by qct.q on 2017/11/29.
- */
+/** Created by qct.q on 2017/11/29. */
 public class MyBean {
 
     private String name;
@@ -21,8 +19,6 @@ public class MyBean {
 
     @Override
     public String toString() {
-        return "MyBean{" +
-            "name='" + name + '\'' +
-            '}';
+        return "MyBean{" + "name='" + name + '\'' + '}';
     }
 }

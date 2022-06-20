@@ -8,9 +8,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 
-/**
- * <p>Created by qct on 2017/9/19.
- */
+/** Created by qct on 2017/9/19. */
 @Configuration
 @EnableWebSecurity
 public class ServerSecurityConfig extends WebSecurityConfigurerAdapter {
@@ -24,10 +22,13 @@ public class ServerSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         // @formatter:off
         http.authorizeRequests()
-                .antMatchers("/public/**").permitAll()
-                .anyRequest().authenticated()
+                .antMatchers("/public/**")
+                .permitAll()
+                .anyRequest()
+                .authenticated()
                 .and()
-            .formLogin().permitAll();
+                .formLogin()
+                .permitAll();
         // @formatter:on
     }
 

@@ -30,9 +30,6 @@ public class ExampleConfig {
 
     @Override
     public String toString() {
-        return "ExampleConfig{" +
-            "name='" + name + '\'' +
-            ", order=" + order +
-            '}';
+        return "ExampleConfig{" + "name='" + name + '\'' + ", order=" + order + '}';
     }
 }

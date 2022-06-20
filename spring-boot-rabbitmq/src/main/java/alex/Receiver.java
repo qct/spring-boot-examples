@@ -4,13 +4,13 @@ import java.util.List;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Component;
 
-/**
- * <p>Created by qct on 2017/2/16.
- */
+/** Created by qct on 2017/2/16. */
 @Component
 public class Receiver {
 
-    @RabbitListener(queues = "my.topic.queue.3", containerFactory = "myMessageListListenerContainerFactory")
+    @RabbitListener(
+            queues = "my.topic.queue.3",
+            containerFactory = "myMessageListListenerContainerFactory")
     public void processObj(List<MyMessage> myMessages) {
         System.out.println("MyMessage List Receiver: " + myMessages.size());
         for (MyMessage myMessage : myMessages) {
@@ -18,7 +18,9 @@ public class Receiver {
         }
     }
 
-    @RabbitListener(queues = "my.topic.queue.2", containerFactory = "myMessageListenerContainerFactory")
+    @RabbitListener(
+            queues = "my.topic.queue.2",
+            containerFactory = "myMessageListenerContainerFactory")
     public void handleMyMessage(MyMessage myMessage) {
         System.out.println("MyMessage Receiver: " + myMessage);
     }

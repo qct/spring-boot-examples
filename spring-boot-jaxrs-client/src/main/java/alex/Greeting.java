@@ -1,14 +1,11 @@
 package alex;
 
-/**
- * <p>Created by qct on 2017/11/6.
- */
+/** Created by qct on 2017/11/6. */
 public class Greeting {
 
     private String message;
 
-    public Greeting() {
-    }
+    public Greeting() {}
 
     public Greeting(String world) {
         this.message = world;
@@ -24,8 +21,6 @@ public class Greeting {
 
     @Override
     public String toString() {
-        return "Greeting{" +
-            "message='" + message + '\'' +
-            '}';
+        return "Greeting{" + "message='" + message + '\'' + '}';
     }
 }

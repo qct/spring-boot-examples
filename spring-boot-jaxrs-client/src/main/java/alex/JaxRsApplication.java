@@ -3,9 +3,7 @@ package alex;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-/**
- * <p>Created by qct on 2017/11/6.
- */
+/** Created by qct on 2017/11/6. */
 @SpringBootApplication
 public class JaxRsApplication {
 

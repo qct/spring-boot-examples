@@ -29,8 +29,8 @@ public class MyHeaderExchange {
     }
 
     @Bean
-    public Binding bindingHeadersExchangeMessage1(Queue headersQueue1,
-        HeadersExchange headersExchange) {
+    public Binding bindingHeadersExchangeMessage1(
+            Queue headersQueue1, HeadersExchange headersExchange) {
         return BindingBuilder.bind(headersQueue1).to(headersExchange).whereAny("age").exist();
     }
 }

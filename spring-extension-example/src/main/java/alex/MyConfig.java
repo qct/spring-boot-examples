@@ -11,6 +11,4 @@ import org.springframework.context.annotation.Configuration;
  */
 @Configuration
 @EnableExampleConfig(value = "testMe", order = 999)
-public class MyConfig {
-
-}
+public class MyConfig {}

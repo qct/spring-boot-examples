@@ -10,12 +10,11 @@ import org.springframework.jdbc.core.JdbcTemplate;
 @SpringBootTest
 public class FlywayApplicationTests {
 
-    @Autowired
-    private JdbcTemplate jdbcTemplate;
+    @Autowired private JdbcTemplate jdbcTemplate;
 
     @Test
     public void testDefaultSettings() throws Exception {
-        assertThat(this.jdbcTemplate.queryForObject("SELECT COUNT(*) from PERSON",
-            Integer.class)).isEqualTo(1);
+        assertThat(this.jdbcTemplate.queryForObject("SELECT COUNT(*) from PERSON", Integer.class))
+                .isEqualTo(1);
     }
 }

@@ -4,9 +4,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-/**
- * <p>Created by qct on 2017/9/20.
- */
+/** Created by qct on 2017/9/20. */
 @Configuration
 public class MvcConfig implements WebMvcConfigurer {
 

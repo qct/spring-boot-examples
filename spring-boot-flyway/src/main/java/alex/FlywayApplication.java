@@ -20,7 +20,6 @@ public class FlywayApplication {
             public void run(String... args) throws Exception {
                 System.err.println(repository.findAll());
             }
-
         };
     }
 }

@@ -8,7 +8,6 @@ import java.util.Properties;
 import java.util.UUID;
 import java.util.prefs.Preferences;
 
-
 /**
  * default description.
  *
@@ -25,7 +24,6 @@ public class KeyMaker {
     public static String ticketId = "100";
     public static String licserverUrl = "http://" + KeyMaker.licServer + ":" + KeyMaker.licServerPort;
 
-
     public static void generate(String product, final String user, String keyDir) {
         generate(Product.valueOf(product), user, keyDir);
     }
@@ -38,23 +36,31 @@ public class KeyMaker {
         final String machineId = getMachineId();
         final Properties licenseProperties = getLicenseProperties(user, machineId, "0");
         writeLicensePreference(licenseProperties, preferenceKey);
-        writeLicenseServerFile("URL:" + licserverUrl, keyDir + "/" + product.name.toLowerCase() + ".key");
+        writeLicenseServerFile(
+                "URL:" + licserverUrl, keyDir + "/" + product.name.toLowerCase() + ".key");
     }
 
     private static String getPreferenceKey(final String productUUID) {
         return KeyMaker.preferenceKeyStart + "." + productUUID + "." + KeyMaker.preferenceKeyEnd;
     }
 
-    private static Properties getLicenseProperties(final String user, final String machineId,
-        final String licenseType) {
+    private static Properties getLicenseProperties(
+            final String user, final String machineId, final String licenseType) {
         final Properties licenseProperties = new Properties();
         licenseProperties.setProperty("server.url", KeyMaker.licserverUrl);
         licenseProperties.setProperty("prolongation.period", KeyMaker.prolongation);
         licenseProperties.setProperty("machine.id", machineId);
         licenseProperties.setProperty("ticket.id", KeyMaker.ticketId);
         licenseProperties.setProperty("licensee", user);
-        final String signature = generateLicenseHash(KeyMaker.licserverUrl, machineId, 0L,
-            Long.parseLong(KeyMaker.prolongation), user, KeyMaker.ticketId, licenseType);
+        final String signature =
+                generateLicenseHash(
+                        KeyMaker.licserverUrl,
+                        machineId,
+                        0L,
+                        Long.parseLong(KeyMaker.prolongation),
+                        user,
+                        KeyMaker.ticketId,
+                        licenseType);
         licenseProperties.setProperty("signature", signature);
         licenseProperties.setProperty("licenseType", licenseType);
         return licenseProperties;
@@ -73,13 +79,14 @@ public class KeyMaker {
         Preferences.userRoot().put("JetBrains.UserIdOnMachine", UUID.randomUUID().toString());
     }
 
-    public static String generateLicenseHash(String licserverUrl,
-        String machineId,
-        long unkown,
-        long prolongation,
-        String user,
-        String ticketId,
-        String licenseType) {
+    public static String generateLicenseHash(
+            String licserverUrl,
+            String machineId,
+            long unkown,
+            long prolongation,
+            String user,
+            String ticketId,
+            String licenseType) {
         final StringBuilder sb = new StringBuilder();
         sb.append(licserverUrl);
         sb.append(prolongation);
@@ -94,12 +101,14 @@ public class KeyMaker {
         return Integer.toHexString(i1);
     }
 
-    public static void writeLicensePreference(final Properties localProperties, final String preferenceKey) {
+    public static void writeLicensePreference(
+            final Properties localProperties, final String preferenceKey) {
         try {
             Preferences.userRoot().remove(preferenceKey);
             final ByteArrayOutputStream localByteArrayOutputStream = new ByteArrayOutputStream();
-            localProperties
-                .store(localByteArrayOutputStream, "License server ticket information. Please do not alter this data");
+            localProperties.store(
+                    localByteArrayOutputStream,
+                    "License server ticket information. Please do not alter this data");
             localByteArrayOutputStream.close();
             Preferences.userRoot().putByteArray(preferenceKey, localByteArrayOutputStream.toByteArray());
             Preferences.userRoot().flush();
@@ -129,8 +138,8 @@ public class KeyMaker {
         }
     }
 
-    private static void writeLicenseServer(final OutputStream paramOutputStream, final String paramString)
-        throws IOException {
+    private static void writeLicenseServer(
+            final OutputStream paramOutputStream, final String paramString) throws IOException {
         for (int i = 0; i < paramString.length(); ++i) {
             final int j = paramString.charAt(i);
             final int k = (byte) (j & 0xFF);
@@ -141,9 +150,7 @@ public class KeyMaker {
     }
 
     public static void main(String[] args) {
-        generate(Product.IDEA, "Rover12421Test",
-            "D:\\playground\\JetBrains-key"
-        );
+        generate(Product.IDEA, "Rover12421Test", "D:\\playground\\JetBrains-key");
     }
 
     public enum Product {

@@ -1,11 +1,6 @@
-<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns="http://maven.apache.org/POM/4.0.0"
-    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-
-    <artifactId>spring-boot-hello-world</artifactId>
-    <version>0.1.0-SNAPSHOT</version>
-    <packaging>jar</packaging>
 
     <parent>
         <groupId>alex</groupId>
@@ -13,6 +8,10 @@
         <version>0.1.0-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
+
+    <artifactId>spring-boot-hello-world</artifactId>
+    <version>0.1.0-SNAPSHOT</version>
+    <packaging>jar</packaging>
 
     <dependencies>
         <dependency>
@@ -42,8 +41,10 @@
                 <version>2.20.1</version>
                 <executions>
                     <execution>
+                        <goals>
+                            <goal>report-only</goal>
+                        </goals>
                         <phase>test</phase>
-                        <goals><goal>report-only</goal></goals>
                     </execution>
                 </executions>
             </plugin>
@@ -59,12 +60,16 @@
                 <executions>
                     <execution>
                         <id>pre-test</id>
-                        <goals><goal>prepare-agent</goal></goals>
+                        <goals>
+                            <goal>prepare-agent</goal>
+                        </goals>
                     </execution>
                     <execution>
                         <id>post-test</id>
+                        <goals>
+                            <goal>report</goal>
+                        </goals>
                         <phase>test</phase>
-                        <goals><goal>report</goal></goals>
                     </execution>
                     <execution>
                         <id>jacoco-check</id>

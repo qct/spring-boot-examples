@@ -5,9 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.statemachine.annotation.OnTransition;
 import org.springframework.statemachine.annotation.WithStateMachine;
 
-/**
- * <p>Created by qct on 2017/2/14.
- */
+/** Created by qct on 2017/2/14. */
 @WithStateMachine
 public class EventConfig {
 

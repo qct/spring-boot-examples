@@ -20,8 +20,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class JooqApplication implements CommandLineRunner {
 
-    @Autowired
-    private DSLContext create;
+    @Autowired private DSLContext create;
 
     public static void main(String[] args) {
         SpringApplication.run(JooqApplication.class, args);
@@ -29,7 +28,8 @@ public class JooqApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        Result<CustomerRecord> records = create.selectFrom(CUSTOMER).where(CUSTOMER.FIRST_NAME.like("%e%")).fetch();
+        Result<CustomerRecord> records =
+                create.selectFrom(CUSTOMER).where(CUSTOMER.FIRST_NAME.like("%e%")).fetch();
         records.forEach(System.out::print);
     }
 }

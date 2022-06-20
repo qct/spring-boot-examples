@@ -1,7 +1,6 @@
 package alex;
 
 import java.util.Optional;
-import java.util.function.Supplier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
@@ -13,7 +12,6 @@ import org.springframework.context.annotation.Bean;
 public class DataJpaApplication {
 
     private static final Logger log = LoggerFactory.getLogger(DataJpaApplication.class);
-
 
     public static void main(String[] args) {
         SpringApplication.run(DataJpaApplication.class);

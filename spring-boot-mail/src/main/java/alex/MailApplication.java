@@ -6,9 +6,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.mail.javamail.JavaMailSender;
 
-/**
- * <p>Created by qct on 2018/2/20.
- */
+/** Created by qct on 2018/2/20. */
 @SpringBootApplication
 public class MailApplication implements CommandLineRunner {
 
@@ -24,7 +22,5 @@ public class MailApplication implements CommandLineRunner {
     }
 
     @Override
-    public void run(String... args) {
-
-    }
+    public void run(String... args) {}
 }

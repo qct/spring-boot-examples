@@ -55,42 +55,44 @@ public class QuartzConfig {
                 String triggerGroup = "my-trigger-group";
                 Scheduler scheduler = schedulerFactoryBean.getScheduler();
                 try {
-                    scheduler.getJobKeys(GroupMatcher.anyJobGroup()).forEach(jobKey -> {
-                        try {
-                            scheduler.deleteJob(jobKey);
-                            logger.info("deleting job: {}", jobKey);
-                        } catch (SchedulerException e) {
-                            e.printStackTrace();
-                        }
-                    });
+                    scheduler
+                            .getJobKeys(GroupMatcher.anyJobGroup())
+                            .forEach(
+                                    jobKey -> {
+                                        try {
+                                            scheduler.deleteJob(jobKey);
+                                            logger.info("deleting job: {}", jobKey);
+                                        } catch (SchedulerException e) {
+                                            e.printStackTrace();
+                                        }
+                                    });
                 } catch (SchedulerException e) {
                     e.printStackTrace();
                 }
 
                 for (int i = 0; i < 5; i++) {
                     String jobName = "my-job-" + i;
-                    JobDetail detail = JobBuilder
-                        .newJob(MyJob.class)
-                        .withIdentity(jobName, jobGroup)
-                        .build();
+                    JobDetail detail = JobBuilder.newJob(MyJob.class).withIdentity(jobName, jobGroup).build();
 
                     String triggerName = "my-trigger-" + i;
                     String cronEx = "*/20 * * * * ?";
-                    CronTrigger trigger = TriggerBuilder
-                        .newTrigger()
-                        .withIdentity(triggerName, triggerGroup)
-                        .forJob(detail)
-                        .withSchedule(
-                            CronScheduleBuilder.cronSchedule(cronEx).withMisfireHandlingInstructionDoNothing())
-                        .startAt(DateBuilder.futureDate(3, IntervalUnit.SECOND))
-                        .build();
+                    CronTrigger trigger =
+                            TriggerBuilder.newTrigger()
+                                    .withIdentity(triggerName, triggerGroup)
+                                    .forJob(detail)
+                                    .withSchedule(
+                                            CronScheduleBuilder.cronSchedule(cronEx)
+                                                    .withMisfireHandlingInstructionDoNothing())
+                                    .startAt(DateBuilder.futureDate(3, IntervalUnit.SECOND))
+                                    .build();
 
                     try {
                         scheduler.scheduleJob(detail, Collections.singleton(trigger), true);
                     } catch (ObjectAlreadyExistsException ex) {
                         logger.warn(
-                            "Unexpectedly found existing job, due to cluster race condition: {} Will reschedule job, can safely be ignored",
-                            ex.getMessage());
+                                "Unexpectedly found existing job, due to cluster race condition: {} Will reschedule"
+                                        + " job, can safely be ignored",
+                                ex.getMessage());
                         try {
                             scheduler.rescheduleJob(trigger.getKey(), trigger);
                         } catch (SchedulerException e) {
@@ -114,7 +116,7 @@ public class QuartzConfig {
                 logger.debug("Job Scheduled: {}", trigger);
             }
 
-            //TODO some monitor code
+            // TODO some monitor code
         };
     }
 }

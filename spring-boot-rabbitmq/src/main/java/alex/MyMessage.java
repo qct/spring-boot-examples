@@ -2,9 +2,7 @@ package alex;
 
 import java.util.StringJoiner;
 
-/**
- * MyMessage.
- */
+/** MyMessage. */
 public class MyMessage {
 
     private String id;
@@ -29,8 +27,8 @@ public class MyMessage {
     @Override
     public String toString() {
         return new StringJoiner(", ", MyMessage.class.getSimpleName() + "[", "]")
-            .add("id='" + id + "'")
-            .add("name='" + name + "'")
-            .toString();
+                .add("id='" + id + "'")
+                .add("name='" + name + "'")
+                .toString();
     }
 }

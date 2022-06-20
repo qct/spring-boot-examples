@@ -16,14 +16,12 @@ public class Drink {
 
     private int orderNumber;
 
-
     public Drink(int orderNumber, DrinkType drinkType, boolean hot, int shots) {
         this.orderNumber = orderNumber;
         this.drinkType = drinkType;
         this.iced = hot;
         this.shots = shots;
     }
-
 
     public int getOrderNumber() {
         return orderNumber;

@@ -3,9 +3,7 @@ package alex;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-/**
- * <p>Created by qct on 2017/9/20.
- */
+/** Created by qct on 2017/9/20. */
 @SpringBootApplication
 public class Application {
 

@@ -13,14 +13,12 @@ public class OrderItem {
     private int shots = 1;
     private boolean iced = false;
 
-
     public OrderItem(Order order, DrinkType type, int shots, boolean iced) {
         this.order = order;
         this.type = type;
         this.shots = shots;
         this.iced = iced;
     }
-
 
     public Order getOrder() {
         return this.order;
@@ -40,8 +38,12 @@ public class OrderItem {
 
     @Override
     public String toString() {
-        return ((this.iced) ? "iced " : "hot ") + " order:" + this.order.getNumber() + " " + this.shots + " shot "
-            + this.type;
+        return ((this.iced) ? "iced " : "hot ")
+                + " order:"
+                + this.order.getNumber()
+                + " "
+                + this.shots
+                + " shot "
+                + this.type;
     }
-
 }

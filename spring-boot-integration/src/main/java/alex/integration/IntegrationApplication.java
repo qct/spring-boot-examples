@@ -25,10 +25,10 @@ import org.springframework.integration.dsl.AggregatorSpec;
 import org.springframework.integration.dsl.Channels;
 import org.springframework.integration.dsl.IntegrationFlow;
 import org.springframework.integration.dsl.IntegrationFlowDefinition;
+import org.springframework.integration.dsl.MessageChannelSpec;
 import org.springframework.integration.dsl.Pollers;
 import org.springframework.integration.dsl.PublishSubscribeSpec;
 import org.springframework.integration.dsl.RouterSpec;
-import org.springframework.integration.dsl.MessageChannelSpec;
 import org.springframework.integration.router.MethodInvokingRouter;
 import org.springframework.integration.scheduling.PollerMetadata;
 import org.springframework.integration.store.MessageGroup;
@@ -45,7 +45,8 @@ public class IntegrationApplication {
     private AtomicInteger coldDrinkCounter = new AtomicInteger();
 
     public static void main(String[] args) throws IOException {
-        ConfigurableApplicationContext context = SpringApplication.run(IntegrationApplication.class, args);
+        ConfigurableApplicationContext context =
+                SpringApplication.run(IntegrationApplication.class, args);
 
         Cafe cafe = context.getBean(Cafe.class);
         for (int i = 0; i < 100; i++) {
@@ -71,172 +72,203 @@ public class IntegrationApplication {
             @Override
             public void configure(IntegrationFlowDefinition<?> f) {
                 f.split(Order.class, Order::getItems)
-                    .channel(channels -> channels.executor(Executors.newCachedThreadPool()))
-                    .<OrderItem, Boolean>route(OrderItem::isIced,
-                        new Consumer<RouterSpec<Boolean, MethodInvokingRouter>>() {
-                            @Override
-                            public void accept(
-                                RouterSpec<Boolean, MethodInvokingRouter> booleanMethodInvokingRouterRouterSpec) {
-                                booleanMethodInvokingRouterRouterSpec
-                                    .subFlowMapping(true, new IntegrationFlow() {
-                                        @Override
-                                        public void configure(IntegrationFlowDefinition<?> flow) {
-                                            flow.channel(channels -> channels.queue(10))
-                                                .publishSubscribeChannel(new Consumer<PublishSubscribeSpec>() {
-                                                    @Override
-                                                    public void accept(PublishSubscribeSpec publishSubscribeSpec) {
-                                                        publishSubscribeSpec
-                                                            .subscribe(new IntegrationFlow() {
-                                                                @Override
-                                                                public void configure(
-                                                                    IntegrationFlowDefinition<?> flow) {
-                                                                    flow.handle(new MessageHandler() {
-                                                                        @Override
-                                                                        public void handleMessage(Message<?> message)
-                                                                            throws MessagingException {
-                                                                            Uninterruptibles
-                                                                                .sleepUninterruptibly(1,
-                                                                                    TimeUnit.SECONDS);
-                                                                        }
-                                                                    });
-                                                                }
-                                                            })
-                                                            .subscribe(new IntegrationFlow() {
-                                                                @Override
-                                                                public void configure(
-                                                                    IntegrationFlowDefinition<?> flow) {
-                                                                    flow
-                                                                        .<OrderItem, String>transform(
-                                                                            new GenericTransformer<OrderItem, String>() {
-                                                                                @Override
-                                                                                public String transform(
-                                                                                    OrderItem source) {
-                                                                                    return
-                                                                                        Thread.currentThread().getName()
-                                                                                            + " prepared cold drink #"
-                                                                                            + coldDrinkCounter
-                                                                                            .incrementAndGet()
-                                                                                            + " for order #" + source
-                                                                                            .getOrder()
-                                                                                            .getNumber()
-                                                                                            + ": " + source;
-                                                                                }
-                                                                            })
-                                                                        .handle(new MessageHandler() {
-                                                                            @Override
-                                                                            public void handleMessage(
-                                                                                Message<?> message)
-                                                                                throws MessagingException {
-                                                                                System.out
-                                                                                    .println(message.getPayload());
-                                                                            }
-                                                                        });
-                                                                }
-                                                            });
-                                                    }
-                                                });
-                                        }
-                                    })
-                                    .subFlowMapping(false, new IntegrationFlow() {
-                                        @Override
-                                        public void configure(IntegrationFlowDefinition<?> flow) {
-                                            flow
-                                                .channel(new Function<Channels, MessageChannelSpec<?, ?>>() {
-                                                    @Override
-                                                    public MessageChannelSpec<?, ?> apply(Channels channels) {
-                                                        return channels.queue(10);
-                                                    }
-                                                })
-                                                .publishSubscribeChannel(new Consumer<PublishSubscribeSpec>() {
-                                                    @Override
-                                                    public void accept(PublishSubscribeSpec publishSubscribeSpec) {
-                                                        publishSubscribeSpec
-                                                            .subscribe(new IntegrationFlow() {
-                                                                @Override
-                                                                public void configure(
-                                                                    IntegrationFlowDefinition<?> flow) {
-                                                                    flow.handle(new MessageHandler() {
-                                                                        @Override
-                                                                        public void handleMessage(Message<?> message)
-                                                                            throws MessagingException {
-                                                                            Uninterruptibles
-                                                                                .sleepUninterruptibly(5,
-                                                                                    TimeUnit.SECONDS);
-                                                                        }
-                                                                    });
-                                                                }
-                                                            })
-                                                            .subscribe(new IntegrationFlow() {
-                                                                @Override
-                                                                public void configure(
-                                                                    IntegrationFlowDefinition<?> flow) {
-                                                                    flow
-                                                                        .<OrderItem, String>transform(
-                                                                            new GenericTransformer<OrderItem, String>() {
-                                                                                @Override
-                                                                                public String transform(
-                                                                                    OrderItem source) {
-                                                                                    return
-                                                                                        Thread.currentThread().getName()
-                                                                                            + " prepared hot drink #"
-                                                                                            + hotDrinkCounter
-                                                                                            .incrementAndGet()
-                                                                                            + " for order #" + source
-                                                                                            .getOrder()
-                                                                                            .getNumber() + ": "
-                                                                                            + source;
-                                                                                }
-                                                                            })
-                                                                        .handle(
-                                                                            new MessageHandler() {
-                                                                                @Override
-                                                                                public void handleMessage(
-                                                                                    Message<?> message)
-                                                                                    throws MessagingException {
-                                                                                    System.out
-                                                                                        .println(message.getPayload());
-                                                                                }
-                                                                            });
-                                                                }
-                                                            });
-                                                    }
-                                                });
-                                        }
-                                    })
-                                    .defaultOutputToParentFlow();
-                            }
-                        })
-                    .<OrderItem, Drink>transform(new GenericTransformer<OrderItem, Drink>() {
-                        @Override
-                        public Drink transform(OrderItem source) {
-                            return new Drink(source.getOrder().getNumber(), source.getDrinkType(), source.isIced(),
-                                source.getShots());
-                        }
-                    })
-                    .aggregate(new Consumer<AggregatorSpec>() {
-                        @Override
-                        public void accept(AggregatorSpec aggregatorSpec) {
-                            aggregatorSpec
-                                .outputProcessor(new MessageGroupProcessor() {
+                        .channel(channels -> channels.executor(Executors.newCachedThreadPool()))
+                        .<OrderItem, Boolean>route(
+                                OrderItem::isIced,
+                                new Consumer<RouterSpec<Boolean, MethodInvokingRouter>>() {
                                     @Override
-                                    public Object processMessageGroup(MessageGroup group) {
-                                        return new Delivery(group.getMessages()
-                                            .stream()
-                                            .map(message -> {
-                                                return (Drink) message.getPayload();
-                                            })
-                                            .collect(Collectors.toList()));
+                                    public void accept(
+                                            RouterSpec<Boolean, MethodInvokingRouter>
+                                                    booleanMethodInvokingRouterRouterSpec) {
+                                        booleanMethodInvokingRouterRouterSpec
+                                                .subFlowMapping(
+                                                        true,
+                                                        new IntegrationFlow() {
+                                                            @Override
+                                                            public void configure(IntegrationFlowDefinition<?> flow) {
+                                                                flow.channel(channels -> channels.queue(10))
+                                                                        .publishSubscribeChannel(
+                                                                                new Consumer<PublishSubscribeSpec>() {
+                                                                                    @Override
+                                                                                    public void accept(
+                                                                                            PublishSubscribeSpec publishSubscribeSpec) {
+                                                                                        publishSubscribeSpec
+                                                                                                .subscribe(
+                                                                                                        new IntegrationFlow() {
+                                                                                                            @Override
+                                                                                                            public void configure(
+                                                                                                                    IntegrationFlowDefinition<?> flow) {
+                                                                                                                flow.handle(
+                                                                                                                        new MessageHandler() {
+                                                                                                                            @Override
+                                                                                                                            public void handleMessage(
+                                                                                                                                    Message<?> message)
+                                                                                                                                    throws MessagingException {
+                                                                                                                                Uninterruptibles
+                                                                                                                                        .sleepUninterruptibly(
+                                                                                                                                                1, TimeUnit.SECONDS);
+                                                                                                                            }
+                                                                                                                        });
+                                                                                                            }
+                                                                                                        })
+                                                                                                .subscribe(
+                                                                                                        new IntegrationFlow() {
+                                                                                                            @Override
+                                                                                                            public void configure(
+                                                                                                                    IntegrationFlowDefinition<?> flow) {
+                                                                                                                flow.<OrderItem, String>transform(
+                                                                                                                                new GenericTransformer<
+                                                                                                                                        OrderItem, String>() {
+                                                                                                                                    @Override
+                                                                                                                                    public String transform(
+                                                                                                                                            OrderItem source) {
+                                                                                                                                        return Thread.currentThread()
+                                                                                                                                                        .getName()
+                                                                                                                                                + " prepared cold drink #"
+                                                                                                                                                + coldDrinkCounter
+                                                                                                                                                        .incrementAndGet()
+                                                                                                                                                + " for order #"
+                                                                                                                                                + source
+                                                                                                                                                        .getOrder()
+                                                                                                                                                        .getNumber()
+                                                                                                                                                + ": "
+                                                                                                                                                + source;
+                                                                                                                                    }
+                                                                                                                                })
+                                                                                                                        .handle(
+                                                                                                                                new MessageHandler() {
+                                                                                                                                    @Override
+                                                                                                                                    public void handleMessage(
+                                                                                                                                            Message<?> message)
+                                                                                                                                            throws MessagingException {
+                                                                                                                                        System.out.println(
+                                                                                                                                                message.getPayload());
+                                                                                                                                    }
+                                                                                                                                });
+                                                                                                            }
+                                                                                                        });
+                                                                                    }
+                                                                                });
+                                                            }
+                                                        })
+                                                .subFlowMapping(
+                                                        false,
+                                                        new IntegrationFlow() {
+                                                            @Override
+                                                            public void configure(IntegrationFlowDefinition<?> flow) {
+                                                                flow.channel(
+                                                                                new Function<Channels, MessageChannelSpec<?, ?>>() {
+                                                                                    @Override
+                                                                                    public MessageChannelSpec<?, ?> apply(Channels channels) {
+                                                                                        return channels.queue(10);
+                                                                                    }
+                                                                                })
+                                                                        .publishSubscribeChannel(
+                                                                                new Consumer<PublishSubscribeSpec>() {
+                                                                                    @Override
+                                                                                    public void accept(
+                                                                                            PublishSubscribeSpec publishSubscribeSpec) {
+                                                                                        publishSubscribeSpec
+                                                                                                .subscribe(
+                                                                                                        new IntegrationFlow() {
+                                                                                                            @Override
+                                                                                                            public void configure(
+                                                                                                                    IntegrationFlowDefinition<?> flow) {
+                                                                                                                flow.handle(
+                                                                                                                        new MessageHandler() {
+                                                                                                                            @Override
+                                                                                                                            public void handleMessage(
+                                                                                                                                    Message<?> message)
+                                                                                                                                    throws MessagingException {
+                                                                                                                                Uninterruptibles
+                                                                                                                                        .sleepUninterruptibly(
+                                                                                                                                                5, TimeUnit.SECONDS);
+                                                                                                                            }
+                                                                                                                        });
+                                                                                                            }
+                                                                                                        })
+                                                                                                .subscribe(
+                                                                                                        new IntegrationFlow() {
+                                                                                                            @Override
+                                                                                                            public void configure(
+                                                                                                                    IntegrationFlowDefinition<?> flow) {
+                                                                                                                flow.<OrderItem, String>transform(
+                                                                                                                                new GenericTransformer<
+                                                                                                                                        OrderItem, String>() {
+                                                                                                                                    @Override
+                                                                                                                                    public String transform(
+                                                                                                                                            OrderItem source) {
+                                                                                                                                        return Thread.currentThread()
+                                                                                                                                                        .getName()
+                                                                                                                                                + " prepared hot drink #"
+                                                                                                                                                + hotDrinkCounter
+                                                                                                                                                        .incrementAndGet()
+                                                                                                                                                + " for order #"
+                                                                                                                                                + source
+                                                                                                                                                        .getOrder()
+                                                                                                                                                        .getNumber()
+                                                                                                                                                + ": "
+                                                                                                                                                + source;
+                                                                                                                                    }
+                                                                                                                                })
+                                                                                                                        .handle(
+                                                                                                                                new MessageHandler() {
+                                                                                                                                    @Override
+                                                                                                                                    public void handleMessage(
+                                                                                                                                            Message<?> message)
+                                                                                                                                            throws MessagingException {
+                                                                                                                                        System.out.println(
+                                                                                                                                                message.getPayload());
+                                                                                                                                    }
+                                                                                                                                });
+                                                                                                            }
+                                                                                                        });
+                                                                                    }
+                                                                                });
+                                                            }
+                                                        })
+                                                .defaultOutputToParentFlow();
                                     }
                                 })
-                                .correlationStrategy(new CorrelationStrategy() {
+                        .<OrderItem, Drink>transform(
+                                new GenericTransformer<OrderItem, Drink>() {
                                     @Override
-                                    public Object getCorrelationKey(Message<?> message) {
-                                        return ((Drink) message.getPayload()).getOrderNumber();
+                                    public Drink transform(OrderItem source) {
+                                        return new Drink(
+                                                source.getOrder().getNumber(),
+                                                source.getDrinkType(),
+                                                source.isIced(),
+                                                source.getShots());
                                     }
-                                });
-                        }
-                    })
-                    .handle(CharacterStreamWritingMessageHandler.stdout());
+                                })
+                        .aggregate(
+                                new Consumer<AggregatorSpec>() {
+                                    @Override
+                                    public void accept(AggregatorSpec aggregatorSpec) {
+                                        aggregatorSpec
+                                                .outputProcessor(
+                                                        new MessageGroupProcessor() {
+                                                            @Override
+                                                            public Object processMessageGroup(MessageGroup group) {
+                                                                return new Delivery(
+                                                                        group.getMessages().stream()
+                                                                                .map(
+                                                                                        message -> {
+                                                                                            return (Drink) message.getPayload();
+                                                                                        })
+                                                                                .collect(Collectors.toList()));
+                                                            }
+                                                        })
+                                                .correlationStrategy(
+                                                        new CorrelationStrategy() {
+                                                            @Override
+                                                            public Object getCorrelationKey(Message<?> message) {
+                                                                return ((Drink) message.getPayload()).getOrderNumber();
+                                                            }
+                                                        });
+                                    }
+                                })
+                        .handle(CharacterStreamWritingMessageHandler.stdout());
             }
         };
     }

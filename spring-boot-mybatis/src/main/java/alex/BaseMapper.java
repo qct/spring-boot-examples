@@ -4,9 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
-/**
- * <p>Created by qct on 2017/10/5.
- */
+/** Created by qct on 2017/10/5. */
 public interface BaseMapper<T, E, PK extends Serializable> {
 
     long countByExample(E example);

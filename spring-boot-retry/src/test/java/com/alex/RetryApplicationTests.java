@@ -7,7 +7,5 @@ import org.springframework.boot.test.context.SpringBootTest;
 public class RetryApplicationTests {
 
     @Test
-    public void contextLoads() {
-    }
-
+    public void contextLoads() {}
 }

@@ -2,25 +2,19 @@ package alex;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.config.BeanPostProcessor;
-import org.springframework.context.ApplicationEvent;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.event.EventListener;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 
-/**
- * <p>Created by qct on 2017/2/25.
- */
+/** Created by qct on 2017/2/25. */
 @Component
 public class MyEventListener {
 
     private static final Logger logger = LoggerFactory.getLogger(MyEventListener.class);
 
-    @Autowired
-    private ApplicationEventPublisher applicationEventPublisher;
+    @Autowired private ApplicationEventPublisher applicationEventPublisher;
 
     @EventListener(classes = EventA.class)
     public void handleEventA(EventA event) {
@@ -34,7 +28,6 @@ public class MyEventListener {
 
         applicationEventPublisher.publishEvent(new EventB(event.getId()));
     }
-
 
     @EventListener(classes = EventB.class)
     @Async
@@ -56,9 +49,7 @@ public class MyEventListener {
 
         @Override
         public String toString() {
-            return "EventA{" +
-                "id=" + id +
-                '}';
+            return "EventA{" + "id=" + id + '}';
         }
     }
 
@@ -76,9 +67,7 @@ public class MyEventListener {
 
         @Override
         public String toString() {
-            return "EventB{" +
-                "id=" + id +
-                '}';
+            return "EventB{" + "id=" + id + '}';
         }
     }
 }

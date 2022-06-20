@@ -19,19 +19,21 @@ import org.springframework.core.type.AnnotationMetadata;
 public class ExampleConfigRegistrar implements ImportBeanDefinitionRegistrar {
 
     @Override
-    public void registerBeanDefinitions(AnnotationMetadata importingClassMetadata, BeanDefinitionRegistry registry) {
-        AnnotationAttributes annotationAttributes = AnnotationAttributes
-            .fromMap(importingClassMetadata.getAnnotationAttributes(EnableExampleConfig.class.getName()));
+    public void registerBeanDefinitions(
+            AnnotationMetadata importingClassMetadata, BeanDefinitionRegistry registry) {
+        AnnotationAttributes annotationAttributes =
+                AnnotationAttributes.fromMap(
+                        importingClassMetadata.getAnnotationAttributes(EnableExampleConfig.class.getName()));
 
         String beanName = "exampleConfig";
         register(registry, beanName);
         registerBeanPostProcessor(beanName, registry, annotationAttributes);
     }
 
-    private void registerBeanPostProcessor(String beanName, BeanDefinitionRegistry registry,
-        AnnotationAttributes annotationAttributes) {
-        BeanDefinitionBuilder beanDefinitionBuilder = BeanDefinitionBuilder
-            .genericBeanDefinition(ExampleConfigPostProcessor.class);
+    private void registerBeanPostProcessor(
+            String beanName, BeanDefinitionRegistry registry, AnnotationAttributes annotationAttributes) {
+        BeanDefinitionBuilder beanDefinitionBuilder =
+                BeanDefinitionBuilder.genericBeanDefinition(ExampleConfigPostProcessor.class);
         beanDefinitionBuilder.addConstructorArgValue(annotationAttributes);
         AbstractBeanDefinition beanDefinition = beanDefinitionBuilder.getBeanDefinition();
         beanDefinition.setRole(BeanDefinition.ROLE_INFRASTRUCTURE);
@@ -40,10 +42,11 @@ public class ExampleConfigRegistrar implements ImportBeanDefinitionRegistrar {
 
     private void register(BeanDefinitionRegistry registry, String beanName) {
         if (!registry.containsBeanDefinition(beanName)) {
-            //registry.registerBeanDefinition(beanName,
+            // registry.registerBeanDefinition(beanName,
             //    BeanDefinitionBuilder.rootBeanDefinition(ExampleConfig.class).getBeanDefinition());
-            registry.registerBeanDefinition(beanName,
-                BeanDefinitionBuilder.genericBeanDefinition(ExampleConfig.class).getBeanDefinition());
+            registry.registerBeanDefinition(
+                    beanName,
+                    BeanDefinitionBuilder.genericBeanDefinition(ExampleConfig.class).getBeanDefinition());
         }
     }
 }

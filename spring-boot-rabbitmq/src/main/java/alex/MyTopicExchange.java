@@ -15,7 +15,6 @@ import org.springframework.amqp.rabbit.listener.RabbitListenerContainerFactory;
 import org.springframework.amqp.support.converter.DefaultJackson2JavaTypeMapper;
 import org.springframework.amqp.support.converter.Jackson2JavaTypeMapper;
 import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
-import org.springframework.amqp.support.converter.MessageConverter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -68,7 +67,8 @@ public class MyTopicExchange {
     }
 
     @Bean
-    public RabbitListenerContainerFactory<?> myMessageListenerContainerFactory(ConnectionFactory connectionFactory) {
+    public RabbitListenerContainerFactory<?> myMessageListenerContainerFactory(
+            ConnectionFactory connectionFactory) {
         SimpleRabbitListenerContainerFactory factory = new SimpleRabbitListenerContainerFactory();
         factory.setConnectionFactory(connectionFactory);
         factory.setMessageConverter(new Jackson2JsonMessageConverter());
@@ -77,26 +77,28 @@ public class MyTopicExchange {
 
     @Bean
     public RabbitListenerContainerFactory<?> myMessageListListenerContainerFactory(
-        ConnectionFactory connectionFactory) {
+            ConnectionFactory connectionFactory) {
         SimpleRabbitListenerContainerFactory factory = new SimpleRabbitListenerContainerFactory();
         factory.setConnectionFactory(connectionFactory);
-        factory.setMessageConverter(new Jackson2JsonMessageConverter() {
-            @Override
-            public void setJavaTypeMapper(Jackson2JavaTypeMapper javaTypeMapper) {
-                super.setJavaTypeMapper(new DefaultJackson2JavaTypeMapper() {
+        factory.setMessageConverter(
+                new Jackson2JsonMessageConverter() {
                     @Override
-                    public JavaType toJavaType(MessageProperties properties) {
-                        JavaType javaType = super.toJavaType(properties);
-                        if (javaType instanceof CollectionLikeType) {
-                            return TypeFactory.defaultInstance()
-                                .constructCollectionLikeType(List.class, MyMessage.class);
-                        } else {
-                            return javaType;
-                        }
+                    public void setJavaTypeMapper(Jackson2JavaTypeMapper javaTypeMapper) {
+                        super.setJavaTypeMapper(
+                                new DefaultJackson2JavaTypeMapper() {
+                                    @Override
+                                    public JavaType toJavaType(MessageProperties properties) {
+                                        JavaType javaType = super.toJavaType(properties);
+                                        if (javaType instanceof CollectionLikeType) {
+                                            return TypeFactory.defaultInstance()
+                                                    .constructCollectionLikeType(List.class, MyMessage.class);
+                                        } else {
+                                            return javaType;
+                                        }
+                                    }
+                                });
                     }
                 });
-            }
-        });
         return factory;
     }
 

@@ -1,16 +1,13 @@
 package alex;
 
-/**
- * <p>Created by qct on 2017/2/13.
- */
+/** Created by qct on 2017/2/13. */
 public class User {
 
     private Long id;
     private String name;
     private Integer age;
 
-    public User() {
-    }
+    public User() {}
 
     public User(Long id, String name, Integer age) {
         this.id = id;

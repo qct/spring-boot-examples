@@ -5,9 +5,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-/**
- * <p>Created by qct on 2017/11/6.
- */
+/** Created by qct on 2017/11/6. */
 @Path("/hello")
 public interface Endpoint {
 

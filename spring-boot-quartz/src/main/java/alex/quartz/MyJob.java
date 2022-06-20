@@ -26,10 +26,13 @@ public class MyJob extends QuartzJobBean implements InterruptableJob {
     private static final Logger logger = LoggerFactory.getLogger(MyJob.class);
 
     @Override
-    protected void executeInternal(JobExecutionContext jobExecutionContext) throws JobExecutionException {
+    protected void executeInternal(JobExecutionContext jobExecutionContext)
+            throws JobExecutionException {
         try {
-            logger.info("I'm running, {}, {}", jobExecutionContext.getJobDetail().getKey(),
-                jobExecutionContext.getScheduler().getSchedulerInstanceId());
+            logger.info(
+                    "I'm running, {}, {}",
+                    jobExecutionContext.getJobDetail().getKey(),
+                    jobExecutionContext.getScheduler().getSchedulerInstanceId());
             JobDataMap jobDataMap = jobExecutionContext.getJobDetail().getJobDataMap();
             if (jobDataMap.size() > 0) {
                 int anInt = jobDataMap.getInt("alert.times");
@@ -46,7 +49,8 @@ public class MyJob extends QuartzJobBean implements InterruptableJob {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        //        logger.info("finished, {}, {}", jobExecutionContext.getJobDetail().getKey(), jobExecutionContext.getFireInstanceId());
+        //        logger.info("finished, {}, {}", jobExecutionContext.getJobDetail().getKey(),
+        // jobExecutionContext.getFireInstanceId());
     }
 
     @Override

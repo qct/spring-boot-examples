@@ -19,7 +19,6 @@ public class ExampleConfigPostProcessor implements BeanPostProcessor {
         this.annotationAttributes = annotationAttributes;
     }
 
-
     @Override
     public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {
         if (bean instanceof ExampleConfig) {

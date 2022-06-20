@@ -11,14 +11,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-/**
- * <p>Created by qct on 2017/2/13.
- */
+/** Created by qct on 2017/2/13. */
 @RestController
 @RequestMapping("/users")
 public class UserController {
 
     static Map<Long, User> users = Collections.synchronizedMap(new HashMap<>());
+
     static {
         users.put(1L, new User(1L, "Poly", 24));
     }

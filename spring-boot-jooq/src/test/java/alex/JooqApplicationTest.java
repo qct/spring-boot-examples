@@ -14,6 +14,5 @@ import org.springframework.boot.test.context.SpringBootTest;
 public class JooqApplicationTest {
 
     @Test
-    public void testContextLoads() {
-    }
+    public void testContextLoads() {}
 }
