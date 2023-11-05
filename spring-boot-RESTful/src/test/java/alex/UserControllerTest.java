@@ -3,6 +3,7 @@ package alex;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.core.Is.is;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
+import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.delete;
 import static org.springframework.restdocs.operation.preprocess.Preprocessors.preprocessResponse;
 import static org.springframework.restdocs.operation.preprocess.Preprocessors.prettyPrint;
 import static org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath;
@@ -30,14 +31,14 @@ public class UserControllerTest {
 
     @Test
     public void listUsers() throws Exception {
-        mvc.perform(post("/users/").param("id", "1").param("name", "测试大师").param("age", "20"))
+        mvc.perform(post("/users/").param("id", "11").param("name", "测试大师").param("age", "20"))
                 .andExpect(content().string(equalTo("success")));
 
         this.mvc
                 .perform(get("/users/").accept(MediaType.ALL))
                 .andDo(print())
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$[0].id", is(1)))
+                .andExpect(jsonPath("$[1].id", is(11)))
                 .andDo(
                         document(
                                 "users",
@@ -46,5 +47,6 @@ public class UserControllerTest {
                                         fieldWithPath("[].id").description("user id"),
                                         fieldWithPath("[].name").description("user name"),
                                         fieldWithPath("[].age").description("user age"))));
+        mvc.perform(delete("/users/11")).andExpect(content().string(equalTo("success")));
     }
 }

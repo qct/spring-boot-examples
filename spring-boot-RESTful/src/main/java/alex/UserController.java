@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 /** Created by qct on 2017/2/13. */
 @RestController
-@RequestMapping("/users")
+@RequestMapping(value = "/users", produces = "application/json;charset=UTF-8")
 public class UserController {
 
     static Map<Long, User> users = Collections.synchronizedMap(new HashMap<>());
