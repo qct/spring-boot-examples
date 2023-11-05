@@ -23,11 +23,11 @@
             <artifactId>jersey-proxy-client</artifactId>
             <version>2.26</version>
         </dependency>
-        <!--<dependency>-->
-        <!--<groupId>org.apache.cxf</groupId>-->
-        <!--<artifactId>cxf-rt-rs-client</artifactId>-->
-        <!--<version>3.2.0</version>-->
-        <!--</dependency>-->
+        <!--<dependency>
+            <groupId>org.apache.cxf</groupId>
+            <artifactId>cxf-rt-rs-client</artifactId>
+            <version>3.2.0</version>
+        </dependency>-->
         <dependency>
             <groupId>com.github.mmazi</groupId>
             <artifactId>rescu</artifactId>
