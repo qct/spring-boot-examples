@@ -52,13 +52,11 @@ public class QrtzFiredTriggers extends TableImpl<QrtzFiredTriggersRecord> {
 
     /** The column <code>test.qrtz_fired_triggers.TRIGGER_GROUP</code>. */
     public final TableField<QrtzFiredTriggersRecord, String> TRIGGER_GROUP =
-            createField(
-                    "TRIGGER_GROUP", org.jooq.impl.SQLDataType.VARCHAR(190).nullable(false), this, "");
+            createField("TRIGGER_GROUP", org.jooq.impl.SQLDataType.VARCHAR(190).nullable(false), this, "");
 
     /** The column <code>test.qrtz_fired_triggers.INSTANCE_NAME</code>. */
     public final TableField<QrtzFiredTriggersRecord, String> INSTANCE_NAME =
-            createField(
-                    "INSTANCE_NAME", org.jooq.impl.SQLDataType.VARCHAR(190).nullable(false), this, "");
+            createField("INSTANCE_NAME", org.jooq.impl.SQLDataType.VARCHAR(190).nullable(false), this, "");
 
     /** The column <code>test.qrtz_fired_triggers.FIRED_TIME</code>. */
     public final TableField<QrtzFiredTriggersRecord, Long> FIRED_TIME =
@@ -111,8 +109,7 @@ public class QrtzFiredTriggers extends TableImpl<QrtzFiredTriggersRecord> {
         this(alias, aliased, null);
     }
 
-    private QrtzFiredTriggers(
-            Name alias, Table<QrtzFiredTriggersRecord> aliased, Field<?>[] parameters) {
+    private QrtzFiredTriggers(Name alias, Table<QrtzFiredTriggersRecord> aliased, Field<?>[] parameters) {
         super(alias, null, aliased, parameters, "");
     }
 

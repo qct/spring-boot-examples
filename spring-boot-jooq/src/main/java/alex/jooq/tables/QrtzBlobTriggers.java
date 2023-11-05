@@ -49,8 +49,7 @@ public class QrtzBlobTriggers extends TableImpl<QrtzBlobTriggersRecord> {
 
     /** The column <code>test.qrtz_blob_triggers.TRIGGER_GROUP</code>. */
     public final TableField<QrtzBlobTriggersRecord, String> TRIGGER_GROUP =
-            createField(
-                    "TRIGGER_GROUP", org.jooq.impl.SQLDataType.VARCHAR(190).nullable(false), this, "");
+            createField("TRIGGER_GROUP", org.jooq.impl.SQLDataType.VARCHAR(190).nullable(false), this, "");
 
     /** The column <code>test.qrtz_blob_triggers.BLOB_DATA</code>. */
     public final TableField<QrtzBlobTriggersRecord, byte[]> BLOB_DATA =
@@ -75,8 +74,7 @@ public class QrtzBlobTriggers extends TableImpl<QrtzBlobTriggersRecord> {
         this(alias, aliased, null);
     }
 
-    private QrtzBlobTriggers(
-            Name alias, Table<QrtzBlobTriggersRecord> aliased, Field<?>[] parameters) {
+    private QrtzBlobTriggers(Name alias, Table<QrtzBlobTriggersRecord> aliased, Field<?>[] parameters) {
         super(alias, null, aliased, parameters, "");
     }
 
@@ -89,8 +87,7 @@ public class QrtzBlobTriggers extends TableImpl<QrtzBlobTriggersRecord> {
     /** {@inheritDoc} */
     @Override
     public List<Index> getIndexes() {
-        return Arrays.<Index>asList(
-                Indexes.QRTZ_BLOB_TRIGGERS_PRIMARY, Indexes.QRTZ_BLOB_TRIGGERS_SCHED_NAME);
+        return Arrays.<Index>asList(Indexes.QRTZ_BLOB_TRIGGERS_PRIMARY, Indexes.QRTZ_BLOB_TRIGGERS_SCHED_NAME);
     }
 
     /** {@inheritDoc} */

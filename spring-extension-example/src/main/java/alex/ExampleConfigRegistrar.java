@@ -19,11 +19,9 @@ import org.springframework.core.type.AnnotationMetadata;
 public class ExampleConfigRegistrar implements ImportBeanDefinitionRegistrar {
 
     @Override
-    public void registerBeanDefinitions(
-            AnnotationMetadata importingClassMetadata, BeanDefinitionRegistry registry) {
-        AnnotationAttributes annotationAttributes =
-                AnnotationAttributes.fromMap(
-                        importingClassMetadata.getAnnotationAttributes(EnableExampleConfig.class.getName()));
+    public void registerBeanDefinitions(AnnotationMetadata importingClassMetadata, BeanDefinitionRegistry registry) {
+        AnnotationAttributes annotationAttributes = AnnotationAttributes.fromMap(
+                importingClassMetadata.getAnnotationAttributes(EnableExampleConfig.class.getName()));
 
         String beanName = "exampleConfig";
         register(registry, beanName);
@@ -46,7 +44,8 @@ public class ExampleConfigRegistrar implements ImportBeanDefinitionRegistrar {
             //    BeanDefinitionBuilder.rootBeanDefinition(ExampleConfig.class).getBeanDefinition());
             registry.registerBeanDefinition(
                     beanName,
-                    BeanDefinitionBuilder.genericBeanDefinition(ExampleConfig.class).getBeanDefinition());
+                    BeanDefinitionBuilder.genericBeanDefinition(ExampleConfig.class)
+                            .getBeanDefinition());
         }
     }
 }

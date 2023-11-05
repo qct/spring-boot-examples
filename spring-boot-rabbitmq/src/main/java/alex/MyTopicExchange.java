@@ -67,8 +67,7 @@ public class MyTopicExchange {
     }
 
     @Bean
-    public RabbitListenerContainerFactory<?> myMessageListenerContainerFactory(
-            ConnectionFactory connectionFactory) {
+    public RabbitListenerContainerFactory<?> myMessageListenerContainerFactory(ConnectionFactory connectionFactory) {
         SimpleRabbitListenerContainerFactory factory = new SimpleRabbitListenerContainerFactory();
         factory.setConnectionFactory(connectionFactory);
         factory.setMessageConverter(new Jackson2JsonMessageConverter());
@@ -80,25 +79,23 @@ public class MyTopicExchange {
             ConnectionFactory connectionFactory) {
         SimpleRabbitListenerContainerFactory factory = new SimpleRabbitListenerContainerFactory();
         factory.setConnectionFactory(connectionFactory);
-        factory.setMessageConverter(
-                new Jackson2JsonMessageConverter() {
+        factory.setMessageConverter(new Jackson2JsonMessageConverter() {
+            @Override
+            public void setJavaTypeMapper(Jackson2JavaTypeMapper javaTypeMapper) {
+                super.setJavaTypeMapper(new DefaultJackson2JavaTypeMapper() {
                     @Override
-                    public void setJavaTypeMapper(Jackson2JavaTypeMapper javaTypeMapper) {
-                        super.setJavaTypeMapper(
-                                new DefaultJackson2JavaTypeMapper() {
-                                    @Override
-                                    public JavaType toJavaType(MessageProperties properties) {
-                                        JavaType javaType = super.toJavaType(properties);
-                                        if (javaType instanceof CollectionLikeType) {
-                                            return TypeFactory.defaultInstance()
-                                                    .constructCollectionLikeType(List.class, MyMessage.class);
-                                        } else {
-                                            return javaType;
-                                        }
-                                    }
-                                });
+                    public JavaType toJavaType(MessageProperties properties) {
+                        JavaType javaType = super.toJavaType(properties);
+                        if (javaType instanceof CollectionLikeType) {
+                            return TypeFactory.defaultInstance()
+                                    .constructCollectionLikeType(List.class, MyMessage.class);
+                        } else {
+                            return javaType;
+                        }
                     }
                 });
+            }
+        });
         return factory;
     }
 

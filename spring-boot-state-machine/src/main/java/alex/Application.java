@@ -10,7 +10,8 @@ import org.springframework.statemachine.StateMachine;
 @SpringBootApplication
 public class Application implements CommandLineRunner {
 
-    @Autowired private StateMachine<States, Events> stateMachine;
+    @Autowired
+    private StateMachine<States, Events> stateMachine;
 
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);

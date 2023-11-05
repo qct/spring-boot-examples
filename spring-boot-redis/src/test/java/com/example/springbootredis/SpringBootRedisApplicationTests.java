@@ -18,9 +18,11 @@ import org.springframework.data.redis.core.types.RedisClientInfo;
 @Disabled("TODO: fix this test by using testcontainers")
 public class SpringBootRedisApplicationTests {
 
-    @Autowired private StringRedisTemplate stringRedisTemplate;
+    @Autowired
+    private StringRedisTemplate stringRedisTemplate;
 
-    @Resource private RedisTemplate<String, SysDict> redisTemplate;
+    @Resource
+    private RedisTemplate<String, SysDict> redisTemplate;
 
     @Test
     public void contextLoads() {}
@@ -34,7 +36,8 @@ public class SpringBootRedisApplicationTests {
     public void testGet() throws Exception {
         List<RedisClientInfo> clientList = redisTemplate.getClientList();
         while (true) {
-            System.out.println(LocalDateTime.now() + ": " + stringRedisTemplate.opsForValue().get("aa"));
+            System.out.println(LocalDateTime.now() + ": "
+                    + stringRedisTemplate.opsForValue().get("aa"));
             Thread.sleep(1000L);
         }
     }
@@ -52,7 +55,8 @@ public class SpringBootRedisApplicationTests {
         Collection<RedisServer> masters = sentinelConnection.masters();
         System.out.println("master:");
         masters.forEach(System.out::println);
-        Collection<RedisServer> slaves = sentinelConnection.slaves(masters.stream().findFirst().get());
+        Collection<RedisServer> slaves =
+                sentinelConnection.slaves(masters.stream().findFirst().get());
         System.out.println("slaves:");
         slaves.forEach(System.out::println);
     }

@@ -44,8 +44,7 @@ public class QrtzCalendars extends TableImpl<QrtzCalendarsRecord> {
 
     /** The column <code>test.qrtz_calendars.CALENDAR_NAME</code>. */
     public final TableField<QrtzCalendarsRecord, String> CALENDAR_NAME =
-            createField(
-                    "CALENDAR_NAME", org.jooq.impl.SQLDataType.VARCHAR(190).nullable(false), this, "");
+            createField("CALENDAR_NAME", org.jooq.impl.SQLDataType.VARCHAR(190).nullable(false), this, "");
 
     /** The column <code>test.qrtz_calendars.CALENDAR</code>. */
     public final TableField<QrtzCalendarsRecord, byte[]> CALENDAR =

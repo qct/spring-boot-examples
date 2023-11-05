@@ -17,15 +17,16 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 @WebMvcTest
 public class WebLayerTest {
 
-    @Autowired private MockMvc mockMvc;
+    @Autowired
+    private MockMvc mockMvc;
 
-    @MockBean private GreetingService greetingService;
+    @MockBean
+    private GreetingService greetingService;
 
     @Test
     public void shouldReturnDefaultMessage() throws Exception {
         when(greetingService.greeting()).thenReturn("Hello, World!");
-        mockMvc
-                .perform(MockMvcRequestBuilders.get("/"))
+        mockMvc.perform(MockMvcRequestBuilders.get("/"))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(content().string(containsString("Hello, World!")));

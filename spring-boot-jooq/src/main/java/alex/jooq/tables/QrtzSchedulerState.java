@@ -44,8 +44,7 @@ public class QrtzSchedulerState extends TableImpl<QrtzSchedulerStateRecord> {
 
     /** The column <code>test.qrtz_scheduler_state.INSTANCE_NAME</code>. */
     public final TableField<QrtzSchedulerStateRecord, String> INSTANCE_NAME =
-            createField(
-                    "INSTANCE_NAME", org.jooq.impl.SQLDataType.VARCHAR(190).nullable(false), this, "");
+            createField("INSTANCE_NAME", org.jooq.impl.SQLDataType.VARCHAR(190).nullable(false), this, "");
 
     /** The column <code>test.qrtz_scheduler_state.LAST_CHECKIN_TIME</code>. */
     public final TableField<QrtzSchedulerStateRecord, Long> LAST_CHECKIN_TIME =
@@ -74,8 +73,7 @@ public class QrtzSchedulerState extends TableImpl<QrtzSchedulerStateRecord> {
         this(alias, aliased, null);
     }
 
-    private QrtzSchedulerState(
-            Name alias, Table<QrtzSchedulerStateRecord> aliased, Field<?>[] parameters) {
+    private QrtzSchedulerState(Name alias, Table<QrtzSchedulerStateRecord> aliased, Field<?>[] parameters) {
         super(alias, null, aliased, parameters, "");
     }
 
@@ -100,8 +98,7 @@ public class QrtzSchedulerState extends TableImpl<QrtzSchedulerStateRecord> {
     /** {@inheritDoc} */
     @Override
     public List<UniqueKey<QrtzSchedulerStateRecord>> getKeys() {
-        return Arrays.<UniqueKey<QrtzSchedulerStateRecord>>asList(
-                Keys.KEY_QRTZ_SCHEDULER_STATE_PRIMARY);
+        return Arrays.<UniqueKey<QrtzSchedulerStateRecord>>asList(Keys.KEY_QRTZ_SCHEDULER_STATE_PRIMARY);
     }
 
     /** {@inheritDoc} */

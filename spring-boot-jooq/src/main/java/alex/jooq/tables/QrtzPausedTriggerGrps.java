@@ -44,8 +44,7 @@ public class QrtzPausedTriggerGrps extends TableImpl<QrtzPausedTriggerGrpsRecord
 
     /** The column <code>test.qrtz_paused_trigger_grps.TRIGGER_GROUP</code>. */
     public final TableField<QrtzPausedTriggerGrpsRecord, String> TRIGGER_GROUP =
-            createField(
-                    "TRIGGER_GROUP", org.jooq.impl.SQLDataType.VARCHAR(190).nullable(false), this, "");
+            createField("TRIGGER_GROUP", org.jooq.impl.SQLDataType.VARCHAR(190).nullable(false), this, "");
 
     /** Create a <code>test.qrtz_paused_trigger_grps</code> table reference */
     public QrtzPausedTriggerGrps() {
@@ -66,8 +65,7 @@ public class QrtzPausedTriggerGrps extends TableImpl<QrtzPausedTriggerGrpsRecord
         this(alias, aliased, null);
     }
 
-    private QrtzPausedTriggerGrps(
-            Name alias, Table<QrtzPausedTriggerGrpsRecord> aliased, Field<?>[] parameters) {
+    private QrtzPausedTriggerGrps(Name alias, Table<QrtzPausedTriggerGrpsRecord> aliased, Field<?>[] parameters) {
         super(alias, null, aliased, parameters, "");
     }
 
@@ -92,8 +90,7 @@ public class QrtzPausedTriggerGrps extends TableImpl<QrtzPausedTriggerGrpsRecord
     /** {@inheritDoc} */
     @Override
     public List<UniqueKey<QrtzPausedTriggerGrpsRecord>> getKeys() {
-        return Arrays.<UniqueKey<QrtzPausedTriggerGrpsRecord>>asList(
-                Keys.KEY_QRTZ_PAUSED_TRIGGER_GRPS_PRIMARY);
+        return Arrays.<UniqueKey<QrtzPausedTriggerGrpsRecord>>asList(Keys.KEY_QRTZ_PAUSED_TRIGGER_GRPS_PRIMARY);
     }
 
     /** {@inheritDoc} */

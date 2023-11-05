@@ -18,7 +18,8 @@ public class JaxRsApplicationTest {
 
     public static final String EXPECTED = "world";
 
-    @LocalServerPort private int port;
+    @LocalServerPort
+    private int port;
 
     private String serviceUri;
 

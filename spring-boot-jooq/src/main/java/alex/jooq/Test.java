@@ -62,8 +62,7 @@ public class Test extends SchemaImpl {
     public final QrtzLocks QRTZ_LOCKS = QrtzLocks.QRTZ_LOCKS;
 
     /** The table <code>test.qrtz_paused_trigger_grps</code>. */
-    public final QrtzPausedTriggerGrps QRTZ_PAUSED_TRIGGER_GRPS =
-            QrtzPausedTriggerGrps.QRTZ_PAUSED_TRIGGER_GRPS;
+    public final QrtzPausedTriggerGrps QRTZ_PAUSED_TRIGGER_GRPS = QrtzPausedTriggerGrps.QRTZ_PAUSED_TRIGGER_GRPS;
 
     /** The table <code>test.qrtz_scheduler_state</code>. */
     public final QrtzSchedulerState QRTZ_SCHEDULER_STATE = QrtzSchedulerState.QRTZ_SCHEDULER_STATE;
@@ -72,8 +71,7 @@ public class Test extends SchemaImpl {
     public final QrtzSimpleTriggers QRTZ_SIMPLE_TRIGGERS = QrtzSimpleTriggers.QRTZ_SIMPLE_TRIGGERS;
 
     /** The table <code>test.qrtz_simprop_triggers</code>. */
-    public final QrtzSimpropTriggers QRTZ_SIMPROP_TRIGGERS =
-            QrtzSimpropTriggers.QRTZ_SIMPROP_TRIGGERS;
+    public final QrtzSimpropTriggers QRTZ_SIMPROP_TRIGGERS = QrtzSimpropTriggers.QRTZ_SIMPROP_TRIGGERS;
 
     /** The table <code>test.qrtz_triggers</code>. */
     public final QrtzTriggers QRTZ_TRIGGERS = QrtzTriggers.QRTZ_TRIGGERS;

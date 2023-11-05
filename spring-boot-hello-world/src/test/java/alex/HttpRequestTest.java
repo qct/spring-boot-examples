@@ -33,31 +33,28 @@ public class HttpRequestTest {
     @Value("${server.ssl.key-store-password}")
     private String keyStorePassword;
 
-    @LocalServerPort private int port;
+    @LocalServerPort
+    private int port;
 
     private TestRestTemplate restTemplate;
 
     @BeforeEach
     public void setup() throws Exception {
-        SSLContext sslContext =
-                new SSLContextBuilder()
-                        .loadTrustMaterial(
-                                keyStore.getURL(), keyStorePassword.toCharArray(), new TrustSelfSignedStrategy())
-                        .build();
-        SSLConnectionSocketFactory socketFactory =
-                new SSLConnectionSocketFactory(
-                        sslContext, new String[] {"TLSv1.2"}, null, NoopHostnameVerifier.INSTANCE);
-        HttpClient httpClient = HttpClients.custom().setSSLSocketFactory(socketFactory).build();
-        HttpComponentsClientHttpRequestFactory factory =
-                new HttpComponentsClientHttpRequestFactory(httpClient);
+        SSLContext sslContext = new SSLContextBuilder()
+                .loadTrustMaterial(keyStore.getURL(), keyStorePassword.toCharArray(), new TrustSelfSignedStrategy())
+                .build();
+        SSLConnectionSocketFactory socketFactory = new SSLConnectionSocketFactory(
+                sslContext, new String[] {"TLSv1.2"}, null, NoopHostnameVerifier.INSTANCE);
+        HttpClient httpClient =
+                HttpClients.custom().setSSLSocketFactory(socketFactory).build();
+        HttpComponentsClientHttpRequestFactory factory = new HttpComponentsClientHttpRequestFactory(httpClient);
         RestTemplateBuilder rtb = new RestTemplateBuilder().requestFactory(() -> factory);
         this.restTemplate = new TestRestTemplate(rtb, null, null, HttpClientOption.SSL);
     }
 
     @Test
     public void greetingShouldReturnDefaultMessage() throws Exception {
-        Assertions.assertThat(
-                        this.restTemplate.getForObject("https://localhost:" + port + "/", String.class))
+        Assertions.assertThat(this.restTemplate.getForObject("https://localhost:" + port + "/", String.class))
                 .contains("Hello, World!");
     }
 }

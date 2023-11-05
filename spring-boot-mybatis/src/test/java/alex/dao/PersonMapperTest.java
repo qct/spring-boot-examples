@@ -14,7 +14,8 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 @MybatisTest
 public class PersonMapperTest {
 
-    @Autowired private PersonMapper mapper;
+    @Autowired
+    private PersonMapper mapper;
 
     @Test
     public void selectByExample() throws Exception {

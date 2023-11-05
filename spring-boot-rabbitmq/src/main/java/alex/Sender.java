@@ -21,7 +21,8 @@ import org.springframework.stereotype.Component;
 @Component
 public class Sender implements CommandLineRunner {
 
-    @Autowired private AmqpTemplate rabbitTemplate;
+    @Autowired
+    private AmqpTemplate rabbitTemplate;
 
     @Override
     public void run(String... args) throws Exception {
@@ -32,7 +33,8 @@ public class Sender implements CommandLineRunner {
         this.rabbitTemplate.convertAndSend(DIRECT_EXCHANGE_NAME, DIRECT_ROUTING_KEY1, context);
         this.rabbitTemplate.convertAndSend(DIRECT_EXCHANGE_NAME, DIRECT_ROUTING_KEY2, context);
 
-        Message headerMsg = MessageBuilder.withBody(context.getBytes()).setHeader("age", 21).build();
+        Message headerMsg =
+                MessageBuilder.withBody(context.getBytes()).setHeader("age", 21).build();
         this.rabbitTemplate.convertAndSend(HEADERS_EXCHANGE_NAME, "", headerMsg);
 
         MyMessage myMessage = new MyMessage();

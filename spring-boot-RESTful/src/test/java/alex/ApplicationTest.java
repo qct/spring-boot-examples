@@ -37,11 +37,10 @@ public class ApplicationTest {
                 .andExpect(content().string(equalTo("[{\"id\":1,\"name\":\"Poly\",\"age\":24}]")));
 
         // 2、post提交一个user
-        request =
-                MockMvcRequestBuilders.post("/users/")
-                        .param("id", "1")
-                        .param("name", "测试大师")
-                        .param("age", "20");
+        request = MockMvcRequestBuilders.post("/users/")
+                .param("id", "1")
+                .param("name", "测试大师")
+                .param("age", "20");
         mvc.perform(request).andExpect(content().string(equalTo("success")));
 
         // 3、get获取user列表，应该有刚才插入的数据
@@ -57,8 +56,7 @@ public class ApplicationTest {
 
         // 5、get一个id为1的user
         request = get("/users/1");
-        mvc.perform(request)
-                .andExpect(content().string(equalTo("{\"id\":1,\"name\":\"测试终极大师\",\"age\":30}")));
+        mvc.perform(request).andExpect(content().string(equalTo("{\"id\":1,\"name\":\"测试终极大师\",\"age\":30}")));
 
         // 6、del删除id为1的user
         request = delete("/users/1");

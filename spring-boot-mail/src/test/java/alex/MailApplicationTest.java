@@ -38,9 +38,11 @@ import org.springframework.ui.freemarker.FreeMarkerTemplateUtils;
 @ActiveProfiles("test")
 public class MailApplicationTest {
 
-    @Autowired private JavaMailSender mailSender;
+    @Autowired
+    private JavaMailSender mailSender;
 
-    @Autowired private Configuration configuration;
+    @Autowired
+    private Configuration configuration;
 
     @Value("${spring.mail.username}")
     private String username;

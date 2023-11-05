@@ -11,7 +11,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 @Disabled("TODO: fix this test by using testcontainers")
 public class RabbitMqApplicationTest {
 
-    @Autowired private AmqpTemplate sender;
+    @Autowired
+    private AmqpTemplate sender;
 
     @Test
     public void hello() throws Exception {

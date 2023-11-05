@@ -12,7 +12,8 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 @MybatisTest
 public class PersonExMapperTest {
 
-    @Autowired private PersonExMapper exMapper;
+    @Autowired
+    private PersonExMapper exMapper;
 
     @Test
     public void queryIds() throws Exception {

@@ -27,7 +27,8 @@ import org.springframework.test.web.servlet.MockMvc;
 @AutoConfigureRestDocs(outputDir = "target/generated-snippets")
 public class UserControllerTest {
 
-    @Autowired private MockMvc mvc;
+    @Autowired
+    private MockMvc mvc;
 
     @Test
     public void listUsers() throws Exception {
@@ -39,14 +40,13 @@ public class UserControllerTest {
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$[1].id", is(11)))
-                .andDo(
-                        document(
-                                "users",
-                                preprocessResponse(prettyPrint()),
-                                responseFields(
-                                        fieldWithPath("[].id").description("user id"),
-                                        fieldWithPath("[].name").description("user name"),
-                                        fieldWithPath("[].age").description("user age"))));
+                .andDo(document(
+                        "users",
+                        preprocessResponse(prettyPrint()),
+                        responseFields(
+                                fieldWithPath("[].id").description("user id"),
+                                fieldWithPath("[].name").description("user name"),
+                                fieldWithPath("[].age").description("user age"))));
         mvc.perform(delete("/users/11")).andExpect(content().string(equalTo("success")));
     }
 }

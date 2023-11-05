@@ -18,18 +18,17 @@ public class TomcatConfig {
 
     @Bean
     public TomcatServletWebServerFactory servletContainerFactory() {
-        TomcatServletWebServerFactory tomcat =
-                new TomcatServletWebServerFactory() {
-                    @Override
-                    protected void postProcessContext(Context context) {
-                        SecurityConstraint securityConstraint = new SecurityConstraint();
-                        securityConstraint.setUserConstraint("CONFIDENTIAL");
-                        SecurityCollection collection = new SecurityCollection();
-                        collection.addPattern("/*");
-                        securityConstraint.addCollection(collection);
-                        context.addConstraint(securityConstraint);
-                    }
-                };
+        TomcatServletWebServerFactory tomcat = new TomcatServletWebServerFactory() {
+            @Override
+            protected void postProcessContext(Context context) {
+                SecurityConstraint securityConstraint = new SecurityConstraint();
+                securityConstraint.setUserConstraint("CONFIDENTIAL");
+                SecurityCollection collection = new SecurityCollection();
+                collection.addPattern("/*");
+                securityConstraint.addCollection(collection);
+                context.addConstraint(securityConstraint);
+            }
+        };
         tomcat.addAdditionalTomcatConnectors(initiateHttpConnector());
         return tomcat;
     }
