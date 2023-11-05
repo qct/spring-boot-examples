@@ -16,18 +16,15 @@ import javax.mail.MessagingException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.ContextConfiguration;
 import org.springframework.ui.freemarker.FreeMarkerTemplateUtils;
 
 /**
@@ -41,11 +38,9 @@ import org.springframework.ui.freemarker.FreeMarkerTemplateUtils;
 @ActiveProfiles("test")
 public class MailApplicationTest {
 
-    @Autowired
-    private JavaMailSender mailSender;
+    @Autowired private JavaMailSender mailSender;
 
-    @Autowired
-    private Configuration configuration;
+    @Autowired private Configuration configuration;
 
     @Value("${spring.mail.username}")
     private String username;

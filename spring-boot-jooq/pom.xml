@@ -45,7 +45,8 @@
                 <artifactId>jooq-codegen-maven</artifactId>
                 <!-- This is a minimal working configuration. See the manual's section about the code generator for more details -->
                 <configuration>
-                    <skip>true</skip><!-- TODO -->
+                    <skip>true</skip>
+                    <!-- TODO -->
                     <jdbc>
                         <url>${db.url}</url>
                         <user>${db.username}</user>

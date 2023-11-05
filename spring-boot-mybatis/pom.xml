@@ -42,8 +42,9 @@
         <dependency>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
+            <version>1.4.199</version>
             <scope>test</scope>
-            <version>1.4.199</version><!-- to compatible with "SELECT LAST_INSERT_ID()" -->
+            <!-- to compatible with "SELECT LAST_INSERT_ID()" -->
         </dependency>
     </dependencies>
 
