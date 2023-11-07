@@ -1,5 +1,6 @@
 package alex;
 
+import alex.config.TomcatConfig;
 import javax.net.ssl.SSLContext;
 import org.apache.http.client.HttpClient;
 import org.apache.http.conn.ssl.NoopHostnameVerifier;
@@ -24,7 +25,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 /** Created by qct on 2017/10/20. */
 @ExtendWith(SpringExtension.class)
-@SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
+@SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT, classes = TomcatConfig.class)
 public class HttpRequestTest {
 
     @Value("${server.ssl.key-store}")
