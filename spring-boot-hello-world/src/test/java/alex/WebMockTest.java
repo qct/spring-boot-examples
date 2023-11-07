@@ -18,15 +18,16 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 @WebMvcTest(HomeController.class)
 public class WebMockTest {
 
-    @Autowired private MockMvc mockMvc;
+    @Autowired
+    private MockMvc mockMvc;
 
-    @MockBean private GreetingService greetingService;
+    @MockBean
+    private GreetingService greetingService;
 
     @Test
     public void greetingShouldReturnDefaultMessage() throws Exception {
         when(greetingService.greeting()).thenReturn("Hello Mock");
-        mockMvc
-                .perform(MockMvcRequestBuilders.get("/").accept(MediaType.ALL))
+        mockMvc.perform(MockMvcRequestBuilders.get("/").accept(MediaType.ALL))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(content().string(containsString("Hello Mock")));

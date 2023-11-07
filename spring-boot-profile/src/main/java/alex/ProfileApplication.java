@@ -17,7 +17,8 @@ public class ProfileApplication {
     @Component
     public static class TestProperties implements InitializingBean {
 
-        @Autowired private ApiProperties apiProperties;
+        @Autowired
+        private ApiProperties apiProperties;
 
         @Override
         public void afterPropertiesSet() {

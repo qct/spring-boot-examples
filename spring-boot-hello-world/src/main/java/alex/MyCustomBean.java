@@ -12,11 +12,7 @@ import org.springframework.stereotype.Component;
 /** Created by qct.q on 2017/11/29. */
 @Component
 public class MyCustomBean
-        implements InitializingBean,
-                DisposableBean,
-                BeanFactoryPostProcessor,
-                BeanPostProcessor,
-                Ordered {
+        implements InitializingBean, DisposableBean, BeanFactoryPostProcessor, BeanPostProcessor, Ordered {
 
     @Override
     public void destroy() throws Exception {
@@ -29,16 +25,14 @@ public class MyCustomBean
     }
 
     @Override
-    public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory)
-            throws BeansException {
+    public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) throws BeansException {
         beanFactory.getBeanNamesIterator();
         Object bean = beanFactory.getBean("&myFactoryBean");
         System.out.println("postProcessBeanFactory");
     }
 
     @Override
-    public Object postProcessBeforeInitialization(Object bean, String beanName)
-            throws BeansException {
+    public Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {
         return bean;
     }
 

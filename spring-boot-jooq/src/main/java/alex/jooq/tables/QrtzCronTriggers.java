@@ -49,13 +49,11 @@ public class QrtzCronTriggers extends TableImpl<QrtzCronTriggersRecord> {
 
     /** The column <code>test.qrtz_cron_triggers.TRIGGER_GROUP</code>. */
     public final TableField<QrtzCronTriggersRecord, String> TRIGGER_GROUP =
-            createField(
-                    "TRIGGER_GROUP", org.jooq.impl.SQLDataType.VARCHAR(190).nullable(false), this, "");
+            createField("TRIGGER_GROUP", org.jooq.impl.SQLDataType.VARCHAR(190).nullable(false), this, "");
 
     /** The column <code>test.qrtz_cron_triggers.CRON_EXPRESSION</code>. */
-    public final TableField<QrtzCronTriggersRecord, String> CRON_EXPRESSION =
-            createField(
-                    "CRON_EXPRESSION", org.jooq.impl.SQLDataType.VARCHAR(120).nullable(false), this, "");
+    public final TableField<QrtzCronTriggersRecord, String> CRON_EXPRESSION = createField(
+            "CRON_EXPRESSION", org.jooq.impl.SQLDataType.VARCHAR(120).nullable(false), this, "");
 
     /** The column <code>test.qrtz_cron_triggers.TIME_ZONE_ID</code>. */
     public final TableField<QrtzCronTriggersRecord, String> TIME_ZONE_ID =
@@ -80,8 +78,7 @@ public class QrtzCronTriggers extends TableImpl<QrtzCronTriggersRecord> {
         this(alias, aliased, null);
     }
 
-    private QrtzCronTriggers(
-            Name alias, Table<QrtzCronTriggersRecord> aliased, Field<?>[] parameters) {
+    private QrtzCronTriggers(Name alias, Table<QrtzCronTriggersRecord> aliased, Field<?>[] parameters) {
         super(alias, null, aliased, parameters, "");
     }
 

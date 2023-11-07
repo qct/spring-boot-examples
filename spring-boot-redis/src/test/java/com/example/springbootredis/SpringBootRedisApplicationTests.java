@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.List;
 import javax.annotation.Resource;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -14,11 +15,14 @@ import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.core.types.RedisClientInfo;
 
 @SpringBootTest
+@Disabled("TODO: fix this test by using testcontainers")
 public class SpringBootRedisApplicationTests {
 
-    @Autowired private StringRedisTemplate stringRedisTemplate;
+    @Autowired
+    private StringRedisTemplate stringRedisTemplate;
 
-    @Resource private RedisTemplate<String, SysDict> redisTemplate;
+    @Resource
+    private RedisTemplate<String, SysDict> redisTemplate;
 
     @Test
     public void contextLoads() {}
@@ -32,7 +36,8 @@ public class SpringBootRedisApplicationTests {
     public void testGet() throws Exception {
         List<RedisClientInfo> clientList = redisTemplate.getClientList();
         while (true) {
-            System.out.println(LocalDateTime.now() + ": " + stringRedisTemplate.opsForValue().get("aa"));
+            System.out.println(LocalDateTime.now() + ": "
+                    + stringRedisTemplate.opsForValue().get("aa"));
             Thread.sleep(1000L);
         }
     }
@@ -50,7 +55,8 @@ public class SpringBootRedisApplicationTests {
         Collection<RedisServer> masters = sentinelConnection.masters();
         System.out.println("master:");
         masters.forEach(System.out::println);
-        Collection<RedisServer> slaves = sentinelConnection.slaves(masters.stream().findFirst().get());
+        Collection<RedisServer> slaves =
+                sentinelConnection.slaves(masters.stream().findFirst().get());
         System.out.println("slaves:");
         slaves.forEach(System.out::println);
     }

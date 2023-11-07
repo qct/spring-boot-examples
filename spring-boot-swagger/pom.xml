@@ -1,67 +1,77 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
+  <modelVersion>4.0.0</modelVersion>
 
-    <parent>
-        <groupId>alex</groupId>
-        <artifactId>spring-boot-examples</artifactId>
-        <version>0.1.0-SNAPSHOT</version>
-        <relativePath>../pom.xml</relativePath>
-    </parent>
-
-    <artifactId>spring-boot-swagger</artifactId>
+  <parent>
+    <groupId>alex</groupId>
+    <artifactId>spring-boot-examples</artifactId>
     <version>0.1.0-SNAPSHOT</version>
-    <packaging>jar</packaging>
+    <relativePath>../pom.xml</relativePath>
+  </parent>
 
-    <name>spring-boot-swagger</name>
-    <description>Demo project for Spring Boot</description>
+  <artifactId>spring-boot-swagger</artifactId>
+  <version>0.1.0-SNAPSHOT</version>
+  <packaging>jar</packaging>
 
-    <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <java.version>1.8</java.version>
-        <springfox-swagger2.version>2.7.0</springfox-swagger2.version>
-    </properties>
+  <name>spring-boot-swagger</name>
+  <description>Demo project for Spring Boot</description>
 
-    <dependencies>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>io.springfox</groupId>
-            <artifactId>springfox-swagger2</artifactId>
-            <version>${springfox-swagger2.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>io.springfox</groupId>
-            <artifactId>springfox-swagger-ui</artifactId>
-            <version>${springfox-swagger2.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
-            <scope>test</scope>
-        </dependency>
-    </dependencies>
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+    <java.version>1.8</java.version>
+    <springfox-swagger2.version>2.7.0</springfox-swagger2.version>
+  </properties>
 
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>
-            <plugin>
-                <groupId>io.swagger</groupId>
-                <artifactId>swagger-codegen-maven-plugin</artifactId>
-                <version>2.2.3</version>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>generate</goal>
-                        </goals>
-                        <!-- server -->
-                        <!--<configuration>
+  <dependencies>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-web</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>io.springfox</groupId>
+      <artifactId>springfox-swagger2</artifactId>
+      <version>${springfox-swagger2.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>io.springfox</groupId>
+      <artifactId>springfox-swagger-ui</artifactId>
+      <version>${springfox-swagger2.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-test</artifactId>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.11.0</version>
+        <configuration>
+          <includes>
+            <include>alex/**</include>
+          </includes>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-maven-plugin</artifactId>
+      </plugin>
+      <plugin>
+        <groupId>io.swagger</groupId>
+        <artifactId>swagger-codegen-maven-plugin</artifactId>
+        <version>2.2.3</version>
+        <executions>
+          <execution>
+            <goals>
+              <goal>generate</goal>
+            </goals>
+            <!-- server -->
+            <!--<configuration>
                             <inputSpec>src/main/resources/my.yml</inputSpec>
                             <output>${project.build.directory}/generated-sources/server</output>
                             <language>spring</language>
@@ -71,78 +81,78 @@
                                 <dateLibrary>java8</dateLibrary>
                             </configOptions>
                         </configuration>-->
-                        <!-- client -->
-                        <configuration>
-                            <inputSpec>${project.basedir}/src/main/resources/my.yml</inputSpec>
-                            <output>${project.build.directory}/generated-sources/client</output>
-                            <language>java</language>
-                            <library>okhttp-gson</library>
-                            <configOptions>
-                                <java8>true</java8>
-                                <dateLibrary>java8</dateLibrary>
-                            </configOptions>
-                        </configuration>
-                        <!--<configuration>
+            <!-- client -->
+            <configuration>
+              <inputSpec>${project.basedir}/src/main/resources/my.yml</inputSpec>
+              <output>${project.build.directory}/generated-sources/client</output>
+              <language>java</language>
+              <library>okhttp-gson</library>
+              <configOptions>
+                <java8>true</java8>
+                <dateLibrary>java8</dateLibrary>
+              </configOptions>
+            </configuration>
+            <!--<configuration>
                             <inputSpec>src/main/resources/my.yml</inputSpec>
                             <output>${project.build.directory}/generated-sources/client</output>
                             <language>go</language>
                         </configuration>-->
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>io.github.swagger2markup</groupId>
-                <artifactId>swagger2markup-maven-plugin</artifactId>
-                <version>1.3.3</version>
-                <configuration>
-                    <swaggerInput>src/main/resources/my.yml</swaggerInput>
-                    <outputDir>${project.build.directory}/generated-sources/asciidoc</outputDir>
-                    <config>
-                        <swagger2markup.markupLanguage>ASCIIDOC</swagger2markup.markupLanguage>
-                    </config>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.asciidoctor</groupId>
-                <artifactId>asciidoctor-maven-plugin</artifactId>
-                <version>1.5.6</version>
-                <configuration>
-                    <sourceDirectory>${project.build.directory}/generated-sources/asciidoc</sourceDirectory>
-                    <outputDirectory>${project.build.directory}/generated-sources/generated-docs</outputDirectory>
-                    <headerFooter>true</headerFooter>
-                    <sourceHighlighter>coderay</sourceHighlighter>
-                    <doctype>book</doctype>
-                    <backend>html5</backend>
-                    <!--<backend>pdf</backend>-->
-                    <attributes>
-                        <sourcedir>${project.build.sourceDirectory}</sourcedir>
-                        <endpoint-url>http://example.org</endpoint-url>
-                        <project-version>${project.version}</project-version>
-                        <toc>left</toc>
-                        <toclevels>3</toclevels>
-                        <sectnums>true</sectnums>
-                        <revnumber>${project.version}</revnumber>
-                        <revdate>${maven.build.timestamp}</revdate>
-                        <organization>google.com</organization>
-                    </attributes>
-                </configuration>
-                <dependencies>
-                    <dependency>
-                        <groupId>org.asciidoctor</groupId>
-                        <artifactId>asciidoctorj-pdf</artifactId>
-                        <version>1.5.0-alpha.16</version>
-                    </dependency>
-                </dependencies>
-                <executions>
-                    <execution>
-                        <id>output-html</id>
-                        <goals>
-                            <goal>process-asciidoc</goal>
-                        </goals>
-                        <phase>generate-resources</phase>
-                        <configuration>
-                            <backend>html5</backend>
-                            <!--<attributes>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>io.github.swagger2markup</groupId>
+        <artifactId>swagger2markup-maven-plugin</artifactId>
+        <version>1.3.3</version>
+        <configuration>
+          <swaggerInput>src/main/resources/my.yml</swaggerInput>
+          <outputDir>${project.build.directory}/generated-sources/asciidoc</outputDir>
+          <config>
+            <swagger2markup.markupLanguage>ASCIIDOC</swagger2markup.markupLanguage>
+          </config>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.asciidoctor</groupId>
+        <artifactId>asciidoctor-maven-plugin</artifactId>
+        <version>1.5.6</version>
+        <configuration>
+          <sourceDirectory>${project.build.directory}/generated-sources/asciidoc</sourceDirectory>
+          <outputDirectory>${project.build.directory}/generated-sources/generated-docs</outputDirectory>
+          <headerFooter>true</headerFooter>
+          <sourceHighlighter>coderay</sourceHighlighter>
+          <doctype>book</doctype>
+          <backend>html5</backend>
+          <!--<backend>pdf</backend>-->
+          <attributes>
+            <sourcedir>${project.build.sourceDirectory}</sourcedir>
+            <endpoint-url>http://example.org</endpoint-url>
+            <project-version>${project.version}</project-version>
+            <toc>left</toc>
+            <toclevels>3</toclevels>
+            <sectnums>true</sectnums>
+            <revnumber>${project.version}</revnumber>
+            <revdate>${maven.build.timestamp}</revdate>
+            <organization>google.com</organization>
+          </attributes>
+        </configuration>
+        <dependencies>
+          <dependency>
+            <groupId>org.asciidoctor</groupId>
+            <artifactId>asciidoctorj-pdf</artifactId>
+            <version>1.5.0-alpha.16</version>
+          </dependency>
+        </dependencies>
+        <executions>
+          <execution>
+            <id>output-html</id>
+            <goals>
+              <goal>process-asciidoc</goal>
+            </goals>
+            <phase>generate-resources</phase>
+            <configuration>
+              <backend>html5</backend>
+              <!--<attributes>
                                 <imagedir>./images</imagedir>
                                 <toc>left</toc>
                                 <icons>font</icons>
@@ -151,27 +161,27 @@
                                 <idseparator>-</idseparator>
                                 <docinfo1>true</docinfo1>
                             </attributes>-->
-                        </configuration>
-                    </execution>
-                    <execution>
-                        <id>output-pdf</id>
-                        <goals>
-                            <goal>process-asciidoc</goal>
-                        </goals>
-                        <phase>generate-resources</phase>
-                        <configuration>
-                            <backend>pdf</backend>
-                            <attributes>
-                                <icons>font</icons>
-                                <pagenums/>
-                                <toc/>
-                                <idprefix/>
-                                <idseparator>-</idseparator>
-                            </attributes>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-        </plugins>
-    </build>
+            </configuration>
+          </execution>
+          <execution>
+            <id>output-pdf</id>
+            <goals>
+              <goal>process-asciidoc</goal>
+            </goals>
+            <phase>generate-resources</phase>
+            <configuration>
+              <backend>pdf</backend>
+              <attributes>
+                <icons>font</icons>
+                <pagenums/>
+                <toc/>
+                <idprefix/>
+                <idseparator>-</idseparator>
+              </attributes>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
 </project>

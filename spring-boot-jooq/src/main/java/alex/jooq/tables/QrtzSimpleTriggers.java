@@ -49,8 +49,7 @@ public class QrtzSimpleTriggers extends TableImpl<QrtzSimpleTriggersRecord> {
 
     /** The column <code>test.qrtz_simple_triggers.TRIGGER_GROUP</code>. */
     public final TableField<QrtzSimpleTriggersRecord, String> TRIGGER_GROUP =
-            createField(
-                    "TRIGGER_GROUP", org.jooq.impl.SQLDataType.VARCHAR(190).nullable(false), this, "");
+            createField("TRIGGER_GROUP", org.jooq.impl.SQLDataType.VARCHAR(190).nullable(false), this, "");
 
     /** The column <code>test.qrtz_simple_triggers.REPEAT_COUNT</code>. */
     public final TableField<QrtzSimpleTriggersRecord, Long> REPEAT_COUNT =
@@ -83,8 +82,7 @@ public class QrtzSimpleTriggers extends TableImpl<QrtzSimpleTriggersRecord> {
         this(alias, aliased, null);
     }
 
-    private QrtzSimpleTriggers(
-            Name alias, Table<QrtzSimpleTriggersRecord> aliased, Field<?>[] parameters) {
+    private QrtzSimpleTriggers(Name alias, Table<QrtzSimpleTriggersRecord> aliased, Field<?>[] parameters) {
         super(alias, null, aliased, parameters, "");
     }
 
@@ -109,8 +107,7 @@ public class QrtzSimpleTriggers extends TableImpl<QrtzSimpleTriggersRecord> {
     /** {@inheritDoc} */
     @Override
     public List<UniqueKey<QrtzSimpleTriggersRecord>> getKeys() {
-        return Arrays.<UniqueKey<QrtzSimpleTriggersRecord>>asList(
-                Keys.KEY_QRTZ_SIMPLE_TRIGGERS_PRIMARY);
+        return Arrays.<UniqueKey<QrtzSimpleTriggersRecord>>asList(Keys.KEY_QRTZ_SIMPLE_TRIGGERS_PRIMARY);
     }
 
     /** {@inheritDoc} */

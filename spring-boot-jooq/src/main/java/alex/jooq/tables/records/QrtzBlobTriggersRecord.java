@@ -207,8 +207,7 @@ public class QrtzBlobTriggersRecord extends UpdatableRecordImpl<QrtzBlobTriggers
     }
 
     /** Create a detached, initialised QrtzBlobTriggersRecord */
-    public QrtzBlobTriggersRecord(
-            String schedName, String triggerName, String triggerGroup, byte[] blobData) {
+    public QrtzBlobTriggersRecord(String schedName, String triggerName, String triggerGroup, byte[] blobData) {
         super(QrtzBlobTriggers.QRTZ_BLOB_TRIGGERS);
 
         set(0, schedName);

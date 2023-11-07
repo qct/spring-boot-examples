@@ -1,104 +1,94 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
+  <modelVersion>4.0.0</modelVersion>
 
-    <parent>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.6.6</version>
-        <relativePath/>
-        <!-- lookup parent from repository -->
-    </parent>
+  <parent>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-parent</artifactId>
+    <version>2.6.6</version>
+    <relativePath/>
+    <!-- lookup parent from repository -->
+  </parent>
 
-    <groupId>alex</groupId>
-    <artifactId>spring-boot-examples</artifactId>
-    <version>0.1.0-SNAPSHOT</version>
-    <packaging>pom</packaging>
+  <groupId>alex</groupId>
+  <artifactId>spring-boot-examples</artifactId>
+  <version>0.1.0-SNAPSHOT</version>
+  <packaging>pom</packaging>
 
-    <name>spring-boot-examples</name>
-    <description>Demo project for Spring Boot</description>
+  <name>spring-boot-examples</name>
+  <description>Demo project for Spring Boot</description>
 
-    <modules>
-        <module>spring-boot-hello-world</module>
-        <module>spring-boot-kafka</module>
-        <module>spring-boot-mybatis</module>
-        <module>spring-boot-oauth2</module>
-        <module>spring-boot-oauth2-resource</module>
-        <module>spring-boot-profile</module>
-        <module>spring-boot-rabbitmq</module>
-        <module>spring-boot-redis</module>
-        <module>spring-boot-RESTful</module>
-        <module>spring-boot-security</module>
-        <module>spring-boot-state-machine</module>
-        <module>spring-boot-retry</module>
-        <module>spring-boot-swagger</module>
-        <module>spring-boot-jaxrs-client</module>
-        <module>spring-boot-rocketmq</module>
-        <module>spring-boot-data-jpa</module>
-        <module>spring-boot-flyway</module>
-        <module>spring-boot-webflux</module>
-        <module>spring-boot-mail</module>
-        <module>spring-boot-jooq</module>
-        <module>spring-boot-quartz</module>
-        <module>spring-extension-example</module>
-        <module>spring-boot-integration</module>
-    </modules>
+  <modules>
+    <module>spring-boot-hello-world</module>
+    <module>spring-boot-kafka</module>
+    <module>spring-boot-mybatis</module>
+    <module>spring-boot-oauth2</module>
+    <module>spring-boot-oauth2-resource</module>
+    <module>spring-boot-profile</module>
+    <module>spring-boot-rabbitmq</module>
+    <module>spring-boot-redis</module>
+    <module>spring-boot-RESTful</module>
+    <module>spring-boot-security</module>
+    <module>spring-boot-state-machine</module>
+    <module>spring-boot-retry</module>
+    <module>spring-boot-swagger</module>
+    <module>spring-boot-jaxrs-client</module>
+    <module>spring-boot-rocketmq</module>
+    <module>spring-boot-data-jpa</module>
+    <module>spring-boot-flyway</module>
+    <module>spring-boot-webflux</module>
+    <module>spring-boot-mail</module>
+    <module>spring-boot-jooq</module>
+    <module>spring-boot-quartz</module>
+    <module>spring-extension-example</module>
+    <module>spring-boot-integration</module>
+  </modules>
 
-    <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <java.version>1.8</java.version>
-    </properties>
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+    <java.version>1.8</java.version>
+  </properties>
 
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>com.diffplug.spotless</groupId>
-                <artifactId>spotless-maven-plugin</artifactId>
-                <version>2.22.8</version>
-                <configuration>
-                    <pom>
-                        <!-- These are the defaults, you can override if you want -->
-                        <includes>
-                            <include>pom.xml</include>
-                        </includes>
-                        <sortPom>
-                            <!-- Should empty elements be expanded-->
-                            <expandEmptyElements>false</expandEmptyElements>
-                            <!-- Indentation -->
-                            <nrOfIndentSpace>4</nrOfIndentSpace>
-                        </sortPom>
-                        <!-- has its own section below -->
-                    </pom>
-                    <java>
-                        <toggleOffOn/>
-                        <importOrder/>
-                        <!-- standard import order -->
-                        <removeUnusedImports/>
-                        <!-- self-explanatory -->
-                        <!-- These are the defaults, you can override if you want -->
-                        <includes>
-                            <include>src/main/java/**/*.java</include>
-                            <include>src/test/java/**/*.java</include>
-                        </includes>
-                        <!-- no need to specify files, inferred automatically, but you can if you want -->
-                        <!-- apply a specific flavor of google-java-format and reflow long strings -->
-                        <googleJavaFormat>
-                            <version>1.15.0</version>
-                            <style>GOOGLE</style>
-                            <reflowLongStrings>true</reflowLongStrings>
-                        </googleJavaFormat>
-                        <indent>
-                            <tabs>true</tabs>
-                            <spacesPerTab>2</spacesPerTab>
-                        </indent>
-                        <indent>
-                            <spaces>true</spaces>
-                            <spacesPerTab>4</spacesPerTab>
-                        </indent>
-                    </java>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>com.diffplug.spotless</groupId>
+        <artifactId>spotless-maven-plugin</artifactId>
+        <version>2.40.0</version>
+        <configuration>
+          <pom>
+            <!-- These are the defaults, you can override if you want -->
+            <includes>
+              <include>pom.xml</include>
+            </includes>
+            <sortPom>
+              <!-- Should empty elements be expanded-->
+              <expandEmptyElements>false</expandEmptyElements>
+              <!-- Indentation -->
+              <nrOfIndentSpace>2</nrOfIndentSpace>
+            </sortPom>
+            <!-- has its own section below -->
+          </pom>
+          <java>
+            <toggleOffOn/>
+            <importOrder/>
+            <!-- standard import order -->
+            <removeUnusedImports/>
+            <!-- self-explanatory -->
+            <!-- These are the defaults, you can override if you want -->
+            <includes>
+              <include>src/main/java/**/*.java</include>
+              <include>src/test/java/**/*.java</include>
+            </includes>
+            <!-- no need to specify files, inferred automatically, but you can if you want -->
+            <!-- apply a specific flavor of google-java-format and reflow long strings -->
+            <palantirJavaFormat>
+              <version>2.38.0</version>
+            </palantirJavaFormat>
+          </java>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
 </project>

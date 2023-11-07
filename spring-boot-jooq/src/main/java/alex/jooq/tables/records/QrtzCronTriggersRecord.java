@@ -224,8 +224,7 @@ public class QrtzCronTriggersRecord extends UpdatableRecordImpl<QrtzCronTriggers
 
     /** {@inheritDoc} */
     @Override
-    public QrtzCronTriggersRecord values(
-            String value1, String value2, String value3, String value4, String value5) {
+    public QrtzCronTriggersRecord values(String value1, String value2, String value3, String value4, String value5) {
         value1(value1);
         value2(value2);
         value3(value3);
@@ -245,11 +244,7 @@ public class QrtzCronTriggersRecord extends UpdatableRecordImpl<QrtzCronTriggers
 
     /** Create a detached, initialised QrtzCronTriggersRecord */
     public QrtzCronTriggersRecord(
-            String schedName,
-            String triggerName,
-            String triggerGroup,
-            String cronExpression,
-            String timeZoneId) {
+            String schedName, String triggerName, String triggerGroup, String cronExpression, String timeZoneId) {
         super(QrtzCronTriggers.QRTZ_CRON_TRIGGERS);
 
         set(0, schedName);

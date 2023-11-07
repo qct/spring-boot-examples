@@ -18,19 +18,7 @@ import org.jooq.impl.UpdatableRecordImpl;
 @SuppressWarnings({"all", "unchecked", "rawtypes"})
 public class QrtzFiredTriggersRecord extends UpdatableRecordImpl<QrtzFiredTriggersRecord>
         implements Record13<
-                String,
-                String,
-                String,
-                String,
-                String,
-                Long,
-                Long,
-                Integer,
-                String,
-                String,
-                String,
-                String,
-                String> {
+                String, String, String, String, String, Long, Long, Integer, String, String, String, String, String> {
 
     private static final long serialVersionUID = -1648984382;
 
@@ -180,40 +168,14 @@ public class QrtzFiredTriggersRecord extends UpdatableRecordImpl<QrtzFiredTrigge
 
     /** {@inheritDoc} */
     @Override
-    public Row13<
-                    String,
-                    String,
-                    String,
-                    String,
-                    String,
-                    Long,
-                    Long,
-                    Integer,
-                    String,
-                    String,
-                    String,
-                    String,
-                    String>
+    public Row13<String, String, String, String, String, Long, Long, Integer, String, String, String, String, String>
             fieldsRow() {
         return (Row13) super.fieldsRow();
     }
 
     /** {@inheritDoc} */
     @Override
-    public Row13<
-                    String,
-                    String,
-                    String,
-                    String,
-                    String,
-                    Long,
-                    Long,
-                    Integer,
-                    String,
-                    String,
-                    String,
-                    String,
-                    String>
+    public Row13<String, String, String, String, String, Long, Long, Integer, String, String, String, String, String>
             valuesRow() {
         return (Row13) super.valuesRow();
     }

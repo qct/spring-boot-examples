@@ -50,8 +50,7 @@ public class QrtzSimpropTriggers extends TableImpl<QrtzSimpropTriggersRecord> {
 
     /** The column <code>test.qrtz_simprop_triggers.TRIGGER_GROUP</code>. */
     public final TableField<QrtzSimpropTriggersRecord, String> TRIGGER_GROUP =
-            createField(
-                    "TRIGGER_GROUP", org.jooq.impl.SQLDataType.VARCHAR(190).nullable(false), this, "");
+            createField("TRIGGER_GROUP", org.jooq.impl.SQLDataType.VARCHAR(190).nullable(false), this, "");
 
     /** The column <code>test.qrtz_simprop_triggers.STR_PROP_1</code>. */
     public final TableField<QrtzSimpropTriggersRecord, String> STR_PROP_1 =
@@ -116,8 +115,7 @@ public class QrtzSimpropTriggers extends TableImpl<QrtzSimpropTriggersRecord> {
         this(alias, aliased, null);
     }
 
-    private QrtzSimpropTriggers(
-            Name alias, Table<QrtzSimpropTriggersRecord> aliased, Field<?>[] parameters) {
+    private QrtzSimpropTriggers(Name alias, Table<QrtzSimpropTriggersRecord> aliased, Field<?>[] parameters) {
         super(alias, null, aliased, parameters, "");
     }
 
@@ -142,15 +140,13 @@ public class QrtzSimpropTriggers extends TableImpl<QrtzSimpropTriggersRecord> {
     /** {@inheritDoc} */
     @Override
     public List<UniqueKey<QrtzSimpropTriggersRecord>> getKeys() {
-        return Arrays.<UniqueKey<QrtzSimpropTriggersRecord>>asList(
-                Keys.KEY_QRTZ_SIMPROP_TRIGGERS_PRIMARY);
+        return Arrays.<UniqueKey<QrtzSimpropTriggersRecord>>asList(Keys.KEY_QRTZ_SIMPROP_TRIGGERS_PRIMARY);
     }
 
     /** {@inheritDoc} */
     @Override
     public List<ForeignKey<QrtzSimpropTriggersRecord, ?>> getReferences() {
-        return Arrays.<ForeignKey<QrtzSimpropTriggersRecord, ?>>asList(
-                Keys.QRTZ_SIMPROP_TRIGGERS_IBFK_1);
+        return Arrays.<ForeignKey<QrtzSimpropTriggersRecord, ?>>asList(Keys.QRTZ_SIMPROP_TRIGGERS_IBFK_1);
     }
 
     /** {@inheritDoc} */

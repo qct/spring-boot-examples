@@ -56,8 +56,7 @@ public class QrtzJobDetails extends TableImpl<QrtzJobDetailsRecord> {
 
     /** The column <code>test.qrtz_job_details.JOB_CLASS_NAME</code>. */
     public final TableField<QrtzJobDetailsRecord, String> JOB_CLASS_NAME =
-            createField(
-                    "JOB_CLASS_NAME", org.jooq.impl.SQLDataType.VARCHAR(250).nullable(false), this, "");
+            createField("JOB_CLASS_NAME", org.jooq.impl.SQLDataType.VARCHAR(250).nullable(false), this, "");
 
     /** The column <code>test.qrtz_job_details.IS_DURABLE</code>. */
     public final TableField<QrtzJobDetailsRecord, String> IS_DURABLE =
@@ -65,17 +64,15 @@ public class QrtzJobDetails extends TableImpl<QrtzJobDetailsRecord> {
 
     /** The column <code>test.qrtz_job_details.IS_NONCONCURRENT</code>. */
     public final TableField<QrtzJobDetailsRecord, String> IS_NONCONCURRENT =
-            createField(
-                    "IS_NONCONCURRENT", org.jooq.impl.SQLDataType.VARCHAR(1).nullable(false), this, "");
+            createField("IS_NONCONCURRENT", org.jooq.impl.SQLDataType.VARCHAR(1).nullable(false), this, "");
 
     /** The column <code>test.qrtz_job_details.IS_UPDATE_DATA</code>. */
     public final TableField<QrtzJobDetailsRecord, String> IS_UPDATE_DATA =
             createField("IS_UPDATE_DATA", org.jooq.impl.SQLDataType.VARCHAR(1).nullable(false), this, "");
 
     /** The column <code>test.qrtz_job_details.REQUESTS_RECOVERY</code>. */
-    public final TableField<QrtzJobDetailsRecord, String> REQUESTS_RECOVERY =
-            createField(
-                    "REQUESTS_RECOVERY", org.jooq.impl.SQLDataType.VARCHAR(1).nullable(false), this, "");
+    public final TableField<QrtzJobDetailsRecord, String> REQUESTS_RECOVERY = createField(
+            "REQUESTS_RECOVERY", org.jooq.impl.SQLDataType.VARCHAR(1).nullable(false), this, "");
 
     /** The column <code>test.qrtz_job_details.JOB_DATA</code>. */
     public final TableField<QrtzJobDetailsRecord, byte[]> JOB_DATA =

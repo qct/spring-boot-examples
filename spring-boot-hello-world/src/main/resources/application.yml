@@ -14,3 +14,6 @@ management:
 logging:
   level:
     root: info
+spring:
+  main:
+    banner-mode: "off"

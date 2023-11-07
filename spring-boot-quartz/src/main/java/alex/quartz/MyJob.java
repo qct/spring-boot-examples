@@ -26,8 +26,7 @@ public class MyJob extends QuartzJobBean implements InterruptableJob {
     private static final Logger logger = LoggerFactory.getLogger(MyJob.class);
 
     @Override
-    protected void executeInternal(JobExecutionContext jobExecutionContext)
-            throws JobExecutionException {
+    protected void executeInternal(JobExecutionContext jobExecutionContext) throws JobExecutionException {
         try {
             logger.info(
                     "I'm running, {}, {}",
