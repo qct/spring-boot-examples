@@ -10,7 +10,8 @@ import org.springframework.jdbc.core.JdbcTemplate;
 @SpringBootTest
 public class FlywayApplicationTests {
 
-    @Autowired private JdbcTemplate jdbcTemplate;
+    @Autowired
+    private JdbcTemplate jdbcTemplate;
 
     @Test
     public void testDefaultSettings() throws Exception {

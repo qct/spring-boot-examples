@@ -20,7 +20,8 @@ public class RocketMqApplication implements CommandLineRunner {
 
     private static final Logger logger = LoggerFactory.getLogger(RocketMqApplication.class);
 
-    @Resource private RocketMQTemplate rocketMQTemplate;
+    @Resource
+    private RocketMQTemplate rocketMQTemplate;
 
     public static void main(String[] args) {
         SpringApplication.run(RocketMqApplication.class, args);
@@ -32,8 +33,7 @@ public class RocketMqApplication implements CommandLineRunner {
         //        rocketMQTemplate.send("test-topic-1", MessageBuilder.withPayload("Hello, World! I'm
         // from spring").build());
         while (true) {
-            rocketMQTemplate.convertAndSend(
-                    "test-topic-2", new OrderPaidEvent("T_001", new BigDecimal("88.00")));
+            rocketMQTemplate.convertAndSend("test-topic-2", new OrderPaidEvent("T_001", new BigDecimal("88.00")));
             int i = new Random().nextInt(60);
             System.out.println("sleep " + i);
             Thread.sleep(1000L * i);

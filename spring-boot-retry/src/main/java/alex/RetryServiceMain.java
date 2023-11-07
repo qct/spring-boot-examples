@@ -33,16 +33,14 @@ public class RetryServiceMain {
         template.setBackOffPolicy(new FixedBackOffPolicy());
         template.registerListener(new StatisticsListener(new DefaultStatisticsRepository()));
 
-        Object execute =
-                template.execute(
-                        new RetryCallback<Integer, Exception>() {
-                            int i = 5;
+        Object execute = template.execute(new RetryCallback<Integer, Exception>() {
+            int i = 5;
 
-                            @Override
-                            public Integer doWithRetry(RetryContext context) throws Exception {
-                                throw new Exception();
-                            }
-                        });
+            @Override
+            public Integer doWithRetry(RetryContext context) throws Exception {
+                throw new Exception();
+            }
+        });
 
         //        String result = retryService.someService();
         //        System.out.println(result);

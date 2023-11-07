@@ -18,12 +18,12 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 @AutoConfigureMockMvc
 public class SampleApplicationTest {
 
-    @Autowired private MockMvc mockMvc;
+    @Autowired
+    private MockMvc mockMvc;
 
     @Test
     public void shouldReturnDefaultMessage() throws Exception {
-        mockMvc
-                .perform(MockMvcRequestBuilders.get("/").accept(MediaType.ALL))
+        mockMvc.perform(MockMvcRequestBuilders.get("/").accept(MediaType.ALL))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(content().string(containsString("Hello, World!")));

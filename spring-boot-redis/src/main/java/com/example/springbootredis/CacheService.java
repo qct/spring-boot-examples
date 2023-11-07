@@ -9,7 +9,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class CacheService {
 
-    @Autowired RedisTemplate redisTemplate;
+    @Autowired
+    RedisTemplate redisTemplate;
 
     @Cacheable
     public SysDict getDict(String key) {

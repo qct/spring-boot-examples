@@ -14,7 +14,8 @@ public class MyEventListener {
 
     private static final Logger logger = LoggerFactory.getLogger(MyEventListener.class);
 
-    @Autowired private ApplicationEventPublisher applicationEventPublisher;
+    @Autowired
+    private ApplicationEventPublisher applicationEventPublisher;
 
     @EventListener(classes = EventA.class)
     public void handleEventA(EventA event) {

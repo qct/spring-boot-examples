@@ -207,8 +207,7 @@ public class QrtzSchedulerStateRecord extends UpdatableRecordImpl<QrtzSchedulerS
     }
 
     /** Create a detached, initialised QrtzSchedulerStateRecord */
-    public QrtzSchedulerStateRecord(
-            String schedName, String instanceName, Long lastCheckinTime, Long checkinInterval) {
+    public QrtzSchedulerStateRecord(String schedName, String instanceName, Long lastCheckinTime, Long checkinInterval) {
         super(QrtzSchedulerState.QRTZ_SCHEDULER_STATE);
 
         set(0, schedName);

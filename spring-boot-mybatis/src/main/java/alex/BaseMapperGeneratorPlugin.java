@@ -14,14 +14,12 @@ public class BaseMapperGeneratorPlugin extends PluginAdapter {
     public boolean clientGenerated(
             Interface interfaze, TopLevelClass topLevelClass, IntrospectedTable introspectedTable) {
         // 主键默认采用java.lang.Integer
-        FullyQualifiedJavaType fqjt =
-                new FullyQualifiedJavaType(
-                        "BaseMapper<"
-                                + introspectedTable.getBaseRecordType()
-                                + ","
-                                + introspectedTable.getExampleType()
-                                + ",java.lang.Integer"
-                                + ">");
+        FullyQualifiedJavaType fqjt = new FullyQualifiedJavaType("BaseMapper<"
+                + introspectedTable.getBaseRecordType()
+                + ","
+                + introspectedTable.getExampleType()
+                + ",java.lang.Integer"
+                + ">");
         FullyQualifiedJavaType imp = new FullyQualifiedJavaType("alex.BaseMapper");
 
         // 添加 extends MybatisBaseMapper

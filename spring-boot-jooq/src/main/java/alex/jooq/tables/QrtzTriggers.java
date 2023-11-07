@@ -49,8 +49,7 @@ public class QrtzTriggers extends TableImpl<QrtzTriggersRecord> {
 
     /** The column <code>test.qrtz_triggers.TRIGGER_GROUP</code>. */
     public final TableField<QrtzTriggersRecord, String> TRIGGER_GROUP =
-            createField(
-                    "TRIGGER_GROUP", org.jooq.impl.SQLDataType.VARCHAR(190).nullable(false), this, "");
+            createField("TRIGGER_GROUP", org.jooq.impl.SQLDataType.VARCHAR(190).nullable(false), this, "");
 
     /** The column <code>test.qrtz_triggers.JOB_NAME</code>. */
     public final TableField<QrtzTriggersRecord, String> JOB_NAME =

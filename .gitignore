@@ -22,3 +22,9 @@ nbbuild/
 dist/
 nbdist/
 .nb-gradle/
+
+### macOS ###
+# General
+.DS_Store
+.AppleDouble
+.LSOverride
