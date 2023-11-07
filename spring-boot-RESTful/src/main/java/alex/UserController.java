@@ -16,41 +16,36 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(value = "/users", produces = "application/json;charset=UTF-8")
 public class UserController {
 
-    static Map<Long, User> users = Collections.synchronizedMap(new HashMap<>());
-
-    static {
-        users.put(1L, new User(1L, "Poly", 24));
-    }
+    private static final Map<Long, User> USERS = Collections.synchronizedMap(new HashMap<>());
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public List<User> getUserList() {
-        ArrayList<User> users = new ArrayList<>(UserController.users.values());
-        return users;
+        return new ArrayList<>(USERS.values());
     }
 
     @RequestMapping(value = "/", method = RequestMethod.POST)
     public String postUser(@ModelAttribute User user) {
-        users.put(user.getId(), user);
+        USERS.put(user.getId(), user);
         return "success";
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public User getUser(@PathVariable Long id) {
-        return users.get(id);
+        return USERS.get(id);
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
     public String putUser(@PathVariable Long id, @ModelAttribute User user) {
-        User u = users.get(id);
+        User u = USERS.get(id);
         u.setName(user.getName());
         u.setAge(user.getAge());
-        users.put(id, u);
+        USERS.put(id, u);
         return "success";
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public String deleteUser(@PathVariable Long id) {
-        users.remove(id);
+        USERS.remove(id);
         return "success";
     }
 }

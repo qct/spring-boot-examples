@@ -3,6 +3,7 @@ package alex;
 import static org.hamcrest.Matchers.equalTo;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -26,6 +27,7 @@ public class ApplicationTest {
     @BeforeEach
     public void setUp() throws Exception {
         mvc = MockMvcBuilders.standaloneSetup(new UserController()).build();
+        mvc.perform(post("/users/").param("id", "1").param("name", "Poly").param("age", "24"));
     }
 
     @Test

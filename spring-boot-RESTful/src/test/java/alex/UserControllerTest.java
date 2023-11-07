@@ -39,7 +39,7 @@ public class UserControllerTest {
                 .perform(get("/users/").accept(MediaType.ALL))
                 .andDo(print())
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$[1].id", is(11)))
+                .andExpect(jsonPath("$[0].id", is(11)))
                 .andDo(document(
                         "users",
                         preprocessResponse(prettyPrint()),
