@@ -28,8 +28,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 /** Created by qct on 2017/10/20. */
 @ExtendWith(SpringExtension.class)
-@SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
-@Import(TomcatConfig.class)
+@SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT, classes = TomcatConfig.class)
 public class HttpRequestTest {
 
     @Value("${server.ssl.key-store}")
