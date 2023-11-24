@@ -2,45 +2,45 @@ package alex;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
+import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import org.springframework.security.web.SecurityFilterChain;
 
 /** Created by qct on 2017/9/19. */
 @Configuration
 @EnableWebSecurity
-public class ServerSecurityConfig extends WebSecurityConfigurerAdapter {
+public class ServerSecurityConfig {
 
     @Bean
     public static NoOpPasswordEncoder passwordEncoder() {
         return (NoOpPasswordEncoder) NoOpPasswordEncoder.getInstance();
     }
 
-    @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.inMemoryAuthentication().withUser("john").password("123").roles("USER");
-    }
-
-    @Override
-    protected void configure(HttpSecurity http) throws Exception {
-        // @formatter:off
-        http.authorizeRequests()
-                .antMatchers("/public/**")
+    @Bean
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+        http.authorizeHttpRequests((authz) -> authz
+                .requestMatchers("/public/**")
                 .permitAll()
                 .anyRequest()
                 .authenticated()
-                .and()
-                .formLogin()
-                .permitAll();
-        // @formatter:on
+            )
+            .formLogin(Customizer.withDefaults());
+        return http.build();
     }
 
     @Bean
-    @Override
-    public AuthenticationManager authenticationManagerBean() throws Exception {
-        return super.authenticationManagerBean();
+    public InMemoryUserDetailsManager userDetailsService() {
+        UserDetails user = User.builder()
+            .username("john")
+            .password("123")
+            .roles("USER")
+            .build();
+        return new InMemoryUserDetailsManager(user);
     }
+
 }
