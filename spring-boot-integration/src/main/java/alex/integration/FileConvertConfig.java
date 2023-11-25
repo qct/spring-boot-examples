@@ -36,7 +36,7 @@ public class FileConvertConfig {
             }
             return null;
         };
-        return  IntegrationFlow.from(
+        return IntegrationFlow.from(
                         Files.inboundAdapter(in)
                                 .autoCreateDirectory(true)
                                 .preventDuplicates(true)

@@ -4,8 +4,8 @@
 package alex.jooq.tables.records;
 
 import alex.jooq.tables.QrtzSimpropTriggers;
-import java.math.BigDecimal;
 import jakarta.annotation.Generated;
+import java.math.BigDecimal;
 import org.jooq.Field;
 import org.jooq.Record14;
 import org.jooq.Record3;
