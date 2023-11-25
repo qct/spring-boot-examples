@@ -3,18 +3,14 @@ package alex.integration;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
-import java.io.PrintStream;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.ImageBanner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.core.env.Environment;
-import org.springframework.core.io.FileSystemResource;
+import org.springframework.integration.core.GenericTransformer;
 import org.springframework.integration.dsl.IntegrationFlow;
-import org.springframework.integration.dsl.IntegrationFlows;
 import org.springframework.integration.file.FileHeaders;
 import org.springframework.integration.file.dsl.Files;
 import org.springframework.integration.support.MessageBuilder;
-import org.springframework.integration.transformer.GenericTransformer;
 import org.springframework.messaging.Message;
 import org.springframework.util.ReflectionUtils;
 
@@ -30,11 +26,8 @@ public class FileConvertConfig {
     @Bean
     IntegrationFlow files(@Value("${input-directory:${HOME}/Desktop/in}") File in, Environment environment) {
         GenericTransformer<File, Message<String>> genericTransformer = (File source) -> {
-            try (ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                    PrintStream printStream = new PrintStream(baos)) {
-                ImageBanner imageBanner = new ImageBanner(new FileSystemResource(source));
-                imageBanner.printBanner(environment, getClass(), printStream);
-                return MessageBuilder.withPayload(new String(baos.toByteArray()))
+            try (ByteArrayOutputStream baos = new ByteArrayOutputStream()) {
+                return MessageBuilder.withPayload(baos.toString())
                         .setHeader(
                                 FileHeaders.FILENAME, source.getAbsoluteFile().getName())
                         .build();
@@ -43,7 +36,7 @@ public class FileConvertConfig {
             }
             return null;
         };
-        return IntegrationFlows.from(
+        return  IntegrationFlow.from(
                         Files.inboundAdapter(in)
                                 .autoCreateDirectory(true)
                                 .preventDuplicates(true)

@@ -56,7 +56,7 @@ class Receiver {
                     @TopicPartition(
                             topic = "${topic.name.partitioned}",
                             partitions = {"2", "3"}))
-    public void listenToPartition(@Payload String msg, @Header(KafkaHeaders.RECEIVED_PARTITION_ID) int partition) {
+    public void listenToPartition(@Payload String msg, @Header(KafkaHeaders.RECEIVED_PARTITION) int partition) {
         System.out.println("Received Message: " + msg + " from partition: " + partition);
     }
 }

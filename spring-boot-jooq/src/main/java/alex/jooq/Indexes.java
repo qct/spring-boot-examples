@@ -17,7 +17,7 @@ import alex.jooq.tables.QrtzSimpleTriggers;
 import alex.jooq.tables.QrtzSimpropTriggers;
 import alex.jooq.tables.QrtzTriggers;
 import alex.jooq.tables.School;
-import javax.annotation.Generated;
+import jakarta.annotation.Generated;
 import org.jooq.Index;
 import org.jooq.OrderField;
 import org.jooq.impl.Internal;

@@ -20,7 +20,7 @@ import alex.jooq.tables.School;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import javax.annotation.Generated;
+import jakarta.annotation.Generated;
 import org.jooq.Catalog;
 import org.jooq.Table;
 import org.jooq.impl.SchemaImpl;

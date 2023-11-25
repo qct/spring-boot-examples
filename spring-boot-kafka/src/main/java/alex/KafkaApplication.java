@@ -144,7 +144,7 @@ public class KafkaApplication {
         }
 
         @KafkaListener(topics = "${topic.name.message}", containerFactory = "headersKafkaListenerContainerFactory")
-        public void listenWithHeaders(@Payload String msg, @Header(KafkaHeaders.RECEIVED_PARTITION_ID) int partition) {
+        public void listenWithHeaders(@Payload String msg, @Header(KafkaHeaders.RECEIVED_PARTITION) int partition) {
             System.out.println("Received Message: " + msg + " from header(partition): " + partition);
             latch.countDown();
         }
@@ -159,7 +159,7 @@ public class KafkaApplication {
                                 }))
         //        @KafkaListener(topicPartitions = @TopicPartition(topic = "${topic.name.partitioned}",
         // partitions = {"2", "3"}))
-        public void listenToPartition(@Payload String msg, @Header(KafkaHeaders.RECEIVED_PARTITION_ID) int partition) {
+        public void listenToPartition(@Payload String msg, @Header(KafkaHeaders.RECEIVED_PARTITION) int partition) {
             System.out.println("Received Message: " + msg + " from partition: " + partition);
             partitionLatch.countDown();
         }
