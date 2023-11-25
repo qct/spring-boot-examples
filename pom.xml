@@ -22,8 +22,8 @@
     <module>spring-boot-hello-world</module>
     <module>spring-boot-kafka</module>
     <module>spring-boot-mybatis</module>
-    <module>spring-boot-oauth2</module>
-    <module>spring-boot-oauth2-resource</module>
+    <module>spring-boot-oauth2-authorization-server</module>
+    <module>spring-boot-oauth2-resource-server</module>
     <module>spring-boot-profile</module>
     <module>spring-boot-rabbitmq</module>
     <module>spring-boot-redis</module>

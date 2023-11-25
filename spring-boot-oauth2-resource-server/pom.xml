@@ -9,13 +9,9 @@
     <relativePath>../pom.xml</relativePath>
   </parent>
 
-  <artifactId>spring-boot-oauth2-resource</artifactId>
+  <artifactId>spring-boot-oauth2-resource-server</artifactId>
   <version>0.1.0-SNAPSHOT</version>
   <packaging>jar</packaging>
-
-  <properties>
-    <spring-security-oauth2-autoconfigure.version>2.0.6.RELEASE</spring-security-oauth2-autoconfigure.version>
-  </properties>
 
   <dependencies>
     <dependency>
@@ -23,10 +19,10 @@
       <artifactId>spring-boot-starter-web</artifactId>
     </dependency>
     <dependency>
-      <groupId>org.springframework.security.oauth.boot</groupId>
-      <artifactId>spring-security-oauth2-autoconfigure</artifactId>
-      <version>${spring-security-oauth2-autoconfigure.version}</version>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-oauth2-resource-server</artifactId>
     </dependency>
+
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-actuator</artifactId>

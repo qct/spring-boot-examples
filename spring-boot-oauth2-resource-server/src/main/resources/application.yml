@@ -1,0 +1,15 @@
+server:
+  port: 8082
+  servlet:
+    context-path: /spring-security-oauth2-resource-server
+logging:
+  level:
+    org.springframework.security: trace
+
+spring:
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:9000
+          jwk-set-uri: http://localhost:9000/oauth2/keys
