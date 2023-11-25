@@ -5,21 +5,19 @@ import org.mybatis.generator.api.IntrospectedTable;
 import org.mybatis.generator.api.PluginAdapter;
 import org.mybatis.generator.api.dom.java.FullyQualifiedJavaType;
 import org.mybatis.generator.api.dom.java.Interface;
-import org.mybatis.generator.api.dom.java.TopLevelClass;
 
 /** Created by qct on 2017/10/5. */
 public class BaseMapperGeneratorPlugin extends PluginAdapter {
 
     @Override
-    public boolean clientGenerated(
-            Interface interfaze, TopLevelClass topLevelClass, IntrospectedTable introspectedTable) {
+    public boolean clientGenerated(Interface interfaze, IntrospectedTable introspectedTable) {
         // 主键默认采用java.lang.Integer
         FullyQualifiedJavaType fqjt = new FullyQualifiedJavaType("BaseMapper<"
-                + introspectedTable.getBaseRecordType()
-                + ","
-                + introspectedTable.getExampleType()
-                + ",java.lang.Integer"
-                + ">");
+            + introspectedTable.getBaseRecordType()
+            + ","
+            + introspectedTable.getExampleType()
+            + ",java.lang.Integer"
+            + ">");
         FullyQualifiedJavaType imp = new FullyQualifiedJavaType("alex.BaseMapper");
 
         // 添加 extends MybatisBaseMapper
