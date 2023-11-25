@@ -130,8 +130,8 @@ public class IntegrationApplication {
                                                                                                                         String>
                                                                                                                         transform(
                                                                                                                                 new GenericTransformer<
-                                                                                                                                                                                                                                                                        OrderItem,
-                                                                                                                                                                                                                                                                        String>() {
+                                                                                                                                        OrderItem,
+                                                                                                                                        String>() {
                                                                                                                                     @Override
                                                                                                                                     public
                                                                                                                                     String

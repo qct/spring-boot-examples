@@ -21,7 +21,6 @@ import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.test.web.client.TestRestTemplate.HttpClientOption;
 import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.boot.web.client.RestTemplateBuilder;
-import org.springframework.context.annotation.Import;
 import org.springframework.core.io.Resource;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
@@ -50,10 +49,9 @@ public class HttpRequestTest {
         SSLConnectionSocketFactory socketFactory = new SSLConnectionSocketFactory(
                 sslContext, new String[] {"TLSv1.2"}, null, NoopHostnameVerifier.INSTANCE);
         final HttpClientConnectionManager cm = PoolingHttpClientConnectionManagerBuilder.create()
-            .setSSLSocketFactory(socketFactory)
-            .build();
-        HttpClient httpClient =
-                HttpClients.custom().setConnectionManager(cm).build();
+                .setSSLSocketFactory(socketFactory)
+                .build();
+        HttpClient httpClient = HttpClients.custom().setConnectionManager(cm).build();
         HttpComponentsClientHttpRequestFactory factory = new HttpComponentsClientHttpRequestFactory(httpClient);
         RestTemplateBuilder rtb = new RestTemplateBuilder().requestFactory(() -> factory);
         this.restTemplate = new TestRestTemplate(rtb, null, null, HttpClientOption.SSL);

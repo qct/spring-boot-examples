@@ -1,9 +1,9 @@
 package alex;
 
-import jakarta.persistence.Id;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 
 /** Created by qct on 2017/11/22. */
 @Entity

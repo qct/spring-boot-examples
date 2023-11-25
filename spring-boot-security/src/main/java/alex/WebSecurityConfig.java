@@ -18,14 +18,13 @@ public class WebSecurityConfig {
 
     @Bean
     public SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
-        http.authorizeHttpRequests((authz) -> authz
-                .requestMatchers("/", "/home").permitAll()
-                .anyRequest().authenticated()
-            )
-            .formLogin(httpSecurityFormLoginConfigurer ->
-                httpSecurityFormLoginConfigurer.loginPage("/login").permitAll()
-            )
-            .logout(Customizer.withDefaults());
+        http.authorizeHttpRequests((authz) -> authz.requestMatchers("/", "/home")
+                        .permitAll()
+                        .anyRequest()
+                        .authenticated())
+                .formLogin(httpSecurityFormLoginConfigurer ->
+                        httpSecurityFormLoginConfigurer.loginPage("/login").permitAll())
+                .logout(Customizer.withDefaults());
         return http.build();
     }
 
