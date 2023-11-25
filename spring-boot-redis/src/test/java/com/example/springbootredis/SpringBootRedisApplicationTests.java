@@ -1,9 +1,9 @@
 package com.example.springbootredis;
 
+import jakarta.annotation.Resource;
 import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.List;
-import javax.annotation.Resource;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,7 +56,7 @@ public class SpringBootRedisApplicationTests {
         System.out.println("master:");
         masters.forEach(System.out::println);
         Collection<RedisServer> slaves =
-                sentinelConnection.slaves(masters.stream().findFirst().get());
+                sentinelConnection.replicas(masters.stream().findFirst().get());
         System.out.println("slaves:");
         slaves.forEach(System.out::println);
     }
