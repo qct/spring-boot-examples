@@ -31,7 +31,7 @@ import alex.jooq.tables.records.QrtzSimpleTriggersRecord;
 import alex.jooq.tables.records.QrtzSimpropTriggersRecord;
 import alex.jooq.tables.records.QrtzTriggersRecord;
 import alex.jooq.tables.records.SchoolRecord;
-import javax.annotation.Generated;
+import jakarta.annotation.Generated;
 import org.jooq.ForeignKey;
 import org.jooq.Identity;
 import org.jooq.UniqueKey;

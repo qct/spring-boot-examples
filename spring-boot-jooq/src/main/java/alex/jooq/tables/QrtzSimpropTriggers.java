@@ -10,7 +10,7 @@ import alex.jooq.tables.records.QrtzSimpropTriggersRecord;
 import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.List;
-import javax.annotation.Generated;
+import jakarta.annotation.Generated;
 import org.jooq.Field;
 import org.jooq.ForeignKey;
 import org.jooq.Index;

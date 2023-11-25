@@ -4,7 +4,7 @@
 package alex.jooq.tables.records;
 
 import alex.jooq.tables.QrtzJobDetails;
-import javax.annotation.Generated;
+import jakarta.annotation.Generated;
 import org.jooq.Field;
 import org.jooq.Record10;
 import org.jooq.Record3;

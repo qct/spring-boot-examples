@@ -9,7 +9,7 @@ import alex.jooq.Test;
 import alex.jooq.tables.records.SchoolRecord;
 import java.util.Arrays;
 import java.util.List;
-import javax.annotation.Generated;
+import jakarta.annotation.Generated;
 import org.jooq.Field;
 import org.jooq.Identity;
 import org.jooq.Index;
