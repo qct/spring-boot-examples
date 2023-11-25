@@ -21,6 +21,7 @@ import org.springframework.integration.aggregator.CorrelationStrategy;
 import org.springframework.integration.aggregator.MessageGroupProcessor;
 import org.springframework.integration.annotation.Gateway;
 import org.springframework.integration.annotation.MessagingGateway;
+import org.springframework.integration.core.GenericTransformer;
 import org.springframework.integration.dsl.AggregatorSpec;
 import org.springframework.integration.dsl.Channels;
 import org.springframework.integration.dsl.IntegrationFlow;
@@ -33,7 +34,6 @@ import org.springframework.integration.router.MethodInvokingRouter;
 import org.springframework.integration.scheduling.PollerMetadata;
 import org.springframework.integration.store.MessageGroup;
 import org.springframework.integration.stream.CharacterStreamWritingMessageHandler;
-import org.springframework.integration.transformer.GenericTransformer;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.MessageHandler;
 import org.springframework.messaging.MessagingException;
@@ -62,7 +62,7 @@ public class IntegrationApplication {
 
     @Bean(name = PollerMetadata.DEFAULT_POLLER)
     public PollerMetadata poller() {
-        return Pollers.fixedDelay(1000L).get();
+        return Pollers.fixedDelay(1000L).getObject();
     }
 
     @Bean
@@ -130,8 +130,8 @@ public class IntegrationApplication {
                                                                                                                         String>
                                                                                                                         transform(
                                                                                                                                 new GenericTransformer<
-                                                                                                                                        OrderItem,
-                                                                                                                                        String>() {
+                                                                                                                                                                                                                                                                        OrderItem,
+                                                                                                                                                                                                                                                                        String>() {
                                                                                                                                     @Override
                                                                                                                                     public
                                                                                                                                     String
