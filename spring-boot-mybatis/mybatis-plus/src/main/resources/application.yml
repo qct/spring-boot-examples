@@ -1,0 +1,11 @@
+debug: false
+mybatis:
+  type-aliases-package: alex.dto
+spring:
+  datasource:
+      driver-class-name: com.mysql.jdbc.Driver
+      url: jdbc:mysql://127.0.0.1:3306/test?useUnicode=true&amp;characterEncoding=UTF8&amp;zeroDateTimeBehavior=convertToNull&amp;transformedBitIsBoolean=true&allowMultiQueries=true
+      username: root
+      password: root
+  main:
+    banner-mode: off
