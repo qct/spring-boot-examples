@@ -1,6 +1,6 @@
 mybatis:
   type-aliases-package: alex.dto
-  mapper-locations: classpath:alex/dao/*.xml
+  mapper-locations: classpath:mapper/*.xml
 spring:
   datasource:
     driver-class-name: org.h2.Driver
@@ -18,7 +18,10 @@ spring:
     banner-mode: off
   h2:
     console:
-      enabled: true
+      enabled: false
+
+generator:
+  generate: false
 
 logging:
   level:

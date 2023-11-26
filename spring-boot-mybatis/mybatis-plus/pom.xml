@@ -62,7 +62,7 @@
         <artifactId>mybatis-generator-maven-plugin</artifactId>
         <version>1.4.2</version>
         <configuration>
-          <configurationFile>spring-boot-mybatis-generator/src/main/resources/generatorConfig.xml</configurationFile>
+          <configurationFile>${project.basedir}/src/main/resources/generatorConfig.xml</configurationFile>
           <verbose>true</verbose>
           <overwrite>true</overwrite>
         </configuration>

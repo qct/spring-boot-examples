@@ -10,6 +10,7 @@ import org.mybatis.generator.config.Configuration;
 import org.mybatis.generator.config.xml.ConfigurationParser;
 import org.mybatis.generator.internal.DefaultShellCallback;
 import org.mybatis.spring.annotation.MapperScan;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -19,14 +20,22 @@ import org.springframework.util.ResourceUtils;
 @SpringBootApplication
 @MapperScan("alex.dao")
 @Log
-public class Application implements CommandLineRunner {
+public class GeneratorApplication implements CommandLineRunner {
+
+    @Value("${generator.generate}")
+    boolean generate;
 
     public static void main(String[] args) {
-        SpringApplication.run(Application.class, args);
+        SpringApplication.run(GeneratorApplication.class, args);
     }
 
     @Override
     public void run(String... args) throws Exception {
+        if (!generate) {
+            log.info("generator.generate is false, skip generator");
+            return;
+        }
+
         List<String> warnings = new ArrayList<>();
         boolean overwrite = true;
 

@@ -1,8 +1,6 @@
 package alex.dao;
 
 import alex.dto.Person;
-import alex.dto.PersonExample;
-import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mybatis.spring.boot.test.autoconfigure.MybatisTest;
@@ -16,12 +14,6 @@ public class PersonMapperTest {
 
     @Autowired
     private PersonMapper mapper;
-
-    @Test
-    public void selectByExample() throws Exception {
-        List<Person> people = mapper.selectByExample(new PersonExample());
-        System.out.println(people.size());
-    }
 
     @Test
     public void selectByPrimaryKey() throws Exception {
