@@ -25,7 +25,7 @@
 
         <!-- 生成的 Model 包路径 -->
         <javaModelGenerator targetPackage="${model.target.package}"
-            targetProject="${model.target.project}">
+            targetProject="${model.target.project}/src/main/java">
             <property name="enableSubPackages" value="false"/>
             <property name="trimStrings" value="true"/>
             <!--<property name="constructorBased" value="true"/>-->
@@ -34,17 +34,17 @@
 
         <!-- 生成的 Mapper 路径 -->
         <sqlMapGenerator targetPackage="${mapper.target.package}"
-            targetProject="${mapper.target.project}"/>
+            targetProject="${mapper.target.project}/src/main/java"/>
 
         <!-- 生成的 DAO 接口路径-->
-        <javaClientGenerator targetPackage="${dao.target.package}" targetProject="${dao.target.project}"
+        <javaClientGenerator targetPackage="${dao.target.package}" targetProject="${dao.target.project}/src/main/java"
             type="XMLMAPPER"/>
 
         <!-- 要生成的数据库表名-->
-        <table domainObjectName="Person" schema="test" tableName="person">
+        <table domainObjectName="Person" catalog="testdb" schema="public" tableName="person">
             <generatedKey column="id" identity="true" sqlStatement="MySql"/>
         </table>
-        <table domainObjectName="School" schema="test" tableName="school">
+        <table domainObjectName="School" catalog="testdb" schema="public" tableName="school">
             <generatedKey column="id" identity="true" sqlStatement="MySql"/>
         </table>
     </context>
