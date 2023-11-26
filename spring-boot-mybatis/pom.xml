@@ -18,39 +18,4 @@
     <module>mybatis-plus</module>
   </modules>
 
-  <build>
-    <pluginManagement>
-      <plugins>
-        <plugin>
-          <groupId>org.springframework.boot</groupId>
-          <artifactId>spring-boot-maven-plugin</artifactId>
-          <configuration>
-            <classifier>exec</classifier>
-          </configuration>
-        </plugin>
-        <plugin>
-          <groupId>org.mybatis.generator</groupId>
-          <artifactId>mybatis-generator-maven-plugin</artifactId>
-          <version>1.4.2</version>
-          <configuration>
-            <configurationFile>spring-boot-mybatis-generator/src/main/resources/generatorConfig.xml</configurationFile>
-            <verbose>true</verbose>
-            <overwrite>true</overwrite>
-          </configuration>
-          <dependencies>
-            <dependency>
-              <groupId>com.mysql</groupId>
-              <artifactId>mysql-connector-j</artifactId>
-              <version>${mysql.version}</version>
-            </dependency>
-            <dependency>
-              <groupId>alex</groupId>
-              <artifactId>spring-boot-mybatis</artifactId>
-              <version>0.1.0-SNAPSHOT</version>
-            </dependency>
-          </dependencies>
-        </plugin>
-      </plugins>
-    </pluginManagement>
-  </build>
 </project>
