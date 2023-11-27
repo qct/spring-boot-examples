@@ -14,7 +14,7 @@
   <packaging>pom</packaging>
 
   <modules>
-    <module>generator</module>
+    <module>mybatis-generator</module>
     <module>mybatis-plus</module>
   </modules>
 
