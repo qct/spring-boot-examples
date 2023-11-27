@@ -34,7 +34,7 @@
 
         <!-- 生成的 Mapper 路径 -->
         <sqlMapGenerator targetPackage="${mapper.target.package}"
-            targetProject="${mapper.target.project}/src/main/java"/>
+            targetProject="${mapper.target.project}/src/main/resources"/>
 
         <!-- 生成的 DAO 接口路径-->
         <javaClientGenerator targetPackage="${dao.target.package}" targetProject="${dao.target.project}/src/main/java"
@@ -42,10 +42,10 @@
 
         <!-- 要生成的数据库表名-->
         <table domainObjectName="Person" tableName="person">
-            <generatedKey column="id" identity="true" sqlStatement="MySql"/>
+            <generatedKey column="id" identity="true" sqlStatement="JDBC"/>
         </table>
         <table domainObjectName="School" tableName="school">
-            <generatedKey column="id" identity="true" sqlStatement="MySql"/>
+            <generatedKey column="id" identity="true" sqlStatement="JDBC"/>
         </table>
     </context>
 </generatorConfiguration>

@@ -1,6 +1,8 @@
 package alex.dao;
 
 import alex.dto.Person;
+import java.util.List;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mybatis.spring.boot.test.autoconfigure.MybatisTest;
@@ -15,10 +17,14 @@ public class PersonMapperTest {
     @Autowired
     private PersonMapper mapper;
 
+    @Autowired
+    private PersonExMapper exMapper;
+
     @Test
     public void selectByPrimaryKey() throws Exception {
-        Person person = mapper.selectByPrimaryKey(5);
-        System.out.println(person);
+        Person person = mapper.selectByPrimaryKey(1);
+
+        Assertions.assertEquals(1, person.getId());
     }
 
     @Test
@@ -29,6 +35,14 @@ public class PersonMapperTest {
             p.setAddress("Tokyo" + i);
             p.setAge(22 + i);
             mapper.insertSelective(p);
+        }
+
+        List<Integer> ids = exMapper.queryIds();
+        Assertions.assertEquals(11, ids.size());
+
+        for (Integer id : ids) {
+            Person p = mapper.selectByPrimaryKey(id);
+            Assertions.assertNotNull(p);
         }
     }
 }
