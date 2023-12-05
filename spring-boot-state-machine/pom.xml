@@ -21,7 +21,7 @@
     <dependency>
       <groupId>org.springframework.statemachine</groupId>
       <artifactId>spring-statemachine-core</artifactId>
-      <version>3.2.1</version>
+      <version>4.0.0</version>
     </dependency>
   </dependencies>
 
